@@ -1,298 +1,341 @@
 # Design System
 
-This document outlines the design principles, patterns, and tokens used in the OpenTelemetry Ecosystem Explorer. It
-serves as a guide for AI agents and developers working on UI elements to ensure visual consistency and quality.
+This document outlines the design principles, patterns, and tokens used in the OpenTelemetry Ecosystem Explorer. It serves as a guide for AI agents and developers working on UI elements to ensure visual consistency and quality.
+
+> **v1 update (2026-04):** the explorer is being aligned with [opentelemetry.io](https://opentelemetry.io). The site should feel like a sub-product of the OTel project, not a separate microsite. This guide reflects that alignment — see "Alignment with opentelemetry.io" at the bottom for the source-of-truth references.
 
 ## Overview
 
-The Ecosystem Explorer uses a **dark-first design system** optimized for readability and visual hierarchy. The design
-emphasizes:
+The Ecosystem Explorer mirrors the visual language of opentelemetry.io: a Bootstrap-5-flavored layout with light + dark theming, an always-dark navbar, OTel brand purple/orange/yellow accents, and the Docsy-derived chrome (`td-*` patterns) translated into our Tailwind v4 stack.
 
-- **Depth through subtlety** - Layered backgrounds, soft shadows, and ambient glows
-- **Clarity first** - Clear information hierarchy through color, spacing, and typography
-- **Consistent motion** - Unified animation timing and easing
-- **Accessibility** - WCAG AA compliance with proper contrast and semantic markup
+The design emphasizes:
+
+- **Continuity with opentelemetry.io** — same nav, footer, hero, type, and brand colors so visitors feel they're inside the same project
+- **Light and dark parity** — every component must work in both themes; the theme toggle is part of the navbar
+- **Clarity first** — clear information hierarchy through color, spacing, and typography
+- **Consistent motion** — unified animation timing and easing
+- **Accessibility** — WCAG AA compliance with proper contrast and semantic markup
 
 ---
 
 ## Design Principles
 
-### 1. Depth Through Subtlety
+### 1. Stay Visually Continuous With opentelemetry.io
 
-Create visual depth without overwhelming the interface:
+A user clicking from `opentelemetry.io/ecosystem/` to the Explorer should not feel they have left the site. That means: same logo lockup, same dark navbar, same primary buttons, same footer layout, same purple `#4f62ad` accent. Diverge only where the explorer needs richer interactivity (filters, three-pane detail) than the static Hugo site supports.
 
-- Use layered backgrounds (base -> pattern -> content -> overlay)
-- Apply soft shadows and glows to establish elevation
-- Employ subtle gradients for ambient lighting effects
-- Keep depth cues understated - they should guide the eye, not dominate
+### 2. Light + Dark Parity
 
-### 2. Clarity First
+Every page must render correctly in both light and dark themes. The navbar is always dark (matching opentelemetry.io). The body switches between a light surface (`#ffffff` / `#f8f9fa`) and a dark surface (`#0b0d12` / `#11141b`) based on `data-bs-theme`. Pick tokens, not hardcoded colors.
+
+### 3. Clarity First
 
 Information hierarchy guides users naturally:
 
-- Primary actions use the vibrant orange (`--color-primary`)
-- Secondary information uses the blue accent (`--color-secondary`)
+- Primary actions use OTel orange/yellow (`--color-primary`)
+- Secondary or branding accents use OTel purple (`--color-secondary`)
 - Background elements recede through lower contrast
 - Whitespace provides visual breathing room
 
-### 3. Consistent Motion
+### 4. Consistent Motion
 
 All animations follow a unified timing system:
 
-- Default transition: `300ms ease-in-out`
-- Micro-interactions: `200ms ease-out`
-- Complex animations: `400ms ease-in-out`
+- Default transition: `200ms ease-in-out` (matches Bootstrap defaults)
+- Micro-interactions: `150ms ease-out`
+- Complex animations: `300ms ease-in-out`
 - Use `transform` and `opacity` for performant animations
-
-### 4. Dark-First Design
-
-Optimized for extended viewing in low-light environments:
-
-- Deep navy base (`--color-background`)
-- Bright, high-contrast text (`--color-foreground`)
-- Reduced blue light through warm accent colors
-- Subtle glows instead of harsh borders
+- Honor `prefers-reduced-motion`
 
 ---
 
 ## Color System
 
-### HSL Token Reference
+### Brand Tokens (aligned with opentelemetry.io)
 
-All colors are defined using HSL values in `src/themes.ts`. They are applied via CSS custom properties:
+opentelemetry.io exposes these colors via meta tags and stylesheets:
+
+| Token | Source | Hex |
+|---|---|---|
+| OTel Purple (brand) | `<meta name=theme-color>`, `mask-icon`, `msapplication-TileColor` | `#4f62ad` |
+| OTel Orange/Yellow (accent) | Logo gradient end stop, kapa `data-project-color` | `#f5a800` |
+| Light surface | Default page bg | `#ffffff` |
+| Dark surface | `prefers-color-scheme: dark` page bg | `#0b0d12` |
+| Light text | Default | near-black |
+| Dark text | dark mode | `#e6e6e6` |
+
+### CSS Custom Properties
+
+All colors are defined in `src/themes.ts` and applied as CSS custom properties. **HSL is preferred** so we can derive variants with opacity:
 
 ```css
---color-primary: 38 95% 52%; /* Vibrant orange */
---color-secondary: 228 60% 55%; /* Brighter blue */
---color-background: 232 38% 15%; /* Deep navy */
---color-foreground: 210 45% 99%; /* Bright white with blue hint */
---color-card: 232 35% 19%; /* Card background */
---color-card-secondary: 232 32% 23%; /* Card hover state */
---color-muted: 232 30% 17%; /* Darker background for code/badges */
---color-muted-foreground: 220 22% 65%; /* Muted text */
---color-border: 232 28% 26%; /* Borders */
+/* Brand */
+--color-primary: 38 95% 52%;        /* OTel orange/yellow #f5a800 */
+--color-primary-foreground: 0 0% 0%;
+--color-secondary: 230 38% 49%;     /* OTel purple #4f62ad */
+--color-secondary-foreground: 0 0% 100%;
+
+/* Light theme (default) */
+--color-background: 0 0% 100%;      /* #ffffff */
+--color-foreground: 220 13% 15%;    /* near-black */
+--color-card: 210 17% 98%;          /* #f8f9fa surface */
+--color-card-secondary: 210 14% 95%;
+--color-muted: 210 14% 92%;
+--color-muted-foreground: 220 9% 40%;
+--color-border: 210 14% 88%;
+
+/* Dark theme — applied via [data-bs-theme="dark"] */
+[data-bs-theme="dark"] {
+  --color-background: 222 25% 6%;     /* #0b0d12 */
+  --color-foreground: 0 0% 90%;       /* #e6e6e6 */
+  --color-card: 222 23% 9%;           /* #11141b */
+  --color-card-secondary: 222 22% 13%;
+  --color-muted: 222 22% 11%;
+  --color-muted-foreground: 220 14% 65%;
+  --color-border: 222 18% 22%;
+}
+
+/* Always-dark navbar — matches opentelemetry.io */
+.navbar-otel {
+  --color-background: 222 25% 6%;
+  --color-foreground: 0 0% 95%;
+}
+```
+
+### Semantic Tokens
+
+```css
+--color-success: 145 63% 42%;   /* stable */
+--color-info: 200 85% 45%;      /* beta / informational */
+--color-warning: 38 95% 52%;    /* alpha — uses brand orange */
+--color-error: 0 70% 50%;       /* deprecated / unmaintained */
 ```
 
 ### Usage Guidelines
 
-#### Primary (Orange)
+#### Primary (OTel Orange/Yellow `#f5a800`)
 
-- Primary CTAs and important actions
-- Links and interactive elements
-- Accent highlights and focus states
-- Sparingly used to draw attention
+- Primary CTAs (matches `btn btn-primary` in opentelemetry.io)
+- The "alpha" stability pill
+- Highlight accents in stats and gradient text
 
-#### Secondary (Blue)
+#### Secondary (OTel Purple `#4f62ad`)
 
-- Secondary actions and information
-- Decorative accents and gradients
-- Category indicators
-- Complements primary without competing
+- Branded surfaces (the `td-box--primary` stats band on opentelemetry.io is purple — we should match)
+- Hero background tint and gradient stops
+- Secondary buttons in dark mode (`btn btn-secondary`)
+- Iconography for ecosystem cards
 
 #### Background Layers
 
-- `background` - Page base
-- `card` - Elevated surfaces (cards, panels)
-- `card-secondary` - Hover states and nested cards
-- `muted` - Darker backgrounds for inline code, type badges, and subtle UI elements
-- `border` - Dividers and outlines
+- `background` — page base (light or dark depending on theme)
+- `card` — elevated surfaces
+- `card-secondary` — hover states and nested cards
+- `muted` — table-row striping, code chips, type badges
+- `border` — dividers and outlines
 
 #### Text Hierarchy
 
-- `foreground` - Primary text (headings, body)
-- `muted-foreground` - Secondary text (captions, labels)
-- Lower opacity variants - Tertiary text
+- `foreground` — primary text (headings, body)
+- `muted-foreground` — secondary text (captions, labels)
+- Lower opacity variants — tertiary text
 
 ---
 
-## Depth and Elevation
+## Typography
 
-### Shadow Scale
+### Font Stack
 
-Shadows establish elevation and focus:
-
-```css
---shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
---shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
---shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1);
-```
-
-### Glow Effects
-
-Glows create ambient lighting and highlight interactive elements:
+Match opentelemetry.io: a sans serif for UI, mono for code. The site uses the Bootstrap/Docsy default (system stack), so we use the same:
 
 ```css
---glow-primary: 0 0 40px hsl(var(--primary-hsl) / 0.15);
---glow-secondary: 0 0 40px hsl(var(--secondary-hsl) / 0.15);
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; /* code */
 ```
 
-**Usage patterns:**
+### Size Scale
 
-- Primary glow: Hero elements, important features
-- Secondary glow: Decorative accents, section transitions
-- Hover states: Increase opacity to 0.25 for prominence
+Use the Bootstrap display scale for hero text, then a tighter Tailwind scale for body. Don't invent new sizes.
 
-### Layering Strategy
+| Use | Size | Weight |
+|---|---|---|
+| Hero headline (matches `display-4` / `display-6`) | 3rem–3.75rem | 600 |
+| Page title (matches `h1`) | 2.25rem | 700 |
+| Section heading (`h2`) | 1.75rem | 700 |
+| Subsection (`h3`) | 1.25rem | 600 |
+| Body | 1rem | 400 |
+| Small / muted (`small`) | 0.875rem | 400 |
+| Eyebrow / pill | 0.75rem uppercase tracking-widest | 600 |
 
-Visual layers from back to front:
+### Weight Conventions
 
-1. **Background** - Solid color or subtle gradient
-2. **Pattern** - Grid or texture overlay (low opacity)
-3. **Content** - Cards, text, images
-4. **Overlay** - Glows, shadows, focus rings
+- `font-normal` (400): Body text
+- `font-medium` (500): Emphasized text, labels
+- `font-semibold` (600): Subheadings, buttons
+- `font-bold` (700): Primary headings
+
+---
+
+## Layout Primitives (mirroring Docsy)
+
+The Hugo Docsy theme on opentelemetry.io uses these structural classes. We re-implement them in Tailwind so that templates feel familiar to anyone moving between codebases.
+
+| Docsy class | Our equivalent | Purpose |
+|---|---|---|
+| `td-navbar` | `<header class="navbar-otel">` | Always-dark top navbar with logo + nav + search + lang + theme toggle |
+| `td-cover-block` | `<section class="cover-block">` | Hero with dark overlay over a background image |
+| `td-box td-box--white` | `<section class="box-light">` | Light-surface section |
+| `td-box td-box--primary` | `<section class="box-primary">` | OTel purple-tinted feature band (e.g. ecosystem stats) |
+| `td-box td-box--secondary` | `<section class="box-muted">` | Subtle gray section (e.g. CNCF callout) |
+| `td-footer` | `<footer class="footer-otel">` | Two-cluster social icons + copyright |
+| `td-content` | `<main class="content-area">` | Page content max-width container |
+
+### Navbar pattern
+
+Always dark, full-width, sticky. From left to right:
+
+1. Logo lockup (svg + "OpenTelemetry" wordmark) — links to `opentelemetry.io`
+2. Nav links: Docs · Ecosystem · Status · Community · Training · Blog · **Explorer (new)**
+3. Search input ("Ask AI or search…", ⌘K shortcut)
+4. Language dropdown (matches opentelemetry.io's 10-language list)
+5. Theme toggle (Light / Dark / Auto)
+
+For the explorer specifically, we add a sub-nav directly under the main navbar with breadcrumbs and explorer-specific actions (filters, view density, etc.).
+
+### Hero pattern
+
+```html
+<section class="cover-block bg-overlay-dark">
+  <img class="cover-bg" src="hero-background.png" alt="" />
+  <div class="cover-content">
+    <img src="opentelemetry-horizontal-color.svg" class="otel-logo" />
+    <p class="display-6">Navigate the OpenTelemetry ecosystem</p>
+    <div class="cta-buttons">
+      <a class="btn btn-lg btn-primary">Browse components</a>
+      <a class="btn btn-lg btn-secondary">Read overview</a>
+    </div>
+  </div>
+</section>
+```
+
+### Footer pattern
+
+Two clusters of social icons (left: mailing lists / Bluesky / Mastodon / SO / logos / meetings / analytics; right: GitHub / Slack / DevStats / privacy / trademark / marketing / build-info), centered copyright between them. Use Font Awesome icons to match opentelemetry.io exactly.
+
+### CNCF callout
+
+Every page closes with a `box-muted` section quoting:
+
+> **OpenTelemetry is a CNCF incubating project.** Formed through a merger of the OpenTracing and OpenCensus projects.
+
+Followed by the CNCF logo. This is non-negotiable — opentelemetry.io shows it on every page and we need to match.
 
 ---
 
 ## Component Patterns
 
+### Buttons
+
+Follow Bootstrap 5 conventions used by opentelemetry.io:
+
+**Primary** (OTel orange):
+```tsx
+<button className="btn btn-primary">Browse components</button>
+```
+
+**Secondary** (outline in light, filled purple in dark):
+```tsx
+<button className="btn btn-secondary">Read overview</button>
+```
+
+**Outline** (for filter chips, "Reset"):
+```tsx
+<button className="btn btn-outline-success">Submit</button>
+<button className="btn btn-outline-danger">Reset</button>
+```
+
+Sizes: `btn-sm`, default, `btn-lg`. Match opentelemetry.io which uses `btn-lg` in heroes.
+
 ### Cards
 
-Standard card pattern for elevated content:
-
-**Structure:**
+opentelemetry.io's registry page uses Bootstrap `.card` with optional `border-success` / `border-warning` for status. Mirror that:
 
 ```tsx
-<div className="border-border bg-card hover:bg-card-secondary relative overflow-hidden rounded-lg border p-6 transition-all duration-300">
-  {/* Grid pattern background */}
-  <div className="absolute inset-0 opacity-20">
-    <div className="grid-pattern" />
+<div className="card registry-entry border-success">
+  <div className="card-body">
+    <h4 className="card-title">Component name</h4>
+    <p className="card-text"><small className="text-muted">by Author</small></p>
+    <div className="card-tags">
+      <span className="badge text-bg-primary me-1">tag</span>
+    </div>
+    <ul className="list-group list-group-flush">
+      <li className="list-group-item"><strong>Receiver</strong><small>Component</small></li>
+    </ul>
   </div>
-
-  {/* Content */}
-  <div className="relative z-10">{children}</div>
-
-  {/* Corner accent */}
-  <div className="from-primary/10 absolute top-0 right-0 h-16 w-16 bg-gradient-to-br to-transparent" />
 </div>
 ```
 
-**Hover states:**
+For richer card interactions in the explorer (which is JS-driven, unlike the static Hugo registry), augment the base card with:
+- A 4px left-edge **type stripe** (receiver=info, processor=purple, exporter=primary, connector=pink, extension=success)
+- Hover state: `card-secondary` background + subtle `box-shadow` + `transform: scale(1.01)`
 
-- Transition to `bg-card-secondary`
-- Add `shadow-[0_0_20px_hsl(var(--primary-hsl)/0.1)]`
-- Slight scale animation: `hover:scale-[1.02]`
+### Badges
 
-### Buttons
+Use Bootstrap's `text-bg-*` utilities to match opentelemetry.io exactly:
 
-Three button variants:
+| Meaning | Class |
+|---|---|
+| Stable | `badge text-bg-success rounded-pill` |
+| Beta | `badge text-bg-info rounded-pill` |
+| Alpha | `badge text-bg-warning rounded-pill` |
+| Deprecated/unmaintained | `badge text-bg-danger rounded-pill` |
+| Tag pill | `badge text-bg-primary rounded-pill` |
+| Type label | `badge text-bg-secondary rounded-pill` |
 
-**Primary:**
+### Stats Section (matches `ecosystem-stats-section`)
 
-```tsx
-<button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-2 font-medium transition-all">
-  Action
-</button>
+This is the canonical "by the numbers" pattern on opentelemetry.io. Reuse it.
+
+```html
+<section class="box-primary">
+  <h2>The OpenTelemetry Ecosystem</h2>
+  <div class="ecosystem-stats">
+    <div class="ecosystem-stat">
+      <div class="ecosystem-stat__number">200+</div>
+      <div class="ecosystem-stat__label">Collector Components</div>
+    </div>
+    ...
+  </div>
+</section>
 ```
 
-**Secondary:**
+**Canonical numbers (sync with opentelemetry.io):**
+- 12+ Languages
+- 200+ Collector Components
+- 1005+ Integrations
+- 102+ Vendors
 
-```tsx
-<button className="border-border hover:bg-card rounded-lg border bg-transparent px-4 py-2 font-medium transition-all">
-  Action
-</button>
-```
+The explorer's stats should match these exactly so users don't see two different counts on sister pages.
 
-**Ghost:**
+### Signal Cards
 
-```tsx
-<button className="hover:bg-card rounded-lg px-4 py-2 font-medium transition-all">Action</button>
-```
-
-### Type Badges
-
-Small badges used to display types, categories, or status indicators:
-
-```tsx
-<span className="bg-muted/50 text-foreground/70 inline-block w-fit rounded px-2 py-1 text-xs font-bold">
-  {type}
-</span>
-```
-
-**Usage:**
-
-- Attribute types in tables (string, int, boolean, etc.)
-- Metric types
-- Span kinds
-- Other categorical indicators
-
-**Styling:**
-
-- `bg-muted/50` - Semi-transparent dark background for subtle contrast
-- `text-foreground/70` - Slightly dimmed text for readability on dark background
-- `text-xs font-bold` - Small, bold text for compact display
-- `rounded px-2 py-1` - Consistent padding and border radius
-
-**Color variants:**
-For semantic meaning with glowing effects, use GlowBadge component:
-
-- `variant="success"` - Green for metrics
-- `variant="info"` - Blue for spans
-- `variant="warning"` - Yellow for warnings
-- `variant="error"` - Red for errors
+opentelemetry.io shows four signal cards on the home page: **Traces · Metrics · Logs · Baggage**. We had originally shown "Profiles" — switch to **Baggage** to match. Profiles can return when the spec stabilizes and opentelemetry.io adopts it.
 
 ### Inline Code Elements
 
-Code snippets and technical values displayed inline:
-
 ```tsx
-<code className="bg-muted text-foreground/80 rounded px-2 py-1 text-sm">{value}</code>
+<code className="bg-muted text-foreground/80 rounded px-2 py-1 text-sm font-mono">{value}</code>
 ```
-
-**Usage:**
-
-- Unit values (ms, bytes, etc.)
-- Configuration keys
-- API endpoints
-- Version numbers
-- Short code snippets
-
-**Styling:**
-
-- `bg-muted` - Full opacity dark background for strong contrast
-- `text-foreground/80` - Slightly dimmed bright text for comfortable reading
-- `text-sm` - Readable size for technical content
-- `rounded px-2 py-1` - Consistent padding matching type badges
-
-**Guidelines:**
-
-- Add `font-mono` class for actual code readability when needed
-- Use `break-all` for long technical strings that need to wrap
-- Maintain consistent padding (`px-2 py-1`) across all inline code elements
 
 ### Striped Tables
 
-Alternating row backgrounds for improved readability in data tables:
-
-```tsx
-<table className="w-full border-collapse">
-  <tbody>
-    {items.map((item, index) => (
-      <tr key={item.id} className={index % 2 === 1 ? "bg-muted/40" : ""}>
-        <td>{item.content}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-```
-
-**Pattern:**
-
-- Apply `bg-muted/40` to odd rows (index % 2 === 1)
-- Keep even rows with default transparent background
-- Use 40% opacity for visible striping that improves readability
-- Combine with borders for clear table structure
-
-**Complete table example:**
+Apply `bg-muted/40` to odd rows. Use Bootstrap-style `table-striped` semantics for consistency.
 
 ```tsx
 <div className="border-border/30 overflow-hidden rounded-lg border">
-  <table className="w-full border-collapse">
-    <thead>
-      <tr className="bg-white/5">
-        <th className="text-muted-foreground p-3 text-left text-[10px] font-bold tracking-widest uppercase">
-          Column
-        </th>
-      </tr>
+  <table className="table table-sm">
+    <thead className="bg-light">
+      <tr><th>Key</th><th>Type</th><th>Default</th><th>Description</th></tr>
     </thead>
     <tbody>
       {items.map((item, index) => (
@@ -305,24 +348,35 @@ Alternating row backgrounds for improved readability in data tables:
 </div>
 ```
 
-### Sections
+---
 
-Page sections with consistent spacing:
+## Status & Stability Pill Mapping (locked)
 
-```tsx
-<section className="border-border/50 border-t py-12 md:py-16">
-  {/* Optional section label with decorative lines */}
-  <div className="mb-8 flex items-center justify-center gap-4">
-    <div className="to-border h-px w-16 bg-gradient-to-r from-transparent" />
-    <h2 className="text-muted-foreground text-sm font-medium tracking-wider uppercase">
-      Section Title
-    </h2>
-    <div className="to-border h-px w-16 bg-gradient-to-l from-transparent" />
-  </div>
+This is the source-of-truth mapping. Use it everywhere — list rows, detail headers, version timelines.
 
-  {/* Content */}
-</section>
-```
+| Lifecycle | Color | Class | Border |
+|---|---|---|---|
+| Stable | green | `text-bg-success` | `border-success` |
+| Beta | blue | `text-bg-info` | `border-info` |
+| Alpha / Development | orange (brand) | `text-bg-warning` | `border-warning` |
+| Deprecated / Unmaintained | red | `text-bg-danger` | `border-danger` |
+| Experimental / Preview | purple | `text-bg-primary-otel` | `border-primary-otel` |
+
+---
+
+## Type Stripe Mapping (collector components)
+
+A 4px left-edge stripe on every component card/row:
+
+| Component type | Color |
+|---|---|
+| Receiver | OTel info blue |
+| Processor | Purple `#7c3aed` |
+| Exporter | OTel orange |
+| Connector | Pink `#db2777` |
+| Extension | Teal `#14b8a6` |
+
+This makes type perceivable in peripheral vision without uppercase badges competing for visual weight.
 
 ---
 
@@ -331,192 +385,68 @@ Page sections with consistent spacing:
 ### Timing Functions
 
 ```css
-ease-out     /* Element entering (200ms) */
-ease-in-out  /* Default (300ms) */
-ease-in      /* Element exiting (200ms) */
+ease-out     /* Element entering (150ms) */
+ease-in-out  /* Default (200ms) */
+ease-in      /* Element exiting (150ms) */
 ```
 
-### Common Animation Patterns
+### Common Patterns
 
-**Fade in:**
-
-```tsx
-<div className="animate-in fade-in duration-300">{content}</div>
-```
-
-**Slide up:**
-
-```tsx
-<div className="animate-in slide-in-from-bottom-4 duration-300">{content}</div>
-```
-
-**Scale on hover:**
-
-```tsx
-<div className="transition-transform duration-200 hover:scale-105">{content}</div>
-```
-
-**Staggered children:**
-Use increasing delay values:
-
-```tsx
-<div className="animate-in fade-in duration-300 delay-0">{child1}</div>
-<div className="animate-in fade-in duration-300 delay-100">{child2}</div>
-<div className="animate-in fade-in duration-300 delay-200">{child3}</div>
-```
-
----
-
-## Typography Scale
-
-### Font Stack
-
-```css
-font-family: ui-sans-serif, system-ui, sans-serif;
-```
-
-### Size Scale
-
-- `text-xs`: 0.75rem (12px) - Fine print, labels
-- `text-sm`: 0.875rem (14px) - Secondary text, captions
-- `text-base`: 1rem (16px) - Body text
-- `text-lg`: 1.125rem (18px) - Subheadings
-- `text-xl`: 1.25rem (20px) - Section headings
-- `text-2xl`: 1.5rem (24px) - Page headings
-- `text-3xl`: 1.875rem (30px) - Large headings
-- `text-4xl`: 2.25rem (36px) - Hero text
-
-### Weight Conventions
-
-- `font-normal` (400): Body text
-- `font-medium` (500): Emphasized text, labels
-- `font-semibold` (600): Subheadings, buttons
-- `font-bold` (700): Primary headings
+**Fade in:** `animate-in fade-in duration-200`
+**Slide up:** `animate-in slide-in-from-bottom-2 duration-200`
+**Scale on hover:** `transition-transform duration-150 hover:scale-[1.01]`
+**Theme transition:** disable transitions during theme switch (see opentelemetry.io's `[data-theme-init] *{transition:none!important}`)
 
 ---
 
 ## Spacing System
 
-Use Tailwind's spacing scale consistently:
+Use Tailwind's spacing scale, but pick values that match Bootstrap defaults so the page feels Docsy-flavored:
 
-- **Micro spacing**: `gap-1` (4px), `gap-2` (8px)
-- **Component spacing**: `gap-4` (16px), `gap-6` (24px)
-- **Section spacing**: `py-8` (32px), `py-12` (48px), `py-16` (64px)
-- **Container padding**: `px-4` (16px), `md:px-8` (32px)
-
-**Responsive patterns:**
-
-```tsx
-<div className="gap-4 md:gap-6 lg:gap-8"> /* Grows with viewport */
-    <div className="py-8 md:py-12 lg:py-16"> /* More vertical space on larger screens */
-```
-
----
-
-## Grid Patterns
-
-Decorative grid patterns for visual texture:
-
-**Small grid (20px):**
-
-```css
-background-image:
-  linear-gradient(hsl(var(--border-hsl)) 1px, transparent 1px),
-  linear-gradient(90deg, hsl(var(--border-hsl)) 1px, transparent 1px);
-background-size: 20px 20px;
-```
-
-**Large grid (40px):**
-
-```css
-background-image:
-  linear-gradient(hsl(var(--border-hsl)) 1px, transparent 1px),
-  linear-gradient(90deg, hsl(var(--border-hsl)) 1px, transparent 1px);
-background-size: 40px 40px;
-```
-
-Apply at low opacity (10-20%) for subtle texture.
+- **Section padding:** `py-12` to `py-16` (matches Bootstrap `py-5`)
+- **Container max-width:** `max-w-[1320px]` (Bootstrap `container-xl`) for content, `max-w-7xl` (1280px) for narrower text-heavy pages
+- **Card padding:** `p-4` to `p-6`
+- **Gap between cards:** `gap-3` to `gap-4`
 
 ---
 
 ## Accessibility
 
-All components must follow accessibility best practices as outlined in `AGENTS.md`. Key requirements:
+All components must follow accessibility best practices as outlined in `AGENTS.md`. Specifically:
 
-- Semantic HTML elements
-- ARIA labels for icon-only buttons
+- Semantic HTML (`<nav>`, `<main>`, `<aside>`, `<article>`)
+- ARIA labels for icon-only buttons (theme toggle, language menu, social icons)
 - `aria-pressed` for toggle buttons
-- Keyboard navigation support
-- Visible focus indicators
-- WCAG AA color contrast (4.5:1 for text, 3:1 for UI elements)
-
-Refer to `AGENTS.md` for complete accessibility guidelines and code examples.
-
----
-
-## Examples
-
-### Hero Section Pattern
-
-```tsx
-<section className="relative overflow-hidden py-16 md:py-24">
-  {/* Ambient radial gradient */}
-  <div className="bg-gradient-radial from-primary/10 via-secondary/5 absolute inset-0 to-transparent" />
-
-  {/* Grid pattern */}
-  <div className="absolute inset-0 opacity-10">
-    <div className="h-full w-full bg-[linear-gradient(hsl(var(--color-border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--color-border))_1px,transparent_1px)] bg-[size:40px_40px]" />
-  </div>
-
-  {/* Content */}
-  <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
-    <div className="mb-6 inline-flex rounded-full p-4 shadow-[0_0_60px_hsl(var(--color-primary)/0.2)]">
-      <Icon className="h-16 w-16" />
-    </div>
-    <h1 className="text-4xl font-bold md:text-6xl">
-      <span className="from-secondary to-primary bg-gradient-to-r bg-clip-text text-transparent">
-        Gradient Title
-      </span>
-    </h1>
-  </div>
-
-  {/* Bottom fade */}
-  <div className="from-background absolute right-0 bottom-0 left-0 h-24 bg-gradient-to-t to-transparent" />
-</section>
-```
-
-### Navigation Card Pattern
-
-```tsx
-<Link
-  to="/path"
-  className="group border-border bg-card hover:bg-card-secondary relative overflow-hidden rounded-lg border p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_hsl(var(--color-primary)/0.1)]"
->
-  {/* Grid pattern */}
-  <div className="absolute inset-0 opacity-20">
-    <div className="h-full w-full bg-[linear-gradient(hsl(var(--color-border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--color-border))_1px,transparent_1px)] bg-[size:20px_20px]" />
-  </div>
-
-  {/* Content */}
-  <div className="relative z-10">
-    <Icon className="text-primary mb-4 h-8 w-8" />
-    <h3 className="text-xl font-semibold">Title</h3>
-    <p className="text-muted-foreground mt-2">Description</p>
-  </div>
-
-  {/* Corner accent */}
-  <div className="from-primary/10 group-hover:from-primary/20 absolute top-0 right-0 h-16 w-16 bg-gradient-to-br to-transparent transition-all duration-300" />
-</Link>
-```
+- Visible focus indicators (use Bootstrap's `:focus-visible` ring)
+- WCAG AA contrast: 4.5:1 for body text, 3:1 for UI elements — verify in **both** themes
+- Theme toggle must respect `prefers-color-scheme` and persist to `localStorage` under the `td-color-theme` key (matching opentelemetry.io)
+- All interactive cards must be keyboard-navigable (`<a>` or `<button>`, never `<div onclick>`)
 
 ---
 
-## Tools and Resources
+## Alignment with opentelemetry.io
 
-- **Tailwind CSS v4** - Utility-first CSS framework
-- **Radix UI** - Accessible component primitives
-- **Color contrast checker** - Browser DevTools or [WebAIM](https://webaim.org/resources/contrastchecker/)
-- **HSL color picker** - For creating consistent color variants
+This explorer is a CNCF-adjacent sub-product. Every design decision should ask: "would this look out of place if it were embedded inside opentelemetry.io?"
+
+**Source-of-truth references:**
+
+- Live site: https://opentelemetry.io/
+- Registry page (the closest sibling pattern): https://opentelemetry.io/ecosystem/registry/
+- Theme stack: Hugo + [Docsy theme](https://www.docsy.dev/) + Bootstrap 5
+- Brand colors: theme-color `#4f62ad` (purple), accent `#f5a800` (orange)
+- Logo SVG: `/img/logos/opentelemetry-horizontal-color.svg`
+- Hero background: `/homepage-hero-background_hu_*.png`
+- Theme toggle: stored in `localStorage` key `td-color-theme`, applied via `data-bs-theme` on `<html>`
+
+**What the explorer adds (and opentelemetry.io doesn't have):**
+
+- True faceted filtering with URL state (the registry page is server-rendered + client-side hide/show)
+- A three-pane component detail page with version timeline + diff
+- Density toggles (Cards / Compact / Table) for power users
+- Pipeline-anatomy diagrams on each ecosystem landing
+- Component sibling navigators
+
+These are extensions, not departures. They should still feel Docsy-shaped.
 
 ---
 
@@ -524,9 +454,10 @@ Refer to `AGENTS.md` for complete accessibility guidelines and code examples.
 
 When adding new UI components:
 
-1. Follow the design principles outlined above
-2. Use existing color tokens from `src/themes.ts`
-3. Implement hover and focus states for interactive elements
-4. Verify accessibility (keyboard nav, ARIA labels, contrast)
-5. Test responsive behavior across viewport sizes
-6. Document any new patterns in this file
+1. Check whether opentelemetry.io already has this pattern. If so, mirror it.
+2. Use existing color tokens from `src/themes.ts`.
+3. Implement the component in **both** light and dark themes — never assume dark-only.
+4. Implement hover, focus, and `prefers-reduced-motion` states.
+5. Verify accessibility (keyboard nav, ARIA labels, contrast in both themes).
+6. Test responsive behavior across viewport sizes.
+7. Document any new patterns in this file.
