@@ -1,5 +1,5 @@
 distribution: contrib
-version: 0.150.1-SNAPSHOT
+version: 0.151.1-SNAPSHOT
 repository: opentelemetry-collector-contrib
 component_type: receiver
 components:
@@ -4805,7 +4805,7 @@ components:
         type: string
 - name: fluentforwardreceiver
   metadata:
-    type: fluentforward
+    type: fluent_forward
     display_name: Fluent Forward Receiver
     description: This receiver runs a TCP server that accepts events via the [Fluent
       Forward protocol](https://github.com/fluent/fluentd/wiki/Forward-Protocol-Specification-v1).
@@ -4829,7 +4829,6 @@ components:
       stability:
         alpha:
         - metrics
-        development:
         - traces
       distributions:
       - contrib
@@ -9251,6 +9250,7 @@ components:
         active:
         - antonblock
         - ishleenk17
+        - cjksplunk
         seeking_new: true
         emeritus:
         - djaglowski
