@@ -85,4 +85,23 @@ describe("CopyButton", () => {
     render(<CopyButton text="x" label="Copy YAML" copiedLabel="Done" />);
     expect(screen.getByRole("button", { name: "Copy YAML" })).toBeInTheDocument();
   });
+
+  it("clears the previous flash timeout when clicked again before it fires", async () => {
+    vi.spyOn(navigator.clipboard, "writeText").mockResolvedValue(undefined);
+    const clearTimeoutSpy = vi.spyOn(globalThis, "clearTimeout");
+    const user = userEvent.setup();
+
+    render(<CopyButton text="hello" />);
+    await user.click(screen.getByRole("button", { name: "Copy" }));
+    await screen.findByRole("button", { name: "Copied" });
+
+    const callsAfterFirstClick = clearTimeoutSpy.mock.calls.length;
+
+    // Second click while still in the "Copied" window
+    await user.click(screen.getByRole("button", { name: "Copied" }));
+    await waitFor(() => {
+      expect(clearTimeoutSpy.mock.calls.length).toBeGreaterThan(callsAfterFirstClick);
+    });
+    expect(screen.getByRole("button", { name: "Copied" })).toBeInTheDocument();
+  });
 });

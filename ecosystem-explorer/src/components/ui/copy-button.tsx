@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Copy } from "lucide-react";
 
 interface CopyButtonProps {
@@ -27,7 +27,7 @@ interface CopyButtonProps {
 const COPIED_FLASH_MS = 2000;
 
 const DEFAULT_CLASS =
-  "border-border/60 bg-card text-foreground hover:bg-card/80 inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs";
+  "border-border/60 bg-card text-foreground hover:bg-card/80 inline-flex cursor-pointer items-center gap-1 rounded-md border px-2 py-1 text-xs";
 
 export function CopyButton({
   text,
@@ -37,16 +37,33 @@ export function CopyButton({
   onCopy,
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      onCopy?.();
-      setTimeout(() => setCopied(false), COPIED_FLASH_MS);
-    } catch {
-      // Clipboard write failed (permissions, insecure context). Stay silent.
-    }
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current !== null) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        setCopied(true);
+        onCopy?.();
+        if (timeoutRef.current !== null) {
+          clearTimeout(timeoutRef.current);
+        }
+        timeoutRef.current = setTimeout(() => {
+          setCopied(false);
+          timeoutRef.current = null;
+        }, COPIED_FLASH_MS);
+      },
+      () => {
+        // Clipboard write rejected (permissions, insecure context). Stay silent.
+      }
+    );
   };
 
   const visibleLabel = copied ? copiedLabel : label;
@@ -56,11 +73,10 @@ export function CopyButton({
       type="button"
       onClick={handleCopy}
       aria-label={visibleLabel}
-      aria-live="polite"
       className={className ?? DEFAULT_CLASS}
     >
-      <Copy className="h-3 w-3" aria-hidden="true" />
-      {visibleLabel}
+      <Copy className="pointer-events-none h-3 w-3" aria-hidden="true" />
+      <span aria-live="polite">{visibleLabel}</span>
     </button>
   );
 }
