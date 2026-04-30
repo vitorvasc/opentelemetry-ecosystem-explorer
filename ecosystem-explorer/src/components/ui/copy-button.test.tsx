@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 import { afterEach, describe, it, expect, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CopyButton } from "@/components/ui/copy-button";
 
 afterEach(() => {
   vi.restoreAllMocks();
+  vi.useRealTimers();
 });
 
 describe("CopyButton", () => {
@@ -34,20 +35,20 @@ describe("CopyButton", () => {
   });
 
   it("flashes the copied label after a successful click and reverts", async () => {
-    const user = userEvent.setup();
+    vi.useFakeTimers();
     vi.spyOn(navigator.clipboard, "writeText").mockResolvedValue(undefined);
 
     render(<CopyButton text="hello" />);
-    await user.click(screen.getByRole("button", { name: "Copy" }));
+    // fireEvent is synchronous; fake timers don't block it.
+    fireEvent.click(screen.getByRole("button", { name: "Copy" }));
+    // Let the clipboard Promise microtask settle before asserting.
+    await act(async () => {});
 
-    expect(await screen.findByRole("button", { name: "Copied" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Copied" })).toBeInTheDocument();
 
-    await waitFor(
-      () => {
-        expect(screen.getByRole("button", { name: "Copy" })).toBeInTheDocument();
-      },
-      { timeout: 3000 }
-    );
+    act(() => vi.runAllTimers());
+
+    expect(screen.getByRole("button", { name: "Copy" })).toBeInTheDocument();
   });
 
   it("calls onCopy after a successful clipboard write", async () => {
