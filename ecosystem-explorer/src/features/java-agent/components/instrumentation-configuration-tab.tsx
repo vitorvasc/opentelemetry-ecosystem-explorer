@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { useState } from "react";
-import { Settings } from "lucide-react";
+import { Copy, Settings } from "lucide-react";
 import type { Configuration } from "@/types/javaagent";
 import { Tabs } from "@/components/ui/tabs";
 import { SegmentedTabList } from "@/components/ui/segmented-tabs";
@@ -31,8 +31,101 @@ const FORMAT_TABS = [
   { value: "declarative", label: "Declarative" },
 ];
 
+const COPIED_FLASH_MS = 2000;
+
 interface InstrumentationConfigurationTabProps {
   configurations: Configuration[];
+}
+
+interface ConfigurationCardProps {
+  config: Configuration;
+  format: FormatMode;
+}
+
+function ConfigurationCard({ config, format }: ConfigurationCardProps) {
+  const [copied, setCopied] = useState(false);
+
+  const stability = config.declarative_name
+    ? getStabilityLabel(config.declarative_name)
+    : null;
+
+  const showDeclarative = format === "declarative" && Boolean(config.declarative_name);
+  const yamlCode = config.declarative_name
+    ? formatDeclarativeYaml(config.declarative_name, "<value>")
+    : "";
+  const flatName = config.name;
+  const copyText = showDeclarative ? yamlCode : flatName;
+
+  const isEmptyDefault =
+    config.default === "" || config.default === null || config.default === undefined;
+  const defaultValue = isEmptyDefault
+    ? "(empty)"
+    : typeof config.default === "boolean"
+      ? config.default.toString()
+      : String(config.default);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(copyText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), COPIED_FLASH_MS);
+  };
+
+  return (
+    <DetailCard withHoverEffect>
+      <div className="space-y-3">
+        <div className="flex items-start justify-between gap-3">
+          {showDeclarative ? (
+            <div data-testid="config-name" className="min-w-0 flex-1">
+              <YamlCodeBlock
+                code={yamlCode}
+                className="bg-background/60 text-foreground rounded-md p-3 font-mono text-xs"
+              />
+            </div>
+          ) : (
+            <code
+              data-testid="config-name"
+              className="text-primary flex-1 font-mono text-sm break-all"
+            >
+              {flatName}
+            </code>
+          )}
+          <div className="flex shrink-0 flex-wrap items-center gap-1">
+            <GlowBadge variant="info" withGlow>
+              {config.type}
+            </GlowBadge>
+            {stability === "development" && <StabilityBadge stability="development" />}
+            <button
+              type="button"
+              onClick={handleCopy}
+              aria-label={copied ? "Copied" : "Copy"}
+              className="border-border/60 bg-card text-foreground hover:bg-card/80 inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs"
+            >
+              <Copy className="h-3 w-3" aria-hidden="true" />
+              {copied ? "Copied" : "Copy"}
+            </button>
+          </div>
+        </div>
+
+        <p className="text-muted-foreground text-sm leading-relaxed">{config.description}</p>
+
+        <div className="border-border/30 bg-muted/30 flex items-start gap-2 rounded-lg border p-3">
+          <span className="text-muted-foreground shrink-0 text-xs font-medium">Default:</span>
+          <code className="flex-1 text-xs break-all">{defaultValue}</code>
+        </div>
+
+        {config.example && config.example.length > 0 && (
+          <div className="space-y-1">
+            <span className="text-muted-foreground text-xs font-medium">Examples:</span>
+            {config.example.map((ex, i) => (
+              <div key={i} className="border-border/30 bg-muted/30 rounded-lg border px-3 py-2">
+                <code className="text-xs break-all">{ex}</code>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </DetailCard>
+  );
 }
 
 export function InstrumentationConfigurationTab({
@@ -58,79 +151,9 @@ export function InstrumentationConfigurationTab({
       </Tabs>
 
       <div className="grid gap-4 md:grid-cols-2">
-        {configurations.map((config) => {
-          const stability = config.declarative_name
-            ? getStabilityLabel(config.declarative_name)
-            : null;
-
-          const showDeclarative = format === "declarative" && config.declarative_name;
-          const displayName = showDeclarative
-            ? formatDeclarativeYaml(config.declarative_name!, "<value>")
-            : config.name;
-
-          const isEmptyDefault =
-            config.default === "" || config.default === null || config.default === undefined;
-          const defaultValue = isEmptyDefault
-            ? "(empty)"
-            : typeof config.default === "boolean"
-              ? config.default.toString()
-              : String(config.default);
-
-          return (
-            <DetailCard key={config.name} withHoverEffect>
-              <div className="space-y-3">
-                <div className="flex items-start justify-between gap-3">
-                  {showDeclarative ? (
-                    <div data-testid="config-name" className="min-w-0 flex-1">
-                      <YamlCodeBlock
-                        code={displayName}
-                        className="bg-background/60 text-foreground rounded-md p-3 font-mono text-xs"
-                      />
-                    </div>
-                  ) : (
-                    <code
-                      data-testid="config-name"
-                      className="text-primary flex-1 font-mono text-sm break-all"
-                    >
-                      {displayName}
-                    </code>
-                  )}
-                  <div className="flex shrink-0 flex-wrap items-center gap-1">
-                    <GlowBadge variant="info" withGlow>
-                      {config.type}
-                    </GlowBadge>
-                    {stability === "development" && <StabilityBadge stability="development" />}
-                  </div>
-                </div>
-
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {config.description}
-                </p>
-
-                <div className="border-border/30 bg-muted/30 flex items-start gap-2 rounded-lg border p-3">
-                  <span className="text-muted-foreground shrink-0 text-xs font-medium">
-                    Default:
-                  </span>
-                  <code className="flex-1 text-xs break-all">{defaultValue}</code>
-                </div>
-
-                {config.example && config.example.length > 0 && (
-                  <div className="space-y-1">
-                    <span className="text-muted-foreground text-xs font-medium">Examples:</span>
-                    {config.example.map((ex, i) => (
-                      <div
-                        key={i}
-                        className="border-border/30 bg-muted/30 rounded-lg border px-3 py-2"
-                      >
-                        <code className="text-xs break-all">{ex}</code>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </DetailCard>
-          );
-        })}
+        {configurations.map((config) => (
+          <ConfigurationCard key={config.name} config={config} format={format} />
+        ))}
       </div>
     </div>
   );

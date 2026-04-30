@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { Configuration } from "@/types/javaagent";
@@ -77,7 +77,8 @@ describe("InstrumentationConfigurationTab", () => {
     await user.click(screen.getByRole("tab", { name: "Declarative" }));
 
     const nameEl = screen.getByTestId("config-name");
-    expect(nameEl.tagName).toBe("PRE");
+    // YamlCodeBlock renders a <pre> inside the wrapper div
+    expect(nameEl.querySelector("pre")).not.toBeNull();
     expect(nameEl.textContent).toContain("java:");
     expect(nameEl.textContent).toContain("known_methods: <value>");
   });
@@ -121,5 +122,33 @@ describe("InstrumentationConfigurationTab", () => {
     const nameEl = screen.getByTestId("config-name");
     expect(nameEl.textContent).toBe(exampleConfig.name);
     expect(nameEl.tagName).toBe("CODE");
+  });
+
+  it("copies the flat name to clipboard in System Properties mode", async () => {
+    const user = userEvent.setup();
+    const writeText = vi
+      .spyOn(navigator.clipboard, "writeText")
+      .mockResolvedValue(undefined);
+
+    render(<InstrumentationConfigurationTab configurations={[baseConfig]} />);
+    await user.click(screen.getByRole("button", { name: "Copy" }));
+
+    expect(writeText).toHaveBeenCalledWith(baseConfig.name);
+    expect(await screen.findByRole("button", { name: "Copied" })).toBeInTheDocument();
+  });
+
+  it("copies the YAML snippet in Declarative mode", async () => {
+    const user = userEvent.setup();
+    const writeText = vi
+      .spyOn(navigator.clipboard, "writeText")
+      .mockResolvedValue(undefined);
+
+    render(<InstrumentationConfigurationTab configurations={[baseConfig]} />);
+    await user.click(screen.getByRole("tab", { name: "Declarative" }));
+    await user.click(screen.getByRole("button", { name: "Copy" }));
+
+    expect(writeText).toHaveBeenCalledWith(
+      "java:\n  common:\n    http:\n      known_methods: <value>"
+    );
   });
 });
