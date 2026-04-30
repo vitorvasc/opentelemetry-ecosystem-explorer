@@ -48,6 +48,7 @@ export function CopyButton({
   }, []);
 
   const handleCopy = () => {
+    if (!navigator.clipboard?.writeText) return; // Clipboard API not supported, stay silent.
     navigator.clipboard.writeText(text).then(
       () => {
         setCopied(true);
