@@ -59,7 +59,7 @@ describe("InstrumentationConfigurationTab", () => {
 
   it("renders a card per configuration with name, type and description", () => {
     render(<InstrumentationConfigurationTab configurations={[baseConfig]} />);
-    expect(screen.getByText(baseConfig.name)).toBeInTheDocument();
+    expect(screen.getByTestId("config-name")).toBeInTheDocument();
     expect(screen.getByText("list")).toBeInTheDocument();
     expect(screen.getByText("Known HTTP methods.")).toBeInTheDocument();
   });
@@ -128,6 +128,7 @@ describe("InstrumentationConfigurationTab", () => {
     const writeText = vi.spyOn(navigator.clipboard, "writeText").mockResolvedValue(undefined);
 
     render(<InstrumentationConfigurationTab configurations={[baseConfig]} />);
+    await user.click(screen.getByRole("tab", { name: "System Properties" }));
     await user.click(screen.getByRole("button", { name: "Copy" }));
 
     expect(writeText).toHaveBeenCalledWith(baseConfig.name);
