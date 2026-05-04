@@ -15,6 +15,7 @@
 """Synchronization orchestration for Java instrumentation metadata."""
 
 import logging
+import re
 from typing import Any
 
 from semantic_version import Version
@@ -25,6 +26,8 @@ from .java_instrumentation_client import GithubAPIError, JavaInstrumentationClie
 from .readme_extractor import ReadmeExtractor
 
 logger = logging.getLogger(__name__)
+
+_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
 class InstrumentationSync:
@@ -165,7 +168,7 @@ class InstrumentationSync:
         only this step, never the sync.
         """
         try:
-            sha = self.client.resolve_ref_to_sha(ref)
+            sha = ref if _SHA_RE.match(ref) else self.client.resolve_ref_to_sha(ref)
             discovered = self.readme_extractor.discover_library_readmes(sha)
         except GithubAPIError as e:
             logger.warning(f"  README discovery failed for {ref}: {e}")

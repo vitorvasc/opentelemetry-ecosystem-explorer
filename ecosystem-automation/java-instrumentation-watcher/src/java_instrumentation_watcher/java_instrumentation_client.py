@@ -23,6 +23,7 @@ from urllib3 import Retry
 
 logger = logging.getLogger(__name__)
 
+
 class GithubAPIError(Exception):
     """Custom exception for GitHub API errors."""
 

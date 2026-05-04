@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+"""Shared content-hashing utilities for watcher packages."""
+
 import hashlib
 
 HASH_LENGTH = 12
+
 
 def compute_content_hash(content: bytes | str) -> str:
     """Return first 12 hex chars of SHA-256 over raw content."""
