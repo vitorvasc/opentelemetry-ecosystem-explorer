@@ -56,8 +56,8 @@ you put the two side by side, the gap is obvious:
 | Component pattern | Bootstrap `.card` with `border-success` etc. + `text-bg-*` badges                                        | Custom                       | **Adopt** + extend with type stripe                                                                                                                           |
 | Theme tokens      | `data-bs-theme` attribute                                                                                | Tailwind v4 only             | **Keep existing `data-theme` attribute, extend to light/dark/auto** (decided 2026-05-08; explorer isn't on Bootstrap, so `data-bs-theme` would be misleading) |
 
-This is now reflected in the updated `DESIGN.md` ("Alignment with opentelemetry.io" section) and
-visible in the mockup.
+This is visible in the mockup. `DESIGN.md` will be updated to reflect the as-built state in the
+Phase 1 cleanup PR (PR 8), once the foundation lands.
 
 ---
 
@@ -226,7 +226,8 @@ If this lands well, the work splits naturally:
 - [ ] Detail page layout — three-pane shell + sibling navigator
 - [ ] Detail page — embedded README/config-table renderer (Bootstrap striped tables)
 - [ ] Detail page — version timeline + diff view
-- [ ] Status-pill / type-stripe mapping spec → already added to `DESIGN.md`
+- [ ] Status-pill / type-stripe mapping spec → defined in this brief; will land in `DESIGN.md` via
+      the Phase 1 cleanup PR
 - [ ] Empty/error state library (4 patterns)
 
 Each is small enough for one contributor to own.
