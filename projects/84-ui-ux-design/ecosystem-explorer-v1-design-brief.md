@@ -249,5 +249,3 @@ browser, click between the four tabs, and toggle the theme to see both modes.
   data-pipeline prerequisite?
 - Status terminology in the data is currently mixed (`alpha`/`beta`/`development`/`unmaintained`).
   Worth aligning to one taxonomy before locking pill colors.
-- Will the explorer eventually live at `opentelemetry.io/ecosystem/explorer/` or as a separate
-  domain? That decision affects how literally we mirror the navbar (sibling vs. linked-out).
