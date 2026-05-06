@@ -13,8 +13,8 @@ last_updated: "2026-05-06"
 
 # Project 02 — Ecosystem landing pages
 
-> Per-ecosystem (Collector, Java Agent, …) overview pages. Orient a user to the project, then funnel
-> them into the list with sensible default filters.
+Per-ecosystem (Collector, Java Agent, …) overview pages. Orient a user to the project, then funnel
+them into the list with sensible default filters.
 
 Tracks: [#84](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/issues/84)
 References: [`ecosystem-explorer-v1-mockups.html`](./ecosystem-explorer-v1-mockups.html) (tab:
