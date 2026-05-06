@@ -1,10 +1,12 @@
 # `projects/` — Initiative workspace
 
-> Top-level index for planning workspaces. Each significant initiative gets its own subfolder here.
-> This file is the meta-index — for the _current state of work_ on a specific initiative, open that
-> initiative's own `_index.md`.
+Top-level index for planning workspaces. Each significant initiative gets its own subfolder here.
+This file is the meta-index — for the _current state of work_ on a specific initiative, open that
+initiative's own `_index.md`.
 
-> **Note on frontmatter.** This file is intentionally outside the scope of
+> [!NOTE] Note on frontmatter
+>
+> This file is intentionally outside the scope of
 > [`frontmatter.schema.json`](./frontmatter.schema.json), which validates docs under
 > `projects/<issue-number>-<slug>/`. Top-level meta files (this one) don't carry issue / phase /
 > status fields because they aren't tied to any single initiative.
