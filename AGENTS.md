@@ -16,6 +16,16 @@ Python watchers and the database builder that populate the registry. See `ecosys
 
 React 19 + Vite + TypeScript frontend. See `ecosystem-explorer/AGENTS.md` for the command palette, project structure, styling, accessibility rules, and footguns. For design system specifics (colors, typography, spacing, component patterns) see `ecosystem-explorer/DESIGN.md`.
 
+### projects (Project planning artifacts)
+
+Cross-phase initiatives that span multiple PRs keep their planning artifacts (rolling roadmaps, audits, per-phase plans, design briefs) under `projects/<issue-number>-<slug>/`. 
+
+Each initiative folder follows a shared frontmatter convention validated by `projects/frontmatter.schema.json`.
+
+See `projects/_index.md` for the full conventions, current initiatives, and the checklist for starting a new initiative.
+
+For the *current state of work* on a specific initiative, open that initiative's `NEXT-STEPS.md`.
+
 ## GitHub Actions
 
 When working with GitHub Actions in this repository:
