@@ -11,7 +11,7 @@ last_updated: "2026-05-06"
 >
 > This file was drafted in collaboration with Claude Opus 4.7. Corrections are welcome.
 
-# Project 02 — Ecosystem landing pages
+## Project 02 — Ecosystem landing pages
 
 Per-ecosystem (Collector, Java Agent, …) overview pages. Orient a user to the project, then funnel
 them into the list with sensible default filters.

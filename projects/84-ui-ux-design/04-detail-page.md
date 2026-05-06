@@ -11,7 +11,7 @@ last_updated: "2026-05-06"
 >
 > This file was drafted in collaboration with Claude Opus 4.7. Corrections are welcome.
 
-# Project 04 — Component detail page
+## Project 04 — Component detail page
 
 The atom of the explorer. The canonical, linkable page for a single component — overview,
 configuration, and what changed across versions.
@@ -135,16 +135,16 @@ A maintainer should be able to link to a specific section of the page
 
 ### PR 04b — Version timeline + diff
 
-13. **VersionTimeline component** — vertical, the last N versions, current highlighted, per-version
-    summary line. Scrollable.
-14. **DiffSelector component** — two version dropdowns + "Diff →" navigation.
-15. **CompatibilityCard component** — simple key/value list.
-16. **/<ecosystem>/components/<slug>/diff route** — reads `from` / `to` from query, computes the
-    schema diff, renders side-by-side view.
-17. **SchemaDiff engine** — pure function that compares two version's config schemas and produces a
-    structured diff (added / removed / renamed / type-changed). Lives in a `lib/` so it's testable
-    in isolation.
-18. **README diff (optional toggle)** — behind a button so it doesn't slow the default view.
+1. **VersionTimeline component** — vertical, the last N versions, current highlighted, per-version
+   summary line. Scrollable.
+2. **DiffSelector component** — two version dropdowns + "Diff →" navigation.
+3. **CompatibilityCard component** — simple key/value list.
+4. **`/<ecosystem>/components/<slug>/diff` route** — reads `from` / `to` from query, computes the
+   schema diff, renders side-by-side view.
+5. **SchemaDiff engine** — pure function that compares two version's config schemas and produces a
+   structured diff (added / removed / renamed / type-changed). Lives in a `lib/` so it's testable in
+   isolation.
+6. **README diff (optional toggle)** — behind a button so it doesn't slow the default view.
 
 ## Acceptance criteria
 

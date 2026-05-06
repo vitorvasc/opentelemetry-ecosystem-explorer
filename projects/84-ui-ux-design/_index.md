@@ -11,7 +11,7 @@ last_updated: "2026-05-06"
 >
 > This file was drafted in collaboration with Claude Opus 4.7. Corrections are welcome.
 
-# Issue #84 — Explorer UI/UX Design
+## Issue #84 — Explorer UI/UX Design
 
 > Folder landing page. This is the _what's here, where to start_ index for the
 > [#84](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/issues/84) UI/UX redesign

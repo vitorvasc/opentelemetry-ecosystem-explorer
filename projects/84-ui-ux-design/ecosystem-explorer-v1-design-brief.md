@@ -7,7 +7,7 @@ status: complete
 last_updated: "2026-05-08"
 ---
 
-# v1 design proposal — Ecosystem Explorer
+## v1 design proposal — Ecosystem Explorer
 
 > Brainstorm for
 > [#84 — \[Explorer\] UI/UX Design](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/issues/84).

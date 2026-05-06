@@ -11,7 +11,7 @@ last_updated: "2026-05-08"
 >
 > This file was drafted in collaboration with Claude Opus 4.7. Corrections are welcome.
 
-# Project 00 — Foundation
+## Project 00 — Foundation
 
 > Shared building blocks every page reuses. **Land this first** — every other project (home,
 > ecosystem landing, list, detail) depends on it.

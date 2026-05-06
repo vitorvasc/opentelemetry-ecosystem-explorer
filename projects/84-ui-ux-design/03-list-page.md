@@ -11,7 +11,7 @@ last_updated: "2026-05-06"
 >
 > This file was drafted in collaboration with Claude Opus 4.7. Corrections are welcome.
 
-# Project 03 — List pages
+## Project 03 — List pages
 
 The biggest UX win — make 200+ components actually browseable. Faceted, sortable,
 density-toggleable, URL-shareable.

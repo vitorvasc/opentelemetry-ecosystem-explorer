@@ -7,7 +7,7 @@ status: planning
 last_updated: "2026-05-08"
 ---
 
-# Next steps
+## Next steps
 
 > Rolling roadmap for the explorer redesign tracked under
 > [#84](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/issues/84). Reflects the

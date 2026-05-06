@@ -11,7 +11,7 @@ last_updated: "2026-05-08"
 >
 > This file was drafted in collaboration with Claude Opus 4.7. Corrections are welcome.
 
-# Phase 1 — Foundation: Codebase Audit
+## Phase 1 — Foundation: Codebase Audit
 
 Companion to [`00-foundation.md`](./00-foundation.md). This is the "state of the explorer today":
 what's already in `ecosystem-explorer/src/`, what we can reuse, and the concrete delta per
@@ -212,6 +212,7 @@ success / danger / danger). See Q5 in "Open questions" above for the full table.
 - New `<StatusPill>` at `components/ui/status-pill.tsx`. Internally uses `GlowBadge` with the right
   variant.
 - Add
+  <!-- markdownlint-disable-next-line MD013 -->
   `error: { base: "bg-red-500/10 border-red-500/30 text-red-600 dark:text-red-400", glow: "shadow-sm shadow-red-500/20" }`
   to `GlowBadge`'s `variantStyles`.
 - Decide whether `StabilityBadge` becomes a thin wrapper over `StatusPill` for backward
