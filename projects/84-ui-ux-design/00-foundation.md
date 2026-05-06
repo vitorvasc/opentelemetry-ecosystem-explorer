@@ -38,9 +38,9 @@ without writing any of that themselves.
 
 ## Scope (in)
 
-- Theme system: `data-theme="light|dark"`, persisted to `localStorage` key `td-color-theme`,
-  honors `prefers-color-scheme` for the "auto" option, with a navbar toggle. No flash of wrong theme
-  on first paint.
+- Theme system: `data-theme="light|dark"`, persisted to `localStorage` key `td-color-theme`, honors
+  `prefers-color-scheme` for the "auto" option, with a navbar toggle. No flash of wrong theme on
+  first paint.
 - CSS custom properties exposed for both themes (see DESIGN.md "CSS Custom Properties" section).
 - `<NavBar />` component matching opentelemetry.io: always-dark, full-width, sticky. Includes logo
   lockup, primary nav (Docs · Ecosystem · Status · Community · Training · Blog · **Explorer**),
@@ -83,8 +83,9 @@ without writing any of that themselves.
    (`© 2019–present OpenTelemetry Authors · Docs CC BY 4.0 · All Rights Reserved`).
 6. **CncfCallout component** — single-purpose, placed at the bottom of every route via a layout
    wrapper.
-7. **StatusPill component** — props: `stability: 'development' | 'alpha' | 'beta' | 'stable' |
-   'deprecated' | 'unmaintained'`, matching the OTel collector stability spec. Bootstrap-style
+7. **StatusPill component** — props:
+   `stability: 'development' | 'alpha' | 'beta' | 'stable' | 'deprecated' | 'unmaintained'`,
+   matching the OTel collector stability spec. Bootstrap-style
    `text-bg-secondary/warning/info/success/danger/danger` classes in our token system. Used
    everywhere stability is shown.
 8. **Type-stripe primitive** — exports both a CSS class set and a small

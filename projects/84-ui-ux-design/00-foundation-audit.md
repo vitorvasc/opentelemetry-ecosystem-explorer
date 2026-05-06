@@ -84,33 +84,33 @@ src/
 
 ## What we can reuse (don't rebuild)
 
-| Foundation task   | Already exists                                          | Path                                                                         | Status                                                                                                                                              |
-| ----------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Theme system      | `ThemeProvider` + HSL custom properties                 | `src/theme-context.tsx`, `src/themes.ts`, `src/index.css`                    | **Extend** to support light + dark + auto                                                                                                           |
-| NavBar            | Sticky header with logo + 2 nav links                   | `src/components/layout/header.tsx`                                           | **Replace** with opentelemetry.io-style navbar (gated by V1_REDESIGN)                                                                               |
-| Footer            | 3-column footer with OTel branding                      | `src/components/layout/footer.tsx`                                           | **Replace** with two-cluster Docsy-style footer (gated)                                                                                             |
+| Foundation task   | Already exists                                          | Path                                                                         | Status                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Theme system      | `ThemeProvider` + HSL custom properties                 | `src/theme-context.tsx`, `src/themes.ts`, `src/index.css`                    | **Extend** to support light + dark + auto                                                                                                                                                                                                                                                                                                                                 |
+| NavBar            | Sticky header with logo + 2 nav links                   | `src/components/layout/header.tsx`                                           | **Replace** with opentelemetry.io-style navbar (gated by V1_REDESIGN)                                                                                                                                                                                                                                                                                                     |
+| Footer            | 3-column footer with OTel branding                      | `src/components/layout/footer.tsx`                                           | **Replace** with two-cluster Docsy-style footer (gated)                                                                                                                                                                                                                                                                                                                   |
 | StatusPill        | `<StabilityBadge>` + `<GlowBadge variant="...">`        | `src/components/ui/stability-badge.tsx`, `src/components/ui/glow-badge.tsx`  | **Add new `<StatusPill>` primitive** in PR 4 — covers all six OTel stability levels (development / alpha / beta / stable / deprecated / unmaintained). Leaves `<StabilityBadge>` alone for now; migration is a follow-up cleanup PR after Phase 1. `GlowBadge` gains a `secondary` variant for `development` and an `error/danger` variant for `deprecated/unmaintained`. |
-| Card primitive    | `<NavigationCard>`, `<DetailCard>`                      | `src/components/ui/navigation-card.tsx`, `src/components/ui/detail-card.tsx` | **Audit + extend** — see if either is general enough to host the type-stripe slot                                                                   |
-| TypeStripe        | —                                                       | —                                                                            | **New primitive**                                                                                                                                   |
-| CncfCallout       | —                                                       | —                                                                            | **New primitive**                                                                                                                                   |
-| Feature flagging  | `lib/feature-flags.ts` with typed `FEATURE_FLAGS` array | `src/lib/feature-flags.ts`                                                   | **Reuse as-is** — add `V1_REDESIGN` to the array                                                                                                    |
-| OtelLogo          | Local SVG component                                     | `src/components/icons/otel-logo.tsx`                                         | **Reuse as-is** — answers the "logo source" open question                                                                                           |
-| Visual regression | Playwright installed                                    | `package.json`, no config yet                                                | **Configure** — first time anyone wires it up                                                                                                       |
+| Card primitive    | `<NavigationCard>`, `<DetailCard>`                      | `src/components/ui/navigation-card.tsx`, `src/components/ui/detail-card.tsx` | **Audit + extend** — see if either is general enough to host the type-stripe slot                                                                                                                                                                                                                                                                                         |
+| TypeStripe        | —                                                       | —                                                                            | **New primitive**                                                                                                                                                                                                                                                                                                                                                         |
+| CncfCallout       | —                                                       | —                                                                            | **New primitive**                                                                                                                                                                                                                                                                                                                                                         |
+| Feature flagging  | `lib/feature-flags.ts` with typed `FEATURE_FLAGS` array | `src/lib/feature-flags.ts`                                                   | **Reuse as-is** — add `V1_REDESIGN` to the array                                                                                                                                                                                                                                                                                                                          |
+| OtelLogo          | Local SVG component                                     | `src/components/icons/otel-logo.tsx`                                         | **Reuse as-is** — answers the "logo source" open question                                                                                                                                                                                                                                                                                                                 |
+| Visual regression | Playwright installed                                    | `package.json`, no config yet                                                | **Configure** — first time anyone wires it up                                                                                                                                                                                                                                                                                                                             |
 
 ## What's incomplete or drifting today
 
-| Issue                                                                                                                                                                                                                                                                                      | Where                                                         | Impact                                                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Color drift between `index.css` and `themes.ts`.** `index.css` `@layer theme` has cyan values (`--primary-hsl: 185 85% 70%`) but `themes.ts` defines orange (`38 95% 52%`). `ThemeProvider` overwrites the CSS values on mount, but there's a flash of wrong-color-theme on first paint. | `src/index.css` lines 13–30 vs `src/themes.ts` lines 50–67    | Needs reconciling as part of theme work. The CSS defaults should match the default theme so first paint is correct.                                         |
-| **Single theme.** `ThemeId = "dark-blue"` only — no light, no dark, no auto.                                                                                                                                                                                                               | `src/themes.ts:17`                                            | Foundation task #1 must extend this. Light + dark + auto with `prefers-color-scheme`.                                                                       |
-| **`data-theme` attribute, not `data-bs-theme`.**                                                                                                                                                                                                                                           | `src/theme-context.tsx:53`                                    | Keeping `data-theme` (decided 2026-05-08, see Q1). The codebase isn't on Bootstrap, so `data-bs-theme` would be misleading.                                  |
-| **`StabilityBadge` only handles `"development"`.** Returns `null` for everything else.                                                                                                                                                                                                     | `src/components/ui/stability-badge.tsx:27`                    | Foundation task #7 needs to extend this OR introduce a separate `<StatusPill>` and migrate `StabilityBadge` callers over time.                              |
-| **`GlowBadge` missing `error/danger` variant.** Has primary/success/info/warning/muted.                                                                                                                                                                                                    | `src/components/ui/glow-badge.tsx:18`                         | One-line addition.                                                                                                                                          |
-| **Header has only Java Agent + Collector links.**                                                                                                                                                                                                                                          | `src/components/layout/header.tsx:27–40`                      | The new navbar replaces this entirely. The current Header keeps shipping behind the flag.                                                                   |
-| **No theme toggle UI anywhere.** `ThemeProvider` exposes `setThemeId` but nothing calls it.                                                                                                                                                                                                | —                                                             | New work in foundation task #2.                                                                                                                             |
-| **CollectorDetailPage is broken.** "Unexpected token '<', '<!doctype' is not valid JSON" — the API call returns HTML when it expects JSON.                                                                                                                                                 | `src/features/collector/collector-detail-page.tsx` (presumed) | Out of scope for foundation, but worth a sub-issue so it isn't forgotten. The detail page rewrite in Project 04 will replace this anyway.                   |
-| **No CNCF callout component or rendering anywhere.**                                                                                                                                                                                                                                       | —                                                             | New work.                                                                                                                                                   |
-| **No Playwright visual regression suite.** Playwright is in `devDependencies` but `playwright.config.*` doesn't exist.                                                                                                                                                                     | —                                                             | First-time setup as part of foundation testing.                                                                                                             |
+| Issue                                                                                                                                                                                                                                                                                      | Where                                                         | Impact                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Color drift between `index.css` and `themes.ts`.** `index.css` `@layer theme` has cyan values (`--primary-hsl: 185 85% 70%`) but `themes.ts` defines orange (`38 95% 52%`). `ThemeProvider` overwrites the CSS values on mount, but there's a flash of wrong-color-theme on first paint. | `src/index.css` lines 13–30 vs `src/themes.ts` lines 50–67    | Needs reconciling as part of theme work. The CSS defaults should match the default theme so first paint is correct.                       |
+| **Single theme.** `ThemeId = "dark-blue"` only — no light, no dark, no auto.                                                                                                                                                                                                               | `src/themes.ts:17`                                            | Foundation task #1 must extend this. Light + dark + auto with `prefers-color-scheme`.                                                     |
+| **`data-theme` attribute, not `data-bs-theme`.**                                                                                                                                                                                                                                           | `src/theme-context.tsx:53`                                    | Keeping `data-theme` (decided 2026-05-08, see Q1). The codebase isn't on Bootstrap, so `data-bs-theme` would be misleading.               |
+| **`StabilityBadge` only handles `"development"`.** Returns `null` for everything else.                                                                                                                                                                                                     | `src/components/ui/stability-badge.tsx:27`                    | Foundation task #7 needs to extend this OR introduce a separate `<StatusPill>` and migrate `StabilityBadge` callers over time.            |
+| **`GlowBadge` missing `error/danger` variant.** Has primary/success/info/warning/muted.                                                                                                                                                                                                    | `src/components/ui/glow-badge.tsx:18`                         | One-line addition.                                                                                                                        |
+| **Header has only Java Agent + Collector links.**                                                                                                                                                                                                                                          | `src/components/layout/header.tsx:27–40`                      | The new navbar replaces this entirely. The current Header keeps shipping behind the flag.                                                 |
+| **No theme toggle UI anywhere.** `ThemeProvider` exposes `setThemeId` but nothing calls it.                                                                                                                                                                                                | —                                                             | New work in foundation task #2.                                                                                                           |
+| **CollectorDetailPage is broken.** "Unexpected token '<', '<!doctype' is not valid JSON" — the API call returns HTML when it expects JSON.                                                                                                                                                 | `src/features/collector/collector-detail-page.tsx` (presumed) | Out of scope for foundation, but worth a sub-issue so it isn't forgotten. The detail page rewrite in Project 04 will replace this anyway. |
+| **No CNCF callout component or rendering anywhere.**                                                                                                                                                                                                                                       | —                                                             | New work.                                                                                                                                 |
+| **No Playwright visual regression suite.** Playwright is in `devDependencies` but `playwright.config.*` doesn't exist.                                                                                                                                                                     | —                                                             | First-time setup as part of foundation testing.                                                                                           |
 
 ---
 
@@ -202,10 +202,10 @@ route when `V1_REDESIGN` is on.
 - `StabilityBadge` — only handles `"development"`, returns `null` otherwise.
 - `GlowBadge` — variants `primary | success | info | warning | muted`, no `error/danger`.
 
-**Target:** `<StatusPill stability="development | alpha | beta | stable | deprecated | unmaintained" />`
-with the locked color mapping from the OTel collector stability spec
-(secondary / warning / info / success / danger / danger). See Q5 in "Open questions" above for
-the full table.
+**Target:**
+`<StatusPill stability="development | alpha | beta | stable | deprecated | unmaintained" />` with
+the locked color mapping from the OTel collector stability spec (secondary / warning / info /
+success / danger / danger). See Q5 in "Open questions" above for the full table.
 
 **Concrete delta:**
 
@@ -248,8 +248,8 @@ version. The longer alignment-focused version is captured in
 [`./ecosystem-explorer-v1-design-brief.md`](./ecosystem-explorer-v1-design-brief.md).
 
 **Target:** When the foundation lands, update `DESIGN.md` to describe the as-built tokens,
-primitives, and the `data-theme` contract. We don't need the full alignment brief
-there — that's what `ecosystem-explorer-v1-design-brief.md` is for.
+primitives, and the `data-theme` contract. We don't need the full alignment brief there — that's
+what `ecosystem-explorer-v1-design-brief.md` is for.
 
 **Concrete delta:** A documentation-only PR after the foundation primitives merge. Out of scope for
 the first foundation PR.
@@ -380,8 +380,8 @@ These were carried over from `00-foundation.md`.
    Stick with it (recommended), or fetch the canonical SVG from `opentelemetry.io/img/logos/`?
    - **Why this matters now:** affects the NavBar PR.
    - **Decision (2026-05-08):** Stick with the current local `OtelLogo` component. Self-contained,
-     no extra fetch dependency, already used elsewhere in the codebase. If the upstream SVG
-     changes meaningfully later, we can revisit.
+     no extra fetch dependency, already used elsewhere in the codebase. If the upstream SVG changes
+     meaningfully later, we can revisit.
 
 3. **Icon library: Lucide-only vs. add Font Awesome.** opentelemetry.io's footer uses Font Awesome
    heavily (Bluesky, Mastodon, Stack Overflow, etc.). The explorer uses Lucide. Mixing libraries
@@ -401,37 +401,37 @@ These were carried over from `00-foundation.md`.
    backward compatibility?
    - **Why this matters now:** affects scope of the StatusPill PR.
    - **Recommended:** keep both, target different uses initially, migrate later in a separate
-     cleanup PR. The current `StabilityBadge` is narrow (one state — `"development"` — rendered as
-     a yellow "dev" pill, used inside the Java configuration builder). The new `<StatusPill>` is
+     cleanup PR. The current `StabilityBadge` is narrow (one state — `"development"` — rendered as a
+     yellow "dev" pill, used inside the Java configuration builder). The new `<StatusPill>` is
      general-purpose with six states. They're different primitives with overlapping concerns.
-     Building `<StatusPill>` in PR 4 without touching `StabilityBadge` keeps PR 4 small and
-     focused, and decouples the configuration-builder visual from the foundation work. Migration
-     becomes a follow-up cleanup PR after Phase 1 lands.
-   - **Decision (2026-05-08):** Adopt the recommendation above. Add `<StatusPill>` in PR 4 as a
-     new primitive; leave `<StabilityBadge>` callers unchanged for now. Migrate the configuration
+     Building `<StatusPill>` in PR 4 without touching `StabilityBadge` keeps PR 4 small and focused,
+     and decouples the configuration-builder visual from the foundation work. Migration becomes a
+     follow-up cleanup PR after Phase 1 lands.
+   - **Decision (2026-05-08):** Adopt the recommendation above. Add `<StatusPill>` in PR 4 as a new
+     primitive; leave `<StabilityBadge>` callers unchanged for now. Migrate the configuration
      builder to `<StatusPill stability="development" />` in a follow-up PR after Phase 1 cleanup.
 
 5. **Stability terminology in data.** The data uses `alpha | beta | development | unmaintained`.
    Visually we map to four colors (success/info/warning/danger). The `development` ↔ `alpha` overlap
    and `unmaintained` ↔ `deprecated` synonym need locking before pill colors ship.
    - **Maintainer call** — needs alignment with `ecosystem-registry` maintainers.
-   - **Decision (2026-05-08):** Adopt the [OpenTelemetry Collector stability
-     spec](https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/component-stability.md)
-     verbatim. **Six** stability levels — Development, Alpha, Beta, Stable, Deprecated,
-     Unmaintained — with this color mapping:
+   - **Decision (2026-05-08):** Adopt the
+     [OpenTelemetry Collector stability spec](https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/component-stability.md)
+     verbatim. **Six** stability levels — Development, Alpha, Beta, Stable, Deprecated, Unmaintained
+     — with this color mapping:
 
-     | Level             | Semantic                                       | Pill variant            |
-     | ----------------- | ---------------------------------------------- | ----------------------- |
-     | `development`     | Not all pieces in place; not for production    | `secondary` (gray)      |
-     | `alpha`           | Limited non-critical workloads                 | `warning` (orange)      |
-     | `beta`            | Configs deemed stable; broader usage           | `info` (blue)           |
-     | `stable`          | General availability; production-ready         | `success` (green)       |
-     | `deprecated`      | Planned removal; no further support            | `danger` (red)          |
-     | `unmaintained`    | No active code owner; will be removed soon     | `danger` (red)          |
+     | Level          | Semantic                                    | Pill variant       |
+     | -------------- | ------------------------------------------- | ------------------ |
+     | `development`  | Not all pieces in place; not for production | `secondary` (gray) |
+     | `alpha`        | Limited non-critical workloads              | `warning` (orange) |
+     | `beta`         | Configs deemed stable; broader usage        | `info` (blue)      |
+     | `stable`       | General availability; production-ready      | `success` (green)  |
+     | `deprecated`   | Planned removal; no further support         | `danger` (red)     |
+     | `unmaintained` | No active code owner; will be removed soon  | `danger` (red)     |
 
      `deprecated` and `unmaintained` share the red color but show different labels — both signal
-     "avoid" but for different reasons. This mirrors the collector's own stability ladder so
-     anyone reading both sources sees the same vocabulary. `<StatusPill>` props update from
+     "avoid" but for different reasons. This mirrors the collector's own stability ladder so anyone
+     reading both sources sees the same vocabulary. `<StatusPill>` props update from
      `'stable' | 'beta' | 'alpha' | 'deprecated'` to the six values above.
 
 ---
@@ -442,8 +442,8 @@ These were carried over from `00-foundation.md`.
 - [x] Decide on logo source (Q2) — locked: keep the local `OtelLogo` component.
 - [x] Decide on icon library strategy (Q3) — locked: option (c), inline SVGs for missing brand
       marks; keep Lucide for everything else.
-- [x] Decide on `StabilityBadge` deprecation path (Q4) — locked: keep both, target different
-      uses; migrate in a follow-up cleanup PR after Phase 1.
+- [x] Decide on `StabilityBadge` deprecation path (Q4) — locked: keep both, target different uses;
+      migrate in a follow-up cleanup PR after Phase 1.
 - [x] Pin the stability-terminology mapping (Q5) — locked: six-level OTel collector spec
       (development / alpha / beta / stable / deprecated / unmaintained).
 - [x] Add `V1_REDESIGN` to `FEATURE_FLAGS` (one-line PR — can ship first as a no-op). The
