@@ -23,6 +23,9 @@ const FEATURE_FLAGS = [
 
   // Collector Page - Still in development
   "COLLECTOR_PAGE",
+
+  // V1 Redesign - Still in development - https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/issues/84
+  "V1_REDESIGN",
 ] as const;
 
 const FEATURE_FLAG_PREFIX = "VITE_FEATURE_FLAG_";
