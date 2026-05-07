@@ -12,7 +12,8 @@ on:
     types: [completed]
 
 concurrency:
-  group: screenshots-commit-${{ github.event.workflow_run.id }}
+  group: screenshots-${{ github.event.workflow_run.pull_requests[0].number }}
+  cancel-in-progress: true
 
 permissions:
   actions: read
@@ -75,7 +76,22 @@ jobs:
 
           rm -rf -- "${PR_NUMBER}"
           mkdir -p -- "${PR_NUMBER}"
-          find /tmp/screenshots -mindepth 1 -maxdepth 1 -type f -exec cp -- {} "${PR_NUMBER}/" \;
+          UNEXPECTED=$(find /tmp/screenshots -mindepth 1 -maxdepth 1 -type f ! -name "*.png")
+          if [ -n "$UNEXPECTED" ]; then
+            echo "::error::Unexpected file types in screenshots artifact:"
+            echo "$UNEXPECTED"
+            exit 1
+          fi
+
+          while IFS= read -r -d '' f; do
+            size=$(stat -c%s "$f")
+            if [ "$size" -gt $((5 * 1024 * 1024)) ]; then
+              echo "::error::File exceeds 5 MB limit: $f ($size bytes)"
+              exit 1
+            fi
+          done < <(find /tmp/screenshots -mindepth 1 -maxdepth 1 -type f -name "*.png" -print0)
+
+          find /tmp/screenshots -mindepth 1 -maxdepth 1 -type f -name "*.png" -exec cp -- {} "${PR_NUMBER}/" \;
           git add -A -- "${PR_NUMBER}/"
           git diff --quiet --exit-code --cached || git commit -m "docs: update screenshots for PR #${PR_NUMBER}"
           git push origin screenshots
