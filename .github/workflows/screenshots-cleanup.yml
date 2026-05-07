@@ -32,7 +32,8 @@ jobs:
             exit 0
           fi
 
-          git checkout -b screenshots origin/screenshots
+          git fetch origin screenshots
+          git checkout -B screenshots FETCH_HEAD
 
           if [ ! -d "${PR_NUMBER}" ]; then
             echo "No screenshots for PR #${PR_NUMBER}, nothing to clean up."

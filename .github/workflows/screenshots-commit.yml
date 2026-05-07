@@ -62,8 +62,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          if git show-ref --verify --quiet refs/remotes/origin/screenshots; then
-            git checkout -b screenshots origin/screenshots
+          if git ls-remote --exit-code --heads origin screenshots > /dev/null 2>&1; then
+            git fetch origin screenshots
+            git checkout -B screenshots FETCH_HEAD
           else
             git checkout --orphan screenshots
             git rm -rf . --quiet 2>/dev/null || true
