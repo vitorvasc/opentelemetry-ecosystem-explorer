@@ -31,8 +31,8 @@ const DETAIL_NAME = "spring-webmvc-6.0";
 // Viewport sizes captured for each page. Edit here to add, remove, or resize.
 const VIEWPORTS = [
   { name: "desktop", width: 1800, height: 1200 },
-  { name: "tablet",  width: 768,  height: 1024 },
-  { name: "mobile",  width: 390,  height: 844  },
+  { name: "tablet", width: 768, height: 1024 },
+  { name: "mobile", width: 390, height: 844 },
 ];
 
 async function startServer() {
