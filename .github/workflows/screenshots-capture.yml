@@ -64,11 +64,13 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           mkdir -p /tmp/pr-metadata
           printf '%s' "$PR_NUMBER" > /tmp/pr-metadata/pr_number.txt
           printf '%s' "$HEAD_REF"  > /tmp/pr-metadata/head_ref.txt
           printf '%s' "$HEAD_REPO" > /tmp/pr-metadata/head_repo.txt
+          printf '%s' "$HEAD_SHA"  > /tmp/pr-metadata/head_sha.txt
 
       - name: Upload PR metadata artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
