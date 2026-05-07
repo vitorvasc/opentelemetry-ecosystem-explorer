@@ -15,7 +15,9 @@ concurrency:
   group: screenshots-commit-${{ github.event.workflow_run.id }}
 
 permissions:
+  actions: read
   contents: write
+  issues: write
   pull-requests: write
 
 jobs:
@@ -70,9 +72,10 @@ jobs:
             git push origin screenshots
           fi
 
-          mkdir -p "${PR_NUMBER}"
-          cp /tmp/screenshots/* "${PR_NUMBER}/"
-          git add "${PR_NUMBER}/"
+          rm -rf -- "${PR_NUMBER}"
+          mkdir -p -- "${PR_NUMBER}"
+          find /tmp/screenshots -mindepth 1 -maxdepth 1 -type f -exec cp -- {} "${PR_NUMBER}/" \;
+          git add -A -- "${PR_NUMBER}/"
           git diff --quiet --exit-code --cached || git commit -m "docs: update screenshots for PR #${PR_NUMBER}"
           git push origin screenshots
 

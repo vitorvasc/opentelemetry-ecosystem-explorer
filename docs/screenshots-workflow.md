@@ -83,6 +83,7 @@ The PR comment table is built from a hardcoded `pages` list in the `Build commen
 
 ## Fork PR limitations
 
-For PRs from forks, the capture job runs and the comment is posted successfully. However, the
-`screenshots` branch is part of the upstream repo — the commit job cannot push to a fork's branch.
-This is accepted; the label is primarily used by maintainers working on upstream branches.
+For PRs from forks, the workflow still writes screenshots to the upstream `screenshots` branch and
+updates the PR comment there. In practice, that means the `add-screenshots` label is generally
+applied by a maintainer or other trusted collaborator, since the screenshots are stored in the
+upstream repo rather than in the contributor's fork.
