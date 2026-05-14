@@ -38,12 +38,12 @@ export function CncfCallout() {
             <a
               href="https://cncf.io"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="td-cncf-callout__link"
             >
               CNCF
             </a>{" "}
-            incubating project.
+            graduated project.
           </strong>
           <br />
           Formed through a merger of the OpenTracing and OpenCensus projects.

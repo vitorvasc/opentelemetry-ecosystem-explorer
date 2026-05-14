@@ -27,8 +27,9 @@
  * at 16px so `em` resolves correctly and `rem` values match Bootstrap's scale.
  *
  * Surface stays dark in both themes — upstream `.td-footer @extend .td-box--dark`
- * imposes the dark background regardless of `data-bs-theme`. Only the top
- * border color flips per theme.
+ * imposes the dark background regardless of `data-bs-theme`. Upstream's top
+ * border color flips per theme; the explorer collapses this to a single dark
+ * border since the rendered surface doesn't change.
  */
 
 .td-footer {

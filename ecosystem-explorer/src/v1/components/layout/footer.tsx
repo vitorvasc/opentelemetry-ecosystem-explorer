@@ -127,7 +127,9 @@ function FooterLinks({ items }: { items: FooterLink[] }) {
     <ul className="td-footer__links-list">
       {items.map((link) => {
         const isExternal = EXTERNAL_URL.test(link.url);
-        const rel = [link.rel, isExternal ? "noopener" : undefined].filter(Boolean).join(" ");
+        const rel = [link.rel, isExternal ? "noopener noreferrer" : undefined]
+          .filter(Boolean)
+          .join(" ");
         return (
           <li key={link.name} className="td-footer__links-item">
             <a
@@ -165,7 +167,7 @@ export function FooterV1() {
                 <a
                   href="https://creativecommons.org/licenses/by/4.0"
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                 >
                   CC BY 4.0
                 </a>

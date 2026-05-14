@@ -79,12 +79,14 @@ describe("FooterV1", () => {
     }
   });
 
-  it("marks external links with target=_blank and rel=noopener", () => {
+  it("marks external links with target=_blank and rel=noopener noreferrer", () => {
     renderFooter();
 
     const github = screen.getByRole("link", { name: "GitHub" });
     expect(github).toHaveAttribute("target", "_blank");
-    expect(github.getAttribute("rel")).toMatch(/\bnoopener\b/);
+    const rel = github.getAttribute("rel") ?? "";
+    expect(rel).toMatch(/\bnoopener\b/);
+    expect(rel).toMatch(/\bnoreferrer\b/);
   });
 
   it("does not open internal links in a new tab", () => {
@@ -94,13 +96,14 @@ describe("FooterV1", () => {
     expect(internal).not.toHaveAttribute("target");
   });
 
-  it('preserves rel="me" on the Mastodon link alongside noopener', () => {
+  it('preserves rel="me" on the Mastodon link alongside noopener noreferrer', () => {
     renderFooter();
 
     const mastodon = screen.getByRole("link", { name: "Mastodon" });
     const rel = mastodon.getAttribute("rel") ?? "";
     expect(rel).toMatch(/\bme\b/);
     expect(rel).toMatch(/\bnoopener\b/);
+    expect(rel).toMatch(/\bnoreferrer\b/);
   });
 
   it("renders the copyright with the CC BY 4.0 link", () => {

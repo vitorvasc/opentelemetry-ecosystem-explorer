@@ -18,11 +18,11 @@ import { describe, it, expect } from "vitest";
 import { CncfCallout } from "./cncf-callout";
 
 describe("CncfCallout", () => {
-  it("renders the CNCF incubating-project statement", () => {
+  it("renders the CNCF graduated-project statement", () => {
     render(<CncfCallout />);
 
     expect(screen.getByText(/OpenTelemetry is a/i)).toBeInTheDocument();
-    expect(screen.getByText(/incubating project/i)).toBeInTheDocument();
+    expect(screen.getByText(/graduated project/i)).toBeInTheDocument();
     expect(
       screen.getByText(/merger of the OpenTracing and OpenCensus projects/i)
     ).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe("CncfCallout", () => {
     render(<CncfCallout />);
 
     expect(
-      screen.getByRole("region", { name: /OpenTelemetry is a.*incubating project/i })
+      screen.getByRole("region", { name: /OpenTelemetry is a.*graduated project/i })
     ).toBeInTheDocument();
   });
 });
