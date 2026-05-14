@@ -15,19 +15,24 @@
  */
 import { render } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import { type ComponentType, TYPE_STRIPE_COLORS } from "./type-stripe-colors";
+import { type CollectorComponentType, TYPE_STRIPE_COLORS } from "./type-stripe-colors";
 import { TypeStripe } from "./type-stripe";
 
-const types: ComponentType[] = ["receiver", "processor", "exporter", "connector", "extension"];
+const types: CollectorComponentType[] = [
+  "receiver",
+  "processor",
+  "exporter",
+  "connector",
+  "extension",
+];
 
 describe("TypeStripe", () => {
-  it.each(types)("renders a presentation element with type=%s and the matching color", (type) => {
+  it.each(types)("renders an aria-hidden element with type=%s and the matching color", (type) => {
     const { container } = render(<TypeStripe type={type} />);
     const el = container.querySelector(".type-stripe");
     expect(el).not.toBeNull();
     expect(el).toHaveAttribute("data-type", type);
     expect(el).toHaveAttribute("aria-hidden");
-    expect(el).toHaveAttribute("role", "presentation");
     expect((el as HTMLElement).style.backgroundColor).not.toBe("");
   });
 

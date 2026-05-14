@@ -21,9 +21,11 @@
  * disallows constants alongside component exports).
  */
 
-export type ComponentType = "receiver" | "processor" | "exporter" | "connector" | "extension";
+import type { CollectorComponent } from "@/types/collector";
 
-export const TYPE_STRIPE_COLORS: Record<ComponentType, string> = {
+export type CollectorComponentType = CollectorComponent["type"];
+
+export const TYPE_STRIPE_COLORS: Record<CollectorComponentType, string> = {
   receiver: "hsl(200 85% 45%)",
   processor: "hsl(270 70% 55%)",
   exporter: "hsl(38 95% 52%)",

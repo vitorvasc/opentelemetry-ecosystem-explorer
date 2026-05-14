@@ -29,19 +29,18 @@
  *      use DetailCard (e.g. compact list view in Phase 4).
  */
 
-import { type ComponentType, TYPE_STRIPE_COLORS } from "./type-stripe-colors";
+import { type CollectorComponentType, TYPE_STRIPE_COLORS } from "./type-stripe-colors";
 
 export interface TypeStripeProps {
-  type: ComponentType;
+  type: CollectorComponentType;
   className?: string;
 }
 
-export function TypeStripe({ type, className = "" }: TypeStripeProps) {
+export function TypeStripe({ type, className }: TypeStripeProps) {
   return (
     <span
-      role="presentation"
       aria-hidden
-      className={`type-stripe ${className}`}
+      className={className ? `type-stripe ${className}` : "type-stripe"}
       data-type={type}
       style={{ backgroundColor: TYPE_STRIPE_COLORS[type] }}
     />
