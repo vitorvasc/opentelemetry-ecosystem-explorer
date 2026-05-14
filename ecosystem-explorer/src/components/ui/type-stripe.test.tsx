@@ -33,7 +33,7 @@ describe("TypeStripe", () => {
     expect(el).not.toBeNull();
     expect(el).toHaveAttribute("data-type", type);
     expect(el).toHaveAttribute("aria-hidden");
-    expect((el as HTMLElement).style.backgroundColor).not.toBe("");
+    expect(el).toHaveStyle({ backgroundColor: TYPE_STRIPE_COLORS[type] });
   });
 
   it("exports a stable color for each of the five canonical types", () => {

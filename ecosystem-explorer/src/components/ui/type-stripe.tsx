@@ -23,8 +23,9 @@
  * React Fast Refresh stays happy).
  *
  * Two consumers:
- *   1. As a slot inside `<DetailCard typeStripe="...">` — the card paints its
- *      own left edge using `TYPE_STRIPE_COLORS`.
+ *   1. As a slot inside `<DetailCard typeStripe="...">` — DetailCard mounts
+ *      `<TypeStripe>` with its own positioning className, so the stripe
+ *      rendering stays in one place.
  *   2. As a standalone `<TypeStripe type="..." />` for list rows that don't
  *      use DetailCard (e.g. compact list view in Phase 4).
  */
