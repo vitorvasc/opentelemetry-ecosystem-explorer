@@ -1,0 +1,40 @@
+/*
+ * Copyright The OpenTelemetry Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { render } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+import { type ComponentType, TYPE_STRIPE_COLORS } from "./type-stripe-colors";
+import { TypeStripe } from "./type-stripe";
+
+const types: ComponentType[] = ["receiver", "processor", "exporter", "connector", "extension"];
+
+describe("TypeStripe", () => {
+  it.each(types)("renders a presentation element with type=%s and the matching color", (type) => {
+    const { container } = render(<TypeStripe type={type} />);
+    const el = container.querySelector(".type-stripe");
+    expect(el).not.toBeNull();
+    expect(el).toHaveAttribute("data-type", type);
+    expect(el).toHaveAttribute("aria-hidden");
+    expect(el).toHaveAttribute("role", "presentation");
+    expect((el as HTMLElement).style.backgroundColor).not.toBe("");
+  });
+
+  it("exports a stable color for each of the five canonical types", () => {
+    expect(Object.keys(TYPE_STRIPE_COLORS).sort()).toEqual(types.slice().sort());
+    for (const c of Object.values(TYPE_STRIPE_COLORS)) {
+      expect(c).toMatch(/^hsl\(/);
+    }
+  });
+});

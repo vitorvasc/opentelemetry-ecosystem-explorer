@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 import React from "react";
+import { type ComponentType, TYPE_STRIPE_COLORS } from "./type-stripe-colors";
 
 interface DetailCardProps {
   children: React.ReactNode;
   className?: string;
   withGrid?: boolean;
   withHoverEffect?: boolean;
+  typeStripe?: ComponentType;
 }
 
 export function DetailCard({
@@ -27,6 +29,7 @@ export function DetailCard({
   className = "",
   withGrid = false,
   withHoverEffect = false,
+  typeStripe,
 }: DetailCardProps) {
   const patternId = React.useId().replace(/:/g, "-");
 
@@ -37,7 +40,15 @@ export function DetailCard({
           ? "hover:border-secondary/40 hover:bg-card hover:shadow-secondary/10 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
           : ""
       } ${className}`}
+      data-type-stripe={typeStripe ?? undefined}
     >
+      {typeStripe && (
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 w-1"
+          style={{ backgroundColor: TYPE_STRIPE_COLORS[typeStripe] }}
+        />
+      )}
       {withGrid && (
         <div className="absolute inset-0 opacity-10">
           <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
