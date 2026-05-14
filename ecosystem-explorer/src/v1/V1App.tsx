@@ -127,9 +127,8 @@ export function V1App() {
               {isEnabled("COLLECTOR_PAGE") && (
                 <>
                   <Route path="/collector/components" element={<CollectorPage />} />
-                  <Route path="/collector/components/:version" element={<CollectorPage />} />
                   <Route
-                    path="/collector/components/:version/:id"
+                    path="/collector/components/:distribution/:name"
                     element={<CollectorDetailPage />}
                   />
                 </>
