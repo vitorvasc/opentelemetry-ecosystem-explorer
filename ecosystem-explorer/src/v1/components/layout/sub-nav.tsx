@@ -40,15 +40,16 @@ export function SubNav({ crumbs, actions, className }: SubNavProps) {
   if (crumbs.length === 0 && !actions) return null;
 
   return (
-    <div className={`td-subnav ${className ?? ""}`}>
+    <div className={className ? `td-subnav ${className}` : "td-subnav"}>
       <div className="td-subnav__container">
         {crumbs.length > 0 && (
           <nav className="td-subnav__breadcrumb" aria-label="Breadcrumb">
             <ol className="td-subnav__crumbs">
               {crumbs.map((crumb, idx) => {
                 const isLast = idx === crumbs.length - 1;
+                const ariaCurrent = isLast ? "page" : undefined;
                 return (
-                  <li key={`${crumb.label}-${idx}`} className="td-subnav__crumb">
+                  <li key={idx} className="td-subnav__crumb">
                     {idx > 0 && (
                       <ChevronRight
                         className="td-subnav__separator"
@@ -59,7 +60,7 @@ export function SubNav({ crumbs, actions, className }: SubNavProps) {
                     {isLast || !crumb.href ? (
                       <span
                         className="td-subnav__crumb-label td-subnav__crumb-label--current"
-                        aria-current={isLast ? "page" : undefined}
+                        aria-current={ariaCurrent}
                       >
                         {crumb.label}
                       </span>

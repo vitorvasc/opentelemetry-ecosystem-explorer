@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-/*
- * SubNav — breadcrumb row below the navbar. Pixel-anchored at 16px-rem like
- * the rest of v1 chrome.
- */
+/* Pixel-anchored at 16px-rem like the rest of v1 chrome. */
 
 .td-subnav {
   font-size: 16px;
