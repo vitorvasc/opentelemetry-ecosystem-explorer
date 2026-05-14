@@ -117,19 +117,16 @@ export function V1App() {
               {isEnabled("JAVA_RELEASE_COMPARISON") && (
                 <Route path="/java-agent/releases" element={<JavaReleaseComparisonPage />} />
               )}
-              {isEnabled("JAVA_CONFIG_BUILDER") && (
-                <Route
-                  path="/java-agent/configuration/builder"
-                  element={<ConfigurationBuilderPage />}
-                />
-              )}
+              <Route
+                path="/java-agent/configuration/builder"
+                element={<ConfigurationBuilderPage />}
+              />
               <Route path="/collector" element={<CollectorPage />} />
               {isEnabled("COLLECTOR_PAGE") && (
                 <>
                   <Route path="/collector/components" element={<CollectorPage />} />
-                  <Route path="/collector/components/:version" element={<CollectorPage />} />
                   <Route
-                    path="/collector/components/:version/:id"
+                    path="/collector/components/:distribution/:name"
                     element={<CollectorDetailPage />}
                   />
                 </>
