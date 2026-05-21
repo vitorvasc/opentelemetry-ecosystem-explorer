@@ -70,6 +70,19 @@ const INSTRUMENTATIONS_SECTION_KEY = "instrumentations";
 const INSTRUMENTATIONS_SECTION_LABEL = "Instrumentations";
 const GENERAL_SETTINGS_LABEL = "General settings";
 
+// Drops instrumentation customizations that reference modules not present in the
+// selected agent version. Without this, switching from a newer agent (where a
+// module exists) to an older one would leak orphan entries into the YAML output.
+function PruneInstrumentationsForAgentVersion({ javaAgentVersion }: { javaAgentVersion: string }) {
+  const { pruneInstrumentations } = useConfigurationBuilder();
+  const { data } = useInstrumentations(javaAgentVersion);
+  useEffect(() => {
+    if (!data) return;
+    pruneInstrumentations(groupByModule(data).map((m) => m.name));
+  }, [data, pruneInstrumentations]);
+  return null;
+}
+
 interface SdkTabContentProps {
   schema: GroupNode;
   starter: ReturnType<typeof useConfigStarter>["data"];
@@ -111,6 +124,7 @@ function SdkTabContent({
       version={schemaVersion}
       starter={starter}
     >
+      <PruneInstrumentationsForAgentVersion javaAgentVersion={javaAgentVersion} />
       <div className={BUILDER_GRID}>
         <ConfigurationTocSidebar
           activeTab={activeTab}
@@ -199,7 +213,7 @@ function InstrumentationTabBody({
   const sectionsContainerRef = useRef<HTMLDivElement>(null);
   const { activeKey, scrollToSection } = useActiveSection(sectionKeys, sectionsContainerRef);
 
-  const { state, setEnabled } = useConfigurationBuilder();
+  const { state, setEnabled, pruneInstrumentations } = useConfigurationBuilder();
 
   const instrumentationsState = useInstrumentations(javaAgentVersion);
   const modules = useMemo(
@@ -208,6 +222,11 @@ function InstrumentationTabBody({
   );
   const customizedSet = useCustomizedModules(modules);
   const customizationCount = customizedSet.size;
+
+  useEffect(() => {
+    if (!instrumentationsState.data) return;
+    pruneInstrumentations(modules.map((m) => m.name));
+  }, [instrumentationsState.data, modules, pruneInstrumentations]);
 
   const devSection = state.values[INSTRUMENTATION_DEV_KEY];
   const hasDevContent = useMemo(() => hasMeaningfulLeaf(devSection), [devSection]);
