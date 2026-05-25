@@ -173,6 +173,23 @@ Starts after Phase 1 cleanup ships. See [`01-home-page.md`](./01-home-page.md). 
 **Prerequisite work that may turn up here:** a cross-ecosystem search index (currently nothing
 exists — see open questions in `01-home-page.md`).
 
+### Follow-ups identified during Phase 2 (out of #371 scope, tracked separately)
+
+Recorded here so the work stays visible after #371 closes and through the end-of-redesign cleanup.
+None of these block closing the Phase 2 issue. Full context in
+[`01-home-page.md`](./01-home-page.md) → "Follow-ups" section.
+
+- **Java Agent index endpoint** — emit `/data/javaagent/index.json` from `ecosystem-automation`,
+  same shape as the existing `/data/collector/index.json`. PR 2's engine currently fans out to ~1000
+  fetches on first GlobalSearch open for the Java Agent side. Watcher work; no existing GitHub issue
+  at the time of writing (flagged by Copilot on PR 2).
+- **Recent-activity feed pipeline** — replace PR 6's static stub `public/data/activity/feed.json`
+  with a generated feed derived from registry diffs in `ecosystem-automation`. Watcher work; client
+  side unchanged once the file is generated.
+- **"See all results" page for GlobalSearch overflow** — the dropdown caps at 10 results with an
+  informational footer. A future browse surface (standalone `/search?q=...` or folded into Phase 4's
+  list page, which already has faceted filters) should let users go beyond the cap.
+
 ---
 
 ## Phase 3 — Ecosystem landing (Project 02)
