@@ -84,16 +84,31 @@ export function GlobalSearch({
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const optionsRef = useRef<Map<number, HTMLAnchorElement>>(new Map());
+  // Tracked via ref so the global keydown listener can read it without
+  // re-binding the listener every time `isOpen` flips.
+  const isOpenRef = useRef(isOpen);
+  // Timestamp of the most recent ArrowUp/Down. Suppresses `onMouseEnter`
+  // highlight-yank when programmatic `scrollIntoView` slides a row under a
+  // stationary cursor right after a keyboard nav.
+  const lastKeyboardNavAt = useRef(0);
   const navigate = useNavigate();
   const idPrefix = useId();
 
   const debouncedQuery = useDebouncedValue(query, SEARCH_DEBOUNCE_MS);
-  const { data: results, loading, error } = useSearch(debouncedQuery);
+  // Only run the engine while the dropdown is open. A persisted query in
+  // sessionStorage would otherwise trigger a full index build (hundreds of
+  // HTTP requests) on every home-page mount, with the user never seeing the
+  // results.
+  const { data: results, loading, error } = useSearch(isOpen ? debouncedQuery : "");
   const visibleResults = useMemo(() => (results ?? []).slice(0, MAX_VISIBLE_RESULTS), [results]);
   const totalMatches = results?.length ?? 0;
   const overflowCount = totalMatches - visibleResults.length;
   const hasVisibleResults = visibleResults.length > 0;
   const showDropdown = isOpen && Boolean(query.trim());
+
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
 
   useEffect(() => {
     try {
@@ -121,23 +136,24 @@ export function GlobalSearch({
   }, [safeHighlightedIndex, hasVisibleResults]);
 
   // Global ⌘K / Escape handler — focus the input from anywhere, close the
-  // dropdown without consuming Escape elsewhere.
+  // dropdown without consuming Escape elsewhere. Accept either modifier on
+  // either platform: `navigator.platform` is deprecated and can be spoofed
+  // via UA Client Hints, so a platform-conditional check would silently
+  // drop the shortcut for users whose platform string is wrong.
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
-      const isMac = navigator.platform.toUpperCase().includes("MAC");
-      const modifier = isMac ? event.metaKey : event.ctrlKey;
-      if (modifier && event.key.toLowerCase() === "k") {
+      if (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         inputRef.current?.focus();
         inputRef.current?.select();
-      } else if (event.key === "Escape" && isOpen) {
+      } else if (event.key === "Escape" && isOpenRef.current) {
         setIsOpen(false);
         inputRef.current?.blur();
       }
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [isOpen]);
+  }, []);
 
   useEffect(() => {
     function onClick(event: MouseEvent) {
@@ -163,9 +179,11 @@ export function GlobalSearch({
     if (!hasVisibleResults) return;
     if (event.key === "ArrowDown") {
       event.preventDefault();
+      lastKeyboardNavAt.current = Date.now();
       setHighlightedIndex((i) => (i + 1) % visibleResults.length);
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
+      lastKeyboardNavAt.current = Date.now();
       setHighlightedIndex((i) => (i - 1 + visibleResults.length) % visibleResults.length);
     } else if (event.key === "Enter") {
       const target = visibleResults[safeHighlightedIndex];
@@ -194,7 +212,7 @@ export function GlobalSearch({
           type="search"
           role="combobox"
           aria-label="Search the ecosystem"
-          aria-expanded={showDropdown && hasVisibleResults}
+          aria-expanded={showDropdown}
           aria-controls={`${idPrefix}-results`}
           aria-activedescendant={activeOptionId}
           aria-busy={loading}
@@ -255,8 +273,30 @@ export function GlobalSearch({
                         "td-search__result-item" +
                         (isActive ? " td-search__result-item--active" : "")
                       }
-                      onMouseEnter={() => setHighlightedIndex(index)}
+                      onMouseEnter={() => {
+                        // Ignore mouseenter that fires within ~150ms of an
+                        // arrow-key nav — programmatic scrollIntoView can
+                        // slide a row under a stationary cursor and yank
+                        // the highlight away from the keyboard target.
+                        if (Date.now() - lastKeyboardNavAt.current < 150) return;
+                        setHighlightedIndex(index);
+                      }}
                       onClick={(e) => {
+                        // Honor modifier-key intents (cmd/ctrl-click for new
+                        // tab, shift-click for new window, middle-click) by
+                        // letting the underlying <Link>'s native anchor
+                        // semantics handle them. Only intercept plain left
+                        // clicks for client-side navigation.
+                        if (
+                          e.defaultPrevented ||
+                          e.button !== 0 ||
+                          e.metaKey ||
+                          e.ctrlKey ||
+                          e.shiftKey ||
+                          e.altKey
+                        ) {
+                          return;
+                        }
                         e.preventDefault();
                         selectResult(r.path);
                       }}
@@ -300,6 +340,7 @@ export function GlobalSearch({
             onClick={() => {
               setQuery(s.label);
               setIsOpen(true);
+              setHighlightedIndex(0);
               inputRef.current?.focus();
             }}
           >

@@ -15,7 +15,7 @@
  */
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { describe, it, expect } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { HomeV1 } from "./home-page";
 
 function renderHome() {
@@ -27,6 +27,13 @@ function renderHome() {
 }
 
 describe("HomeV1 (composition)", () => {
+  // GlobalSearch hydrates its initial query from sessionStorage. Cleared
+  // between tests so a typed-in query from a future test doesn't leak into
+  // the next renderHome() and trigger a real engine fetch.
+  afterEach(() => {
+    window.sessionStorage.clear();
+  });
+
   it("renders exactly one CoverBlock with title containing 'OpenTelemetry' and 'Ecosystem Explorer'", () => {
     const { container } = renderHome();
 

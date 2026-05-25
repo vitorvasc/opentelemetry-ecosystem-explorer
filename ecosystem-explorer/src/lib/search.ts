@@ -51,11 +51,10 @@ export interface SearchResult {
   /** Drives the lead pill in the dropdown row. */
   ecosystem?: SearchResultEcosystem;
   /**
-   * Collector: "receiver" | "processor" | "exporter" | "extension" | "connector".
-   * Java Agent: omitted (everything is an instrumentation; surfacing it repeats the ecosystem pill).
-   * Pages: omitted.
+   * Collector component type. Java Agent items omit this (everything is an
+   * instrumentation; surfacing it repeats the ecosystem pill). Pages omit it.
    */
-  componentType?: string;
+  componentType?: CollectorComponent["type"];
   /**
    * Resolved stability for the trailing pill. Collector components collapse
    * their per-signal `status.stability` map to the *highest* stability across
@@ -318,11 +317,21 @@ async function loadCollectorSearchResults(): Promise<SearchResult[]> {
 }
 
 async function buildSearchIndex(): Promise<SearchResult[]> {
+  // Track per-source failures separately so a partial failure (one ecosystem
+  // down) doesn't get cached for the rest of the session. The caller resets
+  // `searchIndexPromise` to null when either source returns null, allowing
+  // the next `search()` to retry instead of serving a permanently-degraded
+  // index.
   const [javaAgentResults, collectorResults] = await Promise.all([
-    loadJavaAgentSearchResults().catch(() => []),
-    loadCollectorSearchResults().catch(() => []),
+    loadJavaAgentSearchResults().catch(() => null),
+    loadCollectorSearchResults().catch(() => null),
   ]);
-  return [...pageSearchResults, ...javaAgentResults, ...collectorResults];
+
+  if (javaAgentResults === null || collectorResults === null) {
+    searchIndexPromise = null;
+  }
+
+  return [...pageSearchResults, ...(javaAgentResults ?? []), ...(collectorResults ?? [])];
 }
 
 async function getSearchIndex(): Promise<SearchResult[]> {
