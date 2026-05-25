@@ -22,27 +22,8 @@
  */
 
 import { ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const FEED_URL = "/data/activity/feed.json";
-
-type Stability = "stable" | "beta" | "alpha" | "deprecated" | "unmaintained" | "development";
-
-interface ActivityItem {
-  id: string;
-  title: string;
-  stability: Stability | "new";
-  ecosystem: string;
-  version: string | null;
-  occurredAt: string;
-  href: string;
-}
-
-interface FeedShape {
-  generatedAt: string;
-  items: ActivityItem[];
-}
+import { useActivityFeed, type ActivityItem } from "@/v1/hooks/use-activity-feed";
 
 function formatRelative(occurredAt: string, now: Date = new Date()): string {
   const then = new Date(occurredAt);
@@ -84,29 +65,8 @@ export interface RecentActivityRailProps {
   feedUrl?: string;
 }
 
-export function RecentActivityRail({ limit = 5, feedUrl = FEED_URL }: RecentActivityRailProps) {
-  const [items, setItems] = useState<ActivityItem[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    async function load() {
-      try {
-        const res = await fetch(feedUrl);
-        if (!res.ok) throw new Error(`Feed responded with ${res.status}`);
-        const data = (await res.json()) as FeedShape;
-        if (cancelled) return;
-        setItems(data.items.slice(0, limit));
-      } catch (err) {
-        if (cancelled) return;
-        setError(err instanceof Error ? err.message : String(err));
-      }
-    }
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, [feedUrl, limit]);
+export function RecentActivityRail({ limit = 5, feedUrl }: RecentActivityRailProps) {
+  const { data: items, loading, error } = useActivityFeed({ feedUrl, limit });
 
   return (
     <div aria-labelledby="activity-title">
@@ -119,7 +79,7 @@ export function RecentActivityRail({ limit = 5, feedUrl = FEED_URL }: RecentActi
           <p className="td-activity-empty" role="status">
             We couldn't load the activity feed right now. Check back soon.
           </p>
-        ) : items === null ? (
+        ) : loading || items === null ? (
           <p className="td-activity-loading" role="status" aria-live="polite">
             Loading recent activity…
           </p>

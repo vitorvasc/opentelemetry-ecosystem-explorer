@@ -53,6 +53,7 @@ function renderRail(props: Parameters<typeof RecentActivityRail>[0] = {}) {
 describe("RecentActivityRail", () => {
   afterEach(() => {
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it("shows a loading state while the feed is in-flight", () => {
