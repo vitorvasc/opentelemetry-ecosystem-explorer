@@ -123,7 +123,17 @@ In order:
 - [x] Phase 2 PR 6 (#555) — `feat(v1): RecentActivityRail`. Merged 2026-05-30.
 - [ ] **Merge Phase 2 PR 2** — `feat(v1): GlobalSearch (Phase 2 - Home page PR 2)`. Branch
       `feat/84-phase2-pr2-global-search` pushed as a PR against `main`; `main` merged in to resolve
-      conflicts (GlobalSearch + RecentActivityRail coexistence). Last PR remaining in Phase 2.
+      conflicts (GlobalSearch + RecentActivityRail coexistence). Last home-page component PR.
+- [ ] **Phase 2 stat-link integration test** — the only remaining #371 build-plan item. Acceptance
+      criterion "clicking a stat number navigates to the relevant doc" has no
+      `src/test/integration/` coverage yet (every integration test there is configuration-builder /
+      instrumentation). Small follow-up PR adding a HomeV1/StatsBand routing test; ticks the last
+      #371 box. Empty/loading states (#555) and the visual-regression showcase + ⌘K unit test
+      already shipped — see [`01-home-page.md`](./01-home-page.md) build-plan items 8-9.
+- [ ] **Close #371** once PR 2 and the stat-link test land — Phase 2 (home page) complete. Carry the
+      three follow-ups (Java Agent index endpoint, real activity-feed pipeline, GlobalSearch "see
+      all results") forward as their own issues; none block closing #371. Then Phase 3 (ecosystem
+      landing, #372 / [`02-ecosystem-landing.md`](./02-ecosystem-landing.md)) starts.
 
 ---
 

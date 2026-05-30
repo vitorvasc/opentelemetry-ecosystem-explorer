@@ -4,7 +4,7 @@ issue: 84
 type: plan
 phase: 2
 status: in-progress
-last_updated: "2026-05-25"
+last_updated: "2026-05-30"
 ---
 
 > [!NOTE]
@@ -96,8 +96,14 @@ A returning user should land directly on the ⌘K search or the recent activity 
 7. **Home route** — composes the above in order: hero → search → stats → ecosystems → signals +
    activity → CNCF callout.
 8. **Empty / loading states** for the recent-activity feed (foundation has the empty-state pattern).
+   **Shipped: PR 6 (#555)** — `RecentActivityRail` renders loading (`role="status" aria-live`),
+   empty, and error states off `useActivityFeed`'s `DataState`; loading + error covered by tests.
 9. **Tests** — visual regression on hero + stats; unit tests on ⌘K binding; integration test that
-   clicking a stat link goes to the right route.
+   clicking a stat link goes to the right route. **Mostly shipped:** the `/_dev/components` showcase
+   captures all six home components (visual-regression baseline updates on merge via
+   `screenshots-baseline.yml`), and `global-search.test.tsx` covers the ⌘K/Ctrl+K binding. **Still
+   open:** the StatsBand stat-link routing integration test — tracked as the lone remaining #371
+   item (small follow-up PR).
 
 ### PR 1 — implementation notes (locked 2026-05-19)
 
