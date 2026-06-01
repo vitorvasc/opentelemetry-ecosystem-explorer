@@ -24,10 +24,6 @@
  * the matcher is a case-insensitive substring scan, ranked by title >
  * description > keyword.
  *
- * Adapted from the engine originally drafted by @Ansita20 on PR #496
- * (closes #495). PR #496 also ships a legacy-header `<SearchOverlay>`
- * that's out of scope for the v1 redesign; only the engine + the
- * `useDebouncedValue` hook were ported into Phase 2 PR 2.
  */
 
 import type { Stability } from "@/components/ui/status-pill";

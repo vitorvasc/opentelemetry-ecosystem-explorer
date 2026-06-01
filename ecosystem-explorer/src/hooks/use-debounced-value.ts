@@ -20,7 +20,6 @@ import { useEffect, useState } from "react";
  * delaying expensive work (search queries, network calls) until the user
  * stops typing.
  *
- * Adapted from PR #496 (@Ansita20).
  */
 export function useDebouncedValue<T>(value: T, delay = 250): T {
   const [debounced, setDebounced] = useState(value);
