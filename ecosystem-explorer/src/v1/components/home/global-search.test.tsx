@@ -41,7 +41,7 @@ function makeResult(overrides: Partial<SearchResult> = {}): SearchResult {
     path: "/collector/components/contrib/kafka?version=v0.150.0",
     type: "item",
     ecosystem: "collector",
-    componentType: "receiver",
+    facets: ["receiver"],
     stability: "beta",
     version: "v0.150.0",
     ...overrides,
@@ -117,7 +117,7 @@ describe("GlobalSearch", () => {
         description: "Messaging instrumentation for Kafka",
         path: "/java-agent/instrumentation/2.28.0/kafka-client",
         ecosystem: "java-agent",
-        componentType: undefined,
+        facets: [],
         stability: undefined,
         version: "2.28.0",
       }),
@@ -129,6 +129,27 @@ describe("GlobalSearch", () => {
     expect(within(option).getByText("java-agent")).toBeInTheDocument();
     expect(within(option).queryByText(/^Beta$|^Stable$|^Alpha$/)).not.toBeInTheDocument();
     expect(within(option).getByText("java-agent · 2.28.0")).toBeInTheDocument();
+  });
+
+  it("renders a standalone-library facet in the meta line for Java Agent items that ship as one", async () => {
+    mockedSearch.mockResolvedValueOnce([
+      makeResult({
+        title: "JDBC Instrumentation",
+        description: "Database instrumentation",
+        path: "/java-agent/instrumentation/2.28.0/jdbc",
+        ecosystem: "java-agent",
+        facets: ["standalone library"],
+        stability: undefined,
+        version: "2.28.0",
+      }),
+    ]);
+    renderSearch();
+    fireEvent.change(screen.getByRole("combobox"), { target: { value: "jdbc" } });
+
+    const option = await screen.findByRole("option", { name: /JDBC Instrumentation/i });
+    expect(
+      within(option).getByText("java-agent · standalone library · 2.28.0")
+    ).toBeInTheDocument();
   });
 
   it("caps the visible results to 10 and shows an overflow footer", async () => {

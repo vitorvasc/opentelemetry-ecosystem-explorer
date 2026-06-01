@@ -58,7 +58,7 @@ const ECOSYSTEM_VARIANT: Record<SearchResultEcosystem, GlowVariant> = {
 };
 
 function metaLine(result: SearchResult): string {
-  return [result.ecosystem, result.componentType, result.version].filter(Boolean).join(" · ");
+  return [result.ecosystem, ...(result.facets ?? []), result.version].filter(Boolean).join(" · ");
 }
 
 export interface GlobalSearchProps {
