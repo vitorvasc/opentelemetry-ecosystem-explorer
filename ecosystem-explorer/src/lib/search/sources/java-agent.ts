@@ -57,7 +57,7 @@ export function getInstrumentationSearchTerms(instrumentation: InstrumentationDa
     addSearchTerm(terms, configuration.description);
     addSearchTerm(terms, configuration.type);
     addSearchTerm(terms, configuration.default);
-    configuration.example?.forEach((value) => addSearchTerm(terms, value));
+    configuration.examples?.forEach((value) => addSearchTerm(terms, value));
   });
 
   instrumentation.telemetry?.forEach((telemetry) => {

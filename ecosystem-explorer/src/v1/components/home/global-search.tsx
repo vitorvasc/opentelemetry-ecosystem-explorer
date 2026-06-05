@@ -37,10 +37,18 @@ import { StatusPill } from "@/components/ui/status-pill";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import type { SearchResult, SearchResultEcosystem } from "@/lib/search";
 import { useSearch } from "@/v1/hooks/use-search";
+import { INTEGRATIONS_STAT_VALUE } from "@/v1/lib/home-stats";
 
 const STORAGE_KEY = "explorer:lastSearch";
 const SEARCH_DEBOUNCE_MS = 200;
 const MAX_VISIBLE_RESULTS = 10;
+
+// Built from the canonical "Integrations" stat (see home-stats.ts) instead of a
+// hardcoded literal, so the placeholder count tracks the stats band rather than
+// drifting on its own. Building the real index just to count would re-trigger
+// the mount-time fetch storm the dropdown deliberately defers, so the headline
+// number stays the source of truth here.
+const DEFAULT_PLACEHOLDER = `Search ${INTEGRATIONS_STAT_VALUE} components, instrumentations, vendors…`;
 
 const DEFAULT_SUGGESTIONS = [
   { label: "otlp exporter" },
@@ -67,10 +75,7 @@ export interface GlobalSearchProps {
   onSelect?: (path: string) => void;
 }
 
-export function GlobalSearch({
-  placeholder = "Search 1,005+ components, instrumentations, vendors…",
-  onSelect,
-}: GlobalSearchProps) {
+export function GlobalSearch({ placeholder = DEFAULT_PLACEHOLDER, onSelect }: GlobalSearchProps) {
   const [query, setQuery] = useState<string>(() => {
     if (typeof window === "undefined") return "";
     try {

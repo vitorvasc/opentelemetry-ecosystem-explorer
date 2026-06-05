@@ -60,3 +60,12 @@ export const HOME_STATS: StatItem[] = [
     external: true,
   },
 ];
+
+/**
+ * Headline ecosystem-scale counter ("Integrations"), single-sourced from
+ * HOME_STATS so the stats band and the GlobalSearch placeholder can never
+ * drift apart. Falls back to an empty string if the stat is ever renamed —
+ * callers should tolerate that gracefully.
+ */
+export const INTEGRATIONS_STAT_VALUE =
+  HOME_STATS.find((stat) => stat.label === "Integrations")?.value ?? "";

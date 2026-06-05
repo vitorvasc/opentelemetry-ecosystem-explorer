@@ -22,6 +22,7 @@ vi.mock("@/lib/search", () => ({
 }));
 
 import { search, type SearchResult } from "@/lib/search";
+import { INTEGRATIONS_STAT_VALUE } from "@/v1/lib/home-stats";
 import { GlobalSearch } from "./global-search";
 
 const mockedSearch = vi.mocked(search);
@@ -62,9 +63,11 @@ describe("GlobalSearch", () => {
     renderSearch();
     const input = screen.getByRole("combobox", { name: /search the ecosystem/i });
     expect(input).toBeInTheDocument();
+    // Asserts against the canonical stat value rather than a hardcoded number,
+    // so the test tracks home-stats.ts instead of breaking when the count moves.
     expect(input).toHaveAttribute(
       "placeholder",
-      expect.stringMatching(/Search 1,005\+ components/i)
+      expect.stringContaining(`Search ${INTEGRATIONS_STAT_VALUE} components`)
     );
   });
 
