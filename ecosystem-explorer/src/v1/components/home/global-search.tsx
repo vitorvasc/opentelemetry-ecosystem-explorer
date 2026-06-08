@@ -204,9 +204,7 @@ export function GlobalSearch({ placeholder = DEFAULT_PLACEHOLDER, onSelect }: Gl
   // option/listbox ids that aren't rendered (dropdown closed, or open but
   // loading/empty/errored) breaks the combobox pattern for assistive tech.
   const listboxRendered = showDropdown && hasVisibleResults;
-  const activeOptionId = listboxRendered
-    ? `${idPrefix}-option-${safeHighlightedIndex}`
-    : undefined;
+  const activeOptionId = listboxRendered ? `${idPrefix}-option-${safeHighlightedIndex}` : undefined;
   // Keep-stale-while-loading: when a new query is in flight but prior results
   // exist, dim them instead of blanking to "Searching…". Only blank on the
   // very first search.
