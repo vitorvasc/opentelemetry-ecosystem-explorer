@@ -1,0 +1,6 @@
+{
+  "pipelineAnatomy": {
+    "defaultTitle": "Anatomía del pipeline",
+    "stageAriaLabel": "{{label}} — {{count}} componentes"
+  }
+}
