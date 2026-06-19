@@ -130,7 +130,9 @@ export const collectorConfig: EcosystemConfig = {
   ],
   release: {
     version: "v0.150.0",
-    releaseDate: "May 2026",
+    // No release date until the watcher captures git tag dates (follow-up); the
+    // card renders without a date in both the live and fallback states.
+    releaseDate: null,
     deltas: { added: 4, changed: 12, deprecated: 2 },
     hrefChangelog: "https://github.com/open-telemetry/opentelemetry-collector-releases/releases",
   },

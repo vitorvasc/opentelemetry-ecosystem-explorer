@@ -67,6 +67,8 @@ describe("Collector ecosystem landing", () => {
       screen.getByRole("heading", { level: 1, name: /OpenTelemetry Collector/i })
     ).toBeInTheDocument();
     expect(screen.getByText("v0.154.0")).toBeInTheDocument();
+    // Collector has live deltas, so the change strip is present.
+    expect(screen.getByRole("list", { name: "Changes in this release" })).toBeInTheDocument();
 
     // Live counts flow into each stage's deep-link aria-label.
     expect(screen.getByRole("link", { name: /^Receivers — 116 components$/ })).toHaveAttribute(
@@ -128,6 +130,8 @@ describe("Java Agent ecosystem landing", () => {
     expect(screen.getByRole("link", { name: /^Databases — 13 components$/ })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /^Frameworks — 7 components$/ })).toBeInTheDocument();
     expect(screen.getByText("v2.28.1")).toBeInTheDocument();
+    // Version-only: Java Agent has no stability data, so there is no delta strip.
+    expect(screen.queryByRole("list", { name: "Changes in this release" })).not.toBeInTheDocument();
   });
 
   it("falls back to static category counts and version on error", () => {
@@ -135,6 +139,8 @@ describe("Java Agent ecosystem landing", () => {
     renderRouter(<JavaAgentLandingV1 />);
     expect(screen.getByText("v2.10.0")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /^HTTP — 32 components$/ })).toBeInTheDocument();
+    // The static fallback is version-only too — never a fabricated delta strip.
+    expect(screen.queryByRole("list", { name: "Changes in this release" })).not.toBeInTheDocument();
   });
 });
 

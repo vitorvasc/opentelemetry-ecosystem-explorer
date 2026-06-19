@@ -36,6 +36,7 @@ import { useEffect, useState } from "react";
 
 import type { DataState } from "@/hooks/data-state";
 import type { ReleaseDeltas } from "@/v1/components/ecosystem/release-card";
+import type { EcosystemId } from "./types";
 import { getInstrumentationDisplayName } from "@/features/java-agent/utils/format";
 import * as collectorData from "@/lib/api/collector-data";
 import * as javaagentData from "@/lib/api/javaagent-data";
@@ -102,10 +103,15 @@ async function loadCollectorLandingData(): Promise<EcosystemLandingData> {
     stageCounts[component.type] = (stageCounts[component.type] ?? 0) + 1;
   }
 
-  const latestVersion = versions.versions.find((v) => v.is_latest) ?? versions.versions[0];
-  // Second-newest entry. The versions index is ordered newest-first, so the
-  // entry after the latest is the prior release we diff against.
-  const previousVersion = versions.versions.find((v) => v.version !== latestVersion?.version);
+  // The versions index is ordered newest-first; the entry right after the
+  // latest is the prior release we diff against. Resolve `latest` by index so
+  // `previous` stays correct even if `is_latest` is not the first entry.
+  const latestIndex = Math.max(
+    versions.versions.findIndex((v) => v.is_latest),
+    0
+  );
+  const latestVersion = versions.versions[latestIndex];
+  const previousVersion = versions.versions[latestIndex + 1];
 
   let deltas: ReleaseDeltas | null = null;
   if (latestVersion && previousVersion) {
@@ -168,15 +174,13 @@ async function loadJavaAgentLandingData(
   };
 }
 
-export type EcosystemLandingId = "collector" | "java-agent";
-
 /**
  * Fetches the live landing data for an ecosystem. `searchTermsByStageId` is
  * only consulted for Java Agent (each stage's `?search=` term); pass it from
  * the config so the per-tile counts stay in lockstep with the tiles' links.
  */
 export function useEcosystemLandingData(
-  id: EcosystemLandingId,
+  id: EcosystemId,
   searchTermsByStageId: Record<string, string>
 ): DataState<EcosystemLandingData> {
   const [state, setState] = useState<DataState<EcosystemLandingData>>({

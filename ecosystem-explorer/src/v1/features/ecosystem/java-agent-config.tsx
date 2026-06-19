@@ -139,8 +139,11 @@ export const javaAgentConfig: EcosystemConfig = {
   ],
   release: {
     version: "v2.10.0",
-    releaseDate: "May 2026",
-    deltas: { added: 3, changed: 9, deprecated: 1 },
+    // No release date until the watcher captures git tag dates (follow-up). Java
+    // Agent records carry no stability field, so deltas stay null in both the
+    // live and fallback states — the card is version-only, never a delta strip.
+    releaseDate: null,
+    deltas: null,
     hrefChangelog: "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases",
   },
 };
