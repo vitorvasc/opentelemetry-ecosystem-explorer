@@ -31,7 +31,6 @@
 import { Box, GitCompare, Layers } from "lucide-react";
 import { TYPE_STRIPE_COLORS } from "@/components/ui/type-stripe-colors";
 import { JavaIcon } from "@/components/icons/java-icon";
-import { isEnabled } from "@/lib/feature-flags";
 import type { EcosystemConfig } from "./types";
 
 const javaInstrumentationPath = "/java-agent/instrumentation";
@@ -91,6 +90,11 @@ export const javaAgentConfig: EcosystemConfig = {
       accentColor: TYPE_STRIPE_COLORS.exporter,
     },
     {
+      // The count is a substring match on "framework" — some instrumentations
+      // covering a framework do so via an underlying component (e.g. HTTP client
+      // library) and may not mention "framework" directly, so the live count is
+      // an approximation. Trade-off accepted in the Phase 3 design (count =
+      // destination, so the number always matches what clicking the tile lands on).
       id: "frameworks",
       label: "landingV1.stages.frameworks.label",
       count: "55",
@@ -115,20 +119,13 @@ export const javaAgentConfig: EcosystemConfig = {
       href: "/java-agent/configuration/builder",
       icon: <Box className="h-5 w-5" aria-hidden />,
     },
-    // Only surface the release-comparison entry when its route is mounted —
-    // `/java-agent/releases` is gated behind JAVA_RELEASE_COMPARISON in V1App,
-    // so without this guard the card would 404 wherever the flag is off.
-    ...(isEnabled("JAVA_RELEASE_COMPARISON")
-      ? [
-          {
-            id: "releases",
-            title: "landingV1.quickEntries.releases.title",
-            description: "landingV1.quickEntries.releases.description",
-            href: "/java-agent/releases",
-            icon: <GitCompare className="h-5 w-5" aria-hidden />,
-          },
-        ]
-      : []),
+    {
+      id: "releases",
+      title: "landingV1.quickEntries.releases.title",
+      description: "landingV1.quickEntries.releases.description",
+      href: "/java-agent/releases",
+      icon: <GitCompare className="h-5 w-5" aria-hidden />,
+    },
     {
       id: "supported-libs",
       title: "landingV1.quickEntries.supported-libs.title",
