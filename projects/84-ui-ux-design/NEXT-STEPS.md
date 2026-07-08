@@ -141,19 +141,22 @@ In order:
       [`03-list-page.md`](./03-list-page.md)). Six PRs re-derived from `feat/84-tmp-full-layout`
       (rebased 2026-07-07, `af0326da`); slicing locked with Vitor 2026-07-07 (see decision log). PRs
       1, 3, and 4 are mutually independent and can ship in parallel; each PR extracts its own CSS
-      partial from the reference's bundled `list.css`. - [ ] **PR 1 — Facet primitives**
-      (`facets.tsx`: CheckboxFacet, SearchFacet, SelectFacet). Branch
-      `feat/84-phase4-pr1-facet-primitives`, in derivation. Carries the Phase 3 close-out doc
-      updates. - [ ] **PR 2 — FacetPanel** (`facet-panel.tsx`). After PR 1. - [ ] **PR 3 — List
-      controls** (`controls.tsx`: ActiveFilterChips, DensityToggle, SortDropdown, Pagination,
-      EmptyState, FacetDrawerToggle). Parallel with PRs 1/4. - [ ] **PR 4 — Views** (`views.tsx`:
-      CompactList, CardView, TableView). Parallel with PRs 1/3. - [ ] **PR 5 — List page + route**
-      (`list-page.tsx` + `/collector/components` swap in `V1App.tsx`). After PRs 2-4. Carries the
-      known #645 data-layer adaptation: the reference's `componentToRow` expects a full
-      `CollectorComponent` while `useCollectorComponents` now returns `IndexComponent[]` — the
-      signals facet needs a data-layer decision (`IndexComponent` carries no `status`); see
-      "Decisions blocking progress" #10. - [ ] **PR 6 — States + visual regression.** After PR 5.
-      Snapshots per density × theme; list routes in `scripts/take-screenshots.mjs`.
+      partial from the reference's bundled `list.css`.
+- [ ] **Phase 4 PR 1 — Facet primitives** (`facets.tsx`: CheckboxFacet, SearchFacet, SelectFacet).
+      Opened as [#784](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/pull/784),
+      carrying the Phase 3 close-out doc updates.
+- [ ] **Phase 4 PR 2 — FacetPanel** (`facet-panel.tsx`). After PR 1.
+- [ ] **Phase 4 PR 3 — List controls** (`controls.tsx`: ActiveFilterChips, DensityToggle,
+      SortDropdown, Pagination, EmptyState, FacetDrawerToggle). Parallel with PRs 1/4.
+- [ ] **Phase 4 PR 4 — Views** (`views.tsx`: CompactList, CardView, TableView). Parallel with PRs
+      1/3.
+- [ ] **Phase 4 PR 5 — List page + route** (`list-page.tsx` + `/collector/components` swap in
+      `V1App.tsx`). After PRs 2-4. Carries the known #645 data-layer adaptation: the reference's
+      `componentToRow` expects a full `CollectorComponent` while `useCollectorComponents` now
+      returns `IndexComponent[]` — the signals facet needs a data-layer decision (`IndexComponent`
+      carries no `status`); see "Decisions blocking progress" #10.
+- [ ] **Phase 4 PR 6 — States + visual regression.** After PR 5. Snapshots per density × theme; list
+      routes in `scripts/take-screenshots.mjs`.
 
 ---
 

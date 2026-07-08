@@ -79,7 +79,7 @@ describe("CheckboxFacet", () => {
     renderCheckbox({ selected: ["receiver"], onChange });
 
     await user.click(screen.getByRole("checkbox", { name: /processor/i }));
-    expect(onChange).toHaveBeenCalledWith(["receiver", "processor"]);
+    expect(onChange).toHaveBeenCalledWith(["processor", "receiver"]);
   });
 
   it("removes a value from the selection when a checked option is toggled", async () => {

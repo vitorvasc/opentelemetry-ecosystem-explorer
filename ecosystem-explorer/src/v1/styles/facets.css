@@ -82,7 +82,6 @@
 
 .td-facet__name {
   flex: 1;
-  text-transform: capitalize;
 }
 
 .td-facet__count {

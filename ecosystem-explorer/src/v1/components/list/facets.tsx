@@ -57,7 +57,9 @@ export function CheckboxFacet<T extends string = string>({
     const next = new Set(set);
     if (next.has(value)) next.delete(value);
     else next.add(value);
-    onChange(Array.from(next));
+    // Sorted to match the canonical order `listFilters` serialize/parse uses,
+    // so checkbox-emitted state equals what a URL round-trip produces.
+    onChange(Array.from(next).sort());
   }
 
   return (
