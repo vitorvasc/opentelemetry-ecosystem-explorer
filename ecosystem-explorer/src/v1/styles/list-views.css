@@ -235,10 +235,6 @@
   color: inherit;
 }
 
-.td-table__name strong {
-  text-decoration: none;
-}
-
 .td-table__dot {
   width: 0.625rem;
   height: 0.625rem;

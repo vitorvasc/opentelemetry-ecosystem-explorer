@@ -72,11 +72,11 @@ export function CompactRow({ row }: CompactRowProps) {
   );
 }
 
-export interface CompactListProps {
+export interface ListViewProps {
   rows: ListRow[];
 }
 
-export function CompactList({ rows }: CompactListProps) {
+export function CompactList({ rows }: ListViewProps) {
   return (
     <div className="td-list td-list--compact">
       {rows.map((row) => (
@@ -86,7 +86,7 @@ export function CompactList({ rows }: CompactListProps) {
   );
 }
 
-export function CardView({ rows }: CompactListProps) {
+export function CardView({ rows }: ListViewProps) {
   return (
     <div className="td-list td-list--cards">
       {rows.map((row) => (
@@ -115,7 +115,7 @@ export function CardView({ rows }: CompactListProps) {
   );
 }
 
-export function TableView({ rows }: CompactListProps) {
+export function TableView({ rows }: ListViewProps) {
   const { t } = useTranslation("list");
   return (
     <div className="td-table-wrap">

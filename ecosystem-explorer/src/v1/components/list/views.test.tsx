@@ -45,24 +45,24 @@ const rows: ListRow[] = [
   },
 ];
 
-const renderCompactList = (props: Partial<Parameters<typeof CompactList>[0]> = {}) =>
+const renderCompactList = () =>
   render(
     <MemoryRouter>
-      <CompactList rows={rows} {...props} />
+      <CompactList rows={rows} />
     </MemoryRouter>
   );
 
-const renderCardView = (props: Partial<Parameters<typeof CardView>[0]> = {}) =>
+const renderCardView = () =>
   render(
     <MemoryRouter>
-      <CardView rows={rows} {...props} />
+      <CardView rows={rows} />
     </MemoryRouter>
   );
 
-const renderTableView = (props: Partial<Parameters<typeof TableView>[0]> = {}) =>
+const renderTableView = () =>
   render(
     <MemoryRouter>
-      <TableView rows={rows} {...props} />
+      <TableView rows={rows} />
     </MemoryRouter>
   );
 
