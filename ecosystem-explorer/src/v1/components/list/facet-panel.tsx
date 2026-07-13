@@ -83,7 +83,6 @@ export function FacetPanel({
 }: FacetPanelProps) {
   const { t } = useTranslation("collector");
 
-  // Close drawer on Escape
   useEffect(() => {
     if (!isOpen || !onClose) return;
     function onKey(e: KeyboardEvent) {
@@ -97,7 +96,7 @@ export function FacetPanel({
   const change = (next: Partial<ListFilters>) => onChange({ ...next, page: 1 });
 
   function facetOptions<T extends string>(
-    facet: string,
+    facet: "type" | "signal" | "stability" | "distribution",
     values: readonly T[],
     swatches?: Record<T, string>
   ): FacetOption<T>[] {

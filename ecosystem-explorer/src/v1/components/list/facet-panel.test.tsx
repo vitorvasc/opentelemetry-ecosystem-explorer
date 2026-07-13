@@ -35,7 +35,6 @@ describe("FacetPanel", () => {
     for (const title of ["Type", "Signal", "Stability", "Distribution"]) {
       expect(screen.getByRole("group", { name: title })).toBeInTheDocument();
     }
-    // No versions and no onClose: the version select and close button are absent.
     expect(screen.queryByRole("combobox", { name: "Version" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Close filters" })).not.toBeInTheDocument();
   });
