@@ -4,7 +4,7 @@ issue: 84
 type: roadmap
 phase: meta
 status: in-progress
-last_updated: "2026-07-07"
+last_updated: "2026-07-13"
 ---
 
 ## Next steps
@@ -115,6 +115,17 @@ This is a _living_ document. Update it as decisions land and PRs ship. Cross-ref
   gate. Known carryover from 2026-06-09 still stands: the reference's Phase 4 `list-page.tsx` fails
   `tsc` against `main`'s `IndexComponent` return type (#645) — the adaptation belongs to Phase 4's
   derivation. Phase 4 (list page, [`03-list-page.md`](./03-list-page.md)) starts next.
+- **2026-07-13 snapshot:** Phase 4 PR 1 (#784, facet primitives) merged 2026-07-10. PR 2
+  (FacetPanel) derived from `af0326da` on `feat/84-phase4-pr2-facet-panel`: faithful port of
+  `facet-panel.tsx` with one adaptation (`emptyLabel="Latest"` passed explicitly — PR 1's review
+  made the prop required so the consumer owns the copy), `.td-facet-panel*` rules extracted from the
+  reference's bundled `list.css` into `facet-panel.css` (including the desktop sticky rule, inert
+  until PR 5 ships the `.td-list-page__rail` wrapper), 10 new tests, showcase entry under
+  `/_dev/components`. Typecheck + lint green; targeted tests green. Known flake (pre-existing on
+  `main`, full-suite runs only, unrelated to Phase 4): `java-instrumentation-list-page.test.tsx` ›
+  "does not render a sentinel when filtered results fit in one page". Open question for the
+  follow-up `/simplify` commit: FacetPanel hardcodes its English facet titles/labels while AGENTS.md
+  requires i18next — wire `useTranslation("collector")` in PR 2, or defer copy to PR 5's page.
 
 ---
 
@@ -142,10 +153,11 @@ In order:
       (rebased 2026-07-07, `af0326da`); slicing locked with Vitor 2026-07-07 (see decision log). PRs
       1, 3, and 4 are mutually independent and can ship in parallel; each PR extracts its own CSS
       partial from the reference's bundled `list.css`.
-- [ ] **Phase 4 PR 1 — Facet primitives** (`facets.tsx`: CheckboxFacet, SearchFacet, SelectFacet).
-      Opened as [#784](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/pull/784),
-      carrying the Phase 3 close-out doc updates.
-- [ ] **Phase 4 PR 2 — FacetPanel** (`facet-panel.tsx`). After PR 1.
+- [x] **Phase 4 PR 1 — Facet primitives** (`facets.tsx`: CheckboxFacet, SearchFacet, SelectFacet).
+      Merged as [#784](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/pull/784)
+      (2026-07-10), carrying the Phase 3 close-out doc updates.
+- [ ] **Phase 4 PR 2 — FacetPanel** (`facet-panel.tsx`). Derived on `feat/84-phase4-pr2-facet-panel`
+      (2026-07-13), pending Vitor's commit + push.
 - [ ] **Phase 4 PR 3 — List controls** (`controls.tsx`: ActiveFilterChips, DensityToggle,
       SortDropdown, Pagination, EmptyState, FacetDrawerToggle). Parallel with PRs 1/4.
 - [ ] **Phase 4 PR 4 — Views** (`views.tsx`: CompactList, CardView, TableView). Parallel with PRs
