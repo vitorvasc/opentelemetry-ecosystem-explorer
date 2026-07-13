@@ -126,7 +126,16 @@ This is a _living_ document. Update it as decisions land and PRs ship. Cross-ref
   "does not render a sentinel when filtered results fit in one page". Same day, per Vitor, the
   panel's copy was localized in the same PR instead of deferred: all facet titles/labels flow
   through `useTranslation("collector")` via a new `listV1.facets` block (en + es) — see the decision
-  log.
+  log. A `/simplify` pass (4 parallel review agents) then hardened the port: the facet vocabularies
+  now derive from `list-filters.ts`'s exported `TYPES`/`SIGNALS`/`STABILITIES`/`DISTRIBUTIONS`
+  arrays instead of restating them (the review caught the panel's stability order silently diverging
+  from the contract's; the contract arrays were reordered to display order, runtime-neutral since
+  `parseCsv` sorts), stability swatches are typed `Record<StabilityFacet, string>` so a new level
+  fails typecheck until it gets a color, and the "every facet edit resets `page`" policy is
+  single-sourced in one `change()` wrapper. Deferred to the end-of-redesign cleanup: a shared
+  `useEscapeKey` hook (the Escape-listener pattern now appears 3× across `nav-bar`, `global-search`,
+  `facet-panel`) and reconciling stability colors with `recent-activity-rail`'s `.td-pill--*`
+  classes (different mechanism, no shared artifact yet).
 
 ---
 
@@ -157,8 +166,8 @@ In order:
 - [x] **Phase 4 PR 1 — Facet primitives** (`facets.tsx`: CheckboxFacet, SearchFacet, SelectFacet).
       Merged as [#784](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/pull/784)
       (2026-07-10), carrying the Phase 3 close-out doc updates.
-- [ ] **Phase 4 PR 2 — FacetPanel** (`facet-panel.tsx`). Derived on `feat/84-phase4-pr2-facet-panel`
-      (2026-07-13), pending Vitor's commit + push.
+- [ ] **Phase 4 PR 2 — FacetPanel** (`facet-panel.tsx`). Derived + localized + `/simplify`-cleaned
+      on `feat/84-phase4-pr2-facet-panel` (2026-07-13); pending push + PR.
 - [ ] **Phase 4 PR 3 — List controls** (`controls.tsx`: ActiveFilterChips, DensityToggle,
       SortDropdown, Pagination, EmptyState, FacetDrawerToggle). Parallel with PRs 1/4.
 - [ ] **Phase 4 PR 4 — Views** (`views.tsx`: CompactList, CardView, TableView). Parallel with PRs
