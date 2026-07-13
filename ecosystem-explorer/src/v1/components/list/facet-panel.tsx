@@ -21,44 +21,39 @@
  * Composes the facets defined in the Phase 4 plan: Search · Type · Signal ·
  * Stability · Distribution · Version. The panel itself stays presentational —
  * all filter state lives in the parent (driven by the `listFilters` URL
- * contract).
+ * contract). Copy comes from the `collector` namespace's `listV1.facets`
+ * block, self-contained so the end-of-redesign cleanup can drop the legacy
+ * `filters.*` keys without breaking v1.
  */
 
 import { X } from "lucide-react";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { TYPE_STRIPE_COLORS } from "@/components/ui/type-stripe-colors";
 import type { CollectorComponentType } from "@/components/ui/type-stripe-colors";
 import type { Distribution, ListFilters, Signal, StabilityFacet } from "@/v1/lib/list-filters";
 import { CheckboxFacet, type FacetOption, SearchFacet, SelectFacet } from "./facets";
 
-const TYPE_OPTIONS: FacetOption<CollectorComponentType>[] = [
-  { value: "receiver", label: "Receiver", swatch: TYPE_STRIPE_COLORS.receiver },
-  { value: "processor", label: "Processor", swatch: TYPE_STRIPE_COLORS.processor },
-  { value: "exporter", label: "Exporter", swatch: TYPE_STRIPE_COLORS.exporter },
-  { value: "connector", label: "Connector", swatch: TYPE_STRIPE_COLORS.connector },
-  { value: "extension", label: "Extension", swatch: TYPE_STRIPE_COLORS.extension },
+const TYPE_VALUES: { value: CollectorComponentType; swatch: string }[] = [
+  { value: "receiver", swatch: TYPE_STRIPE_COLORS.receiver },
+  { value: "processor", swatch: TYPE_STRIPE_COLORS.processor },
+  { value: "exporter", swatch: TYPE_STRIPE_COLORS.exporter },
+  { value: "connector", swatch: TYPE_STRIPE_COLORS.connector },
+  { value: "extension", swatch: TYPE_STRIPE_COLORS.extension },
 ];
 
-const SIGNAL_OPTIONS: FacetOption<Signal>[] = [
-  { value: "traces", label: "Traces" },
-  { value: "metrics", label: "Metrics" },
-  { value: "logs", label: "Logs" },
-  { value: "baggage", label: "Baggage" },
+const SIGNAL_VALUES: Signal[] = ["traces", "metrics", "logs", "baggage"];
+
+const STABILITY_VALUES: { value: StabilityFacet; swatch: string }[] = [
+  { value: "stable", swatch: "hsl(145 63% 42%)" },
+  { value: "beta", swatch: "hsl(200 85% 45%)" },
+  { value: "alpha", swatch: "hsl(38 95% 52%)" },
+  { value: "development", swatch: "hsl(220 9% 60%)" },
+  { value: "deprecated", swatch: "hsl(0 70% 50%)" },
+  { value: "unmaintained", swatch: "hsl(0 70% 50%)" },
 ];
 
-const STABILITY_OPTIONS: FacetOption<StabilityFacet>[] = [
-  { value: "stable", label: "Stable", swatch: "hsl(145 63% 42%)" },
-  { value: "beta", label: "Beta", swatch: "hsl(200 85% 45%)" },
-  { value: "alpha", label: "Alpha", swatch: "hsl(38 95% 52%)" },
-  { value: "development", label: "Development", swatch: "hsl(220 9% 60%)" },
-  { value: "deprecated", label: "Deprecated", swatch: "hsl(0 70% 50%)" },
-  { value: "unmaintained", label: "Unmaintained", swatch: "hsl(0 70% 50%)" },
-];
-
-const DISTRIBUTION_OPTIONS: FacetOption<Distribution>[] = [
-  { value: "core", label: "Core" },
-  { value: "contrib", label: "Contrib" },
-];
+const DISTRIBUTION_VALUES: Distribution[] = ["core", "contrib"];
 
 export interface FacetCounts {
   types?: Partial<Record<CollectorComponentType, number>>;
@@ -93,6 +88,8 @@ export function FacetPanel({
   isOpen = false,
   onClose,
 }: FacetPanelProps) {
+  const { t } = useTranslation("collector");
+
   // Close drawer on Escape
   useEffect(() => {
     if (!isOpen || !onClose) return;
@@ -103,16 +100,31 @@ export function FacetPanel({
     return () => document.removeEventListener("keydown", onKey);
   }, [isOpen, onClose]);
 
+  const typeOptions: FacetOption<CollectorComponentType>[] = TYPE_VALUES.map(
+    ({ value, swatch }) => ({ value, swatch, label: t(`listV1.facets.type.options.${value}`) })
+  );
+  const signalOptions: FacetOption<Signal>[] = SIGNAL_VALUES.map((value) => ({
+    value,
+    label: t(`listV1.facets.signal.options.${value}`),
+  }));
+  const stabilityOptions: FacetOption<StabilityFacet>[] = STABILITY_VALUES.map(
+    ({ value, swatch }) => ({ value, swatch, label: t(`listV1.facets.stability.options.${value}`) })
+  );
+  const distributionOptions: FacetOption<Distribution>[] = DISTRIBUTION_VALUES.map((value) => ({
+    value,
+    label: t(`listV1.facets.distribution.options.${value}`),
+  }));
+
   return (
     <aside
       className={`td-facet-panel ${isOpen ? "td-facet-panel--open" : ""}`}
-      aria-label="Filters"
+      aria-label={t("listV1.facets.panel.label")}
     >
       {onClose && (
         <button
           type="button"
           className="td-facet-panel__close"
-          aria-label="Close filters"
+          aria-label={t("listV1.facets.panel.close")}
           onClick={onClose}
         >
           <X className="h-4 w-4" aria-hidden focusable="false" />
@@ -120,47 +132,47 @@ export function FacetPanel({
       )}
 
       <SearchFacet
-        title="Search"
-        placeholder="Search name or description…"
+        title={t("listV1.facets.search.title")}
+        placeholder={t("listV1.facets.search.placeholder")}
         value={filters.q}
         onChange={(q) => onChange({ q, page: 1 })}
       />
 
       <CheckboxFacet
-        title="Type"
-        options={withCounts(TYPE_OPTIONS, counts?.types)}
+        title={t("listV1.facets.type.title")}
+        options={withCounts(typeOptions, counts?.types)}
         selected={filters.types}
         onChange={(types) => onChange({ types, page: 1 })}
       />
 
       <CheckboxFacet
-        title="Signal"
-        options={withCounts(SIGNAL_OPTIONS, counts?.signals)}
+        title={t("listV1.facets.signal.title")}
+        options={withCounts(signalOptions, counts?.signals)}
         selected={filters.signals}
         onChange={(signals) => onChange({ signals, page: 1 })}
       />
 
       <CheckboxFacet
-        title="Stability"
-        options={withCounts(STABILITY_OPTIONS, counts?.stabilities)}
+        title={t("listV1.facets.stability.title")}
+        options={withCounts(stabilityOptions, counts?.stabilities)}
         selected={filters.stabilities}
         onChange={(stabilities) => onChange({ stabilities, page: 1 })}
       />
 
       <CheckboxFacet
-        title="Distribution"
-        options={withCounts(DISTRIBUTION_OPTIONS, counts?.distributions)}
+        title={t("listV1.facets.distribution.title")}
+        options={withCounts(distributionOptions, counts?.distributions)}
         selected={filters.distributions}
         onChange={(distributions) => onChange({ distributions, page: 1 })}
       />
 
       {versions && versions.length > 0 && (
         <SelectFacet
-          title="Version"
+          title={t("listV1.facets.version.title")}
           options={versions.map((v) => ({ value: v, label: v }))}
           value={filters.version}
           onChange={(version) => onChange({ version, page: 1 })}
-          emptyLabel="Latest"
+          emptyLabel={t("listV1.facets.version.latest")}
         />
       )}
     </aside>
