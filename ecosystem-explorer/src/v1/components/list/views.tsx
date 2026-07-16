@@ -28,17 +28,17 @@ import { useTranslation } from "react-i18next";
 import { StatusPill } from "@/components/ui/status-pill";
 import { TYPE_STRIPE_COLORS } from "@/components/ui/type-stripe-colors";
 import type { CollectorComponentType } from "@/components/ui/type-stripe-colors";
-import type { StabilityFacet } from "@/v1/lib/list-filters";
+import type { Distribution, Signal, StabilityFacet } from "@/v1/lib/list-filters";
 
 export interface ListRow {
   id: string;
   name: string;
   displayName: string;
   type: CollectorComponentType;
-  distribution: string;
+  distribution: Distribution;
   description: string | null;
   stability: StabilityFacet;
-  signals: string[];
+  signals: Signal[];
   href: string;
 }
 
