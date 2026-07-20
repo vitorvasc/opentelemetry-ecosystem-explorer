@@ -15,17 +15,17 @@
  */
 
 /*
- * CollectorDetailPageV1 — Phase 5 detail page. Two-pane layout for PR A:
- *   ┌──────────┬──────────────────┐
- *   │ Sibling  │  Header / tabs   │
- *   │ navigator│  (configuration, │
- *   │ + on-page│   README,        │
- *   │ anchors  │   attributes,    │
- *   │          │   examples)      │
- *   └──────────┴──────────────────┘
+ * CollectorDetailPageV1 — Phase 5 detail page, three-pane layout:
+ *   ┌──────────┬──────────────────┬───────────┐
+ *   │ Sibling  │  Header / tabs   │  Version  │
+ *   │ navigator│  (configuration, │  timeline │
+ *   │ + on-page│   README,        │  + diff   │
+ *   │ anchors  │   attributes,    │  + compat │
+ *   │          │   examples)      │           │
+ *   └──────────┴──────────────────┴───────────┘
  *
- * The right rail (version timeline + diff selector + compatibility card) is
- * added by PR B, which promotes the grid to three columns.
+ * The grid collapses to two columns below 1280px (the right rail spanning the
+ * full width beneath) and to a single column below 992px.
  *
  * Data: reuses `useCollectorComponent` + `useCollectorComponents` from the
  * existing hooks so the v1 view is a re-skin, not a reimplementation. The
@@ -45,6 +45,11 @@ import {
 } from "@/hooks/use-collector-data";
 import type { CollectorComponent } from "@/types/collector";
 import { SubNav } from "@/v1/components/layout/sub-nav";
+import {
+  CompatibilityCard,
+  DiffSelector,
+  VersionTimeline,
+} from "@/v1/components/detail/version-timeline";
 import { DetailHeader } from "@/v1/components/detail/detail-header";
 import {
   type OnPageAnchor,
@@ -219,6 +224,15 @@ export function CollectorDetailPageV1() {
     { id: "examples", label: t("anchors.examples"), tab: "examples" },
   ];
 
+  // Right-rail data. `is_latest` is the only per-version summary the registry
+  // exposes today; per-version change one-liners are deferred. Timeline and
+  // diff links target the current component's canonical distribution/name.
+  const versionEntries = (versionsQ.data?.versions ?? []).map((v) => ({
+    version: v.version,
+    summary: v.is_latest ? t("timeline.latest") : undefined,
+  }));
+  const detailBase = `/collector/components/${component.distribution}/${component.name}`;
+
   return (
     <div className="td-detail">
       <SubNav
@@ -267,6 +281,22 @@ export function CollectorDetailPageV1() {
             </DetailTabs>
           </section>
         </main>
+
+        <aside className="td-detail__rail-right" aria-label={t("rightRailLabel")}>
+          <VersionTimeline
+            versions={versionEntries}
+            currentVersion={version}
+            buildHref={(v) => `${detailBase}?version=${encodeURIComponent(v)}`}
+          />
+          <DiffSelector
+            versions={versionEntries.map((v) => v.version)}
+            defaultTo={version}
+            buildHref={(from, to) =>
+              `${detailBase}/diff?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`
+            }
+          />
+          <CompatibilityCard distributions={component.status?.distributions} />
+        </aside>
       </div>
     </div>
   );

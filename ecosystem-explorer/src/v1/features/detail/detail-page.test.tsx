@@ -74,7 +74,12 @@ function mockHooks(overrides?: {
   componentsState?: Partial<ReturnType<typeof useCollectorComponents>>;
 }) {
   vi.mocked(useCollectorVersions).mockReturnValue({
-    data: { versions: [{ version: "0.150.0", is_latest: true }] },
+    data: {
+      versions: [
+        { version: "0.150.0", is_latest: true },
+        { version: "0.149.0", is_latest: false },
+      ],
+    },
     loading: false,
     error: null,
     ...overrides?.versionsState,
@@ -170,6 +175,33 @@ describe("CollectorDetailPageV1", () => {
       "href",
       "/collector/components/contrib/kafkareceiver?version=0.149.0"
     );
+  });
+
+  it("renders the right rail: version timeline, diff selector, and compatibility card", () => {
+    mockHooks();
+
+    renderAtRoute("/collector/components/core/otlpreceiver");
+
+    // Right-rail landmark, disambiguated from the left rail by its label.
+    expect(
+      screen.getByRole("complementary", { name: "Version history and compatibility" })
+    ).toBeInTheDocument();
+
+    // Timeline links the current version back to itself with an explicit ?version=.
+    expect(screen.getByRole("heading", { name: "Version history" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "0.150.0" })).toHaveAttribute(
+      "href",
+      "/collector/components/core/otlpreceiver?version=0.150.0"
+    );
+
+    // Diff selector defaults to previous -> current and builds the query-param diff link.
+    expect(screen.getByRole("link", { name: /Diff/ })).toHaveAttribute(
+      "href",
+      "/collector/components/core/otlpreceiver/diff?from=0.149.0&to=0.150.0"
+    );
+
+    // Compatibility card renders (it returns null unless distributions exist).
+    expect(screen.getByRole("heading", { name: "Compatibility" })).toBeInTheDocument();
   });
 
   it("wires component telemetry into the attributes tab", async () => {

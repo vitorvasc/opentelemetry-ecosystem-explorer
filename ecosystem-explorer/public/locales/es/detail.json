@@ -23,8 +23,50 @@
     "empty": "Sin coincidencias."
   },
   "railLabel": "Componentes similares y navegación en la página",
+  "rightRailLabel": "Historial de versiones y compatibilidad",
   "onPage": {
     "title": "En esta página"
+  },
+  "timeline": {
+    "title": "Historial de versiones",
+    "latest": "Última versión",
+    "showAll": "Mostrar las {{count}} versiones",
+    "showFewer": "Mostrar menos"
+  },
+  "diffSelector": {
+    "title": "Comparar versiones",
+    "from": "Desde",
+    "to": "Hasta",
+    "fromAriaLabel": "Comparar desde la versión",
+    "toAriaLabel": "Comparar hasta la versión",
+    "submit": "Comparar →"
+  },
+  "compat": {
+    "title": "Compatibilidad",
+    "distributions": "Distribuciones"
+  },
+  "diff": {
+    "breadcrumbLabel": "Comparación",
+    "componentFallback": "Componente",
+    "title": "Comparando",
+    "loading": "Cargando ambas versiones…",
+    "errorTitle": "No se pudo cargar la comparación",
+    "invalidTitle": "Elige dos versiones para comparar",
+    "invalidLead": "Esta página necesita una versión `from` y otra `to` en la URL. Vuelve al componente y usa el selector de comparación de versiones para elegir dos publicaciones.",
+    "configTitle": "Esquema de configuración",
+    "configEmpty": "El registro todavía no expone un esquema de configuración por versión para este componente; la comparación de esquemas se completará cuando lleguen esos datos.",
+    "metadataTitle": "Metadatos",
+    "stabilityLabel": "Señales de estabilidad:",
+    "signalAdded": "+ señal {{signal}}",
+    "signalRemoved": "− señal {{signal}}",
+    "descriptionChanged": "Se actualizó la descripción.",
+    "noMetadataChanges": "No hay cambios de metadatos entre estas versiones.",
+    "buckets": {
+      "added": "Agregado",
+      "removed": "Eliminado",
+      "renamed": "Renombrado",
+      "typeChanged": "Tipo cambiado"
+    }
   },
   "anchors": {
     "placement": "Dónde encaja",

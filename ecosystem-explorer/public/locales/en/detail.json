@@ -23,8 +23,50 @@
     "empty": "No matches."
   },
   "railLabel": "Siblings and on-page navigation",
+  "rightRailLabel": "Version history and compatibility",
   "onPage": {
     "title": "On this page"
+  },
+  "timeline": {
+    "title": "Version history",
+    "latest": "Latest release",
+    "showAll": "Show all {{count}} versions",
+    "showFewer": "Show fewer"
+  },
+  "diffSelector": {
+    "title": "Compare versions",
+    "from": "From",
+    "to": "To",
+    "fromAriaLabel": "Diff from version",
+    "toAriaLabel": "Diff to version",
+    "submit": "Diff →"
+  },
+  "compat": {
+    "title": "Compatibility",
+    "distributions": "Distributions"
+  },
+  "diff": {
+    "breadcrumbLabel": "Diff",
+    "componentFallback": "Component",
+    "title": "Comparing",
+    "loading": "Loading both versions…",
+    "errorTitle": "Couldn't load the diff",
+    "invalidTitle": "Pick two versions to compare",
+    "invalidLead": "This page needs a `from` and a `to` version in the URL. Head back to the component and use the version comparison selector to choose two releases.",
+    "configTitle": "Configuration schema",
+    "configEmpty": "The registry doesn't yet expose a per-version config schema for this component — the schema diff will populate when that data lands.",
+    "metadataTitle": "Metadata",
+    "stabilityLabel": "Stability signals:",
+    "signalAdded": "+ signal {{signal}}",
+    "signalRemoved": "− signal {{signal}}",
+    "descriptionChanged": "Description was updated.",
+    "noMetadataChanges": "No metadata changes between these versions.",
+    "buckets": {
+      "added": "Added",
+      "removed": "Removed",
+      "renamed": "Renamed",
+      "typeChanged": "Type changed"
+    }
   },
   "anchors": {
     "placement": "Where this fits",
