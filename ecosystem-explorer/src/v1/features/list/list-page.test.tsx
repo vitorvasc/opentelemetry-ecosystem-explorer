@@ -176,6 +176,20 @@ describe("CollectorListPageV1", () => {
     expect(screen.getByRole("alert")).toHaveTextContent("network down");
   });
 
+  it("opens the facet drawer as a modal from the toggle and restores focus on close", async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    const toggle = screen.getByRole("button", { name: "Open filters" });
+    await user.click(toggle);
+
+    expect(screen.getByRole("dialog", { name: "Filters" })).toHaveAttribute("aria-modal", "true");
+
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(toggle).toHaveFocus();
+  });
+
   it("switches density views and persists the choice to localStorage", async () => {
     const user = userEvent.setup();
     renderPage("/collector/components?density=table");
