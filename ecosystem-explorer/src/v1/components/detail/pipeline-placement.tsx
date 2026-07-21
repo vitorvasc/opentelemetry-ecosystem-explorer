@@ -60,17 +60,13 @@ export function PipelinePlacement({ activeType, activeName }: PipelinePlacementP
         {stages.map((stage, idx) => {
           const isActive = stage === activeType;
           const stageLabel = tc(`detail.typeLabels.${stage}`);
+          const stageStyle = {
+            ["--td-stage-accent" as never]: TYPE_STRIPE_COLORS[stage],
+          } as React.CSSProperties;
           return (
             <Fragment key={stage}>
               {isActive ? (
-                <div
-                  className="td-placement__stage td-placement__stage--active"
-                  style={
-                    {
-                      ["--td-stage-accent" as never]: TYPE_STRIPE_COLORS[stage],
-                    } as React.CSSProperties
-                  }
-                >
+                <div className="td-placement__stage td-placement__stage--active" style={stageStyle}>
                   <span className="td-placement__stage-label">{stageLabel}</span>
                   <span className="td-placement__stage-active">{activeName}</span>
                 </div>
@@ -78,11 +74,7 @@ export function PipelinePlacement({ activeType, activeName }: PipelinePlacementP
                 <Link
                   to={filtersToHref("/collector/components", { types: [stage] })}
                   className="td-placement__stage"
-                  style={
-                    {
-                      ["--td-stage-accent" as never]: TYPE_STRIPE_COLORS[stage],
-                    } as React.CSSProperties
-                  }
+                  style={stageStyle}
                 >
                   <span className="td-placement__stage-label">{stageLabel}</span>
                 </Link>

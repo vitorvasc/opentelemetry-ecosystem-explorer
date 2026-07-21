@@ -116,6 +116,11 @@ function sourceHref(c: CollectorComponent): string | null {
   return `https://github.com/open-telemetry/${c.repository}/tree/main/${c.type}/${c.name}`;
 }
 
+// Prefer the human-friendly display name, falling back to the slug.
+function displayLabel(c: { display_name?: string | null; name: string }): string {
+  return c.display_name?.trim() || c.name;
+}
+
 export function CollectorDetailPageV1() {
   const { t } = useTranslation("detail");
   const { t: tc } = useTranslation("collector");
@@ -176,11 +181,10 @@ export function CollectorDetailPageV1() {
   }
 
   const componentType = component.type as CollectorComponentType;
-  const displayName = component.display_name?.trim() || component.name;
+  const displayName = displayLabel(component);
   const stability = topStability(component);
   const signals = emittedSignals(component);
   const href = sourceHref(component);
-  const rows = attributeRows(component);
 
   // Sibling links preserve the explicit `?version=` when present, but never
   // synthesize one for the latest view (so latest-view links stay bare).
@@ -190,7 +194,7 @@ export function CollectorDetailPageV1() {
     .map((c) => ({
       id: c.id,
       name: c.name,
-      displayName: c.display_name?.trim() || c.name,
+      displayName: displayLabel(c),
       href: `/collector/components/${c.distribution}/${c.name}${siblingSuffix}`,
     }));
 
@@ -245,7 +249,7 @@ export function CollectorDetailPageV1() {
             <DetailTabs active={activeTab} onChange={setActiveTab}>
               {activeTab === "configuration" && <ConfigurationTab rows={null} hrefSource={href} />}
               {activeTab === "readme" && <ReadmeTab hrefSource={href} />}
-              {activeTab === "attributes" && <AttributesTab rows={rows} />}
+              {activeTab === "attributes" && <AttributesTab rows={attributeRows(component)} />}
               {activeTab === "examples" && <ExamplesTab snippets={[]} hrefExamples={href} />}
             </DetailTabs>
           </section>
