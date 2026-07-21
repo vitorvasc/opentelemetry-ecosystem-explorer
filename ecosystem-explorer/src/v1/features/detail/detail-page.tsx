@@ -189,14 +189,18 @@ export function CollectorDetailPageV1() {
   // Sibling links preserve the explicit `?version=` when present, but never
   // synthesize one for the latest view (so latest-view links stay bare).
   const siblingSuffix = rawVersion ? `?version=${encodeURIComponent(rawVersion)}` : "";
-  const siblings: SiblingItem[] = (componentsQ.data ?? [])
-    .filter((c) => c.type === component.type)
-    .map((c) => ({
-      id: c.id,
-      name: c.name,
-      displayName: displayLabel(c),
-      href: `/collector/components/${c.distribution}/${c.name}${siblingSuffix}`,
-    }));
+  const siblings: SiblingItem[] = (componentsQ.data ?? []).flatMap((c) =>
+    c.type === component.type
+      ? [
+          {
+            id: c.id,
+            name: c.name,
+            displayName: displayLabel(c),
+            href: `/collector/components/${c.distribution}/${c.name}${siblingSuffix}`,
+          },
+        ]
+      : []
+  );
 
   const anchors = [
     { id: "placement", label: t("anchors.placement") },
