@@ -26,6 +26,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import type { DetailTabId } from "./tabs";
 
 export interface SiblingItem {
   id: string;
@@ -93,30 +94,45 @@ export function SiblingNavigator({ title, items, activeId }: SiblingNavigatorPro
 export interface OnPageAnchor {
   id: string;
   label: string;
+  // When set, the anchor drives a tab switch via `onSelectTab` instead of a
+  // hash jump. Tab panels are mounted one at a time, so a plain `#id` link
+  // can't scroll to a hidden tab — and its hash write would collide with the
+  // tab deep-link hash. Section anchors (no `tab`) stay hash links.
+  tab?: DetailTabId;
 }
 
 export interface OnPageAnchorsProps {
   anchors: OnPageAnchor[];
   activeId?: string;
+  onSelectTab?: (tab: DetailTabId) => void;
 }
 
-export function OnPageAnchors({ anchors, activeId }: OnPageAnchorsProps) {
+export function OnPageAnchors({ anchors, activeId, onSelectTab }: OnPageAnchorsProps) {
   const { t } = useTranslation("detail");
   if (anchors.length === 0) return null;
   return (
     <nav className="td-on-page" aria-label={t("onPage.title")}>
       <div className="td-on-page__title">{t("onPage.title")}</div>
       <ul className="td-on-page__list">
-        {anchors.map((a) => (
-          <li key={a.id}>
-            <a
-              href={`#${a.id}`}
-              className={`td-on-page__link ${a.id === activeId ? "td-on-page__link--active" : ""}`}
-            >
-              {a.label}
-            </a>
-          </li>
-        ))}
+        {anchors.map((a) => {
+          const className = `td-on-page__link ${
+            a.id === activeId ? "td-on-page__link--active" : ""
+          }`;
+          const { tab } = a;
+          return (
+            <li key={a.id}>
+              {tab ? (
+                <button type="button" className={className} onClick={() => onSelectTab?.(tab)}>
+                  {a.label}
+                </button>
+              ) : (
+                <a href={`#${a.id}`} className={className}>
+                  {a.label}
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

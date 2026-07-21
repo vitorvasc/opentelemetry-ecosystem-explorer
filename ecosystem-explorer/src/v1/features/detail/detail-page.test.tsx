@@ -186,4 +186,23 @@ describe("CollectorDetailPageV1", () => {
     expect(screen.getByText("Metric")).toBeInTheDocument();
     expect(screen.getByText("Resource attribute")).toBeInTheDocument();
   });
+
+  it("switches tabs from the on-page anchor instead of leaving a dead hash link", async () => {
+    // Regression: on-page tab anchors and the tablist once shared the same
+    // hash namespace, so clicking an anchor for an inactive tab flipped the
+    // tab as a side effect and never scrolled. The anchor is now a button that
+    // drives the tab switch directly.
+    const user = userEvent.setup();
+    mockHooks();
+
+    renderAtRoute("/collector/components/core/otlpreceiver");
+
+    // Configuration is the default tab; its empty state is showing.
+    expect(screen.getByText("No configuration schema yet")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Emitted attributes" }));
+
+    expect(screen.getByText("otelcol_receiver_accepted_spans")).toBeInTheDocument();
+    expect(window.location.hash).toBe("#attributes");
+  });
 });

@@ -271,11 +271,17 @@
 
 .td-on-page__link {
   display: block;
+  width: 100%;
   padding: 0.25rem 0.5rem;
+  border: 0;
   border-radius: 0.25rem;
+  background: none;
+  font: inherit;
   font-size: 0.875rem;
+  text-align: left;
   color: hsl(var(--muted-foreground-hsl));
   text-decoration: none;
+  cursor: pointer;
 }
 
 .td-on-page__link:hover,

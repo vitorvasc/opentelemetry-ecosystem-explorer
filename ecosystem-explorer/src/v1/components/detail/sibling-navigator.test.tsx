@@ -17,7 +17,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 
 import { OnPageAnchors, SiblingNavigator, type SiblingItem } from "./sibling-navigator";
 
@@ -92,6 +92,33 @@ describe("OnPageAnchors", () => {
       "href",
       "#configuration"
     );
+  });
+
+  it("renders tab-bound anchors as buttons that drive onSelectTab, not hash links", async () => {
+    const user = userEvent.setup();
+    const onSelectTab = vi.fn();
+    render(
+      <OnPageAnchors
+        anchors={[
+          { id: "placement", label: "Where this fits" },
+          { id: "attributes", label: "Emitted attributes", tab: "attributes" },
+        ]}
+        activeId="attributes"
+        onSelectTab={onSelectTab}
+      />
+    );
+
+    // Section anchors stay hash links; tab anchors are buttons (no hash write,
+    // so no collision with the tab deep-link hash).
+    expect(screen.getByRole("link", { name: "Where this fits" })).toHaveAttribute(
+      "href",
+      "#placement"
+    );
+    const tabButton = screen.getByRole("button", { name: "Emitted attributes" });
+    expect(screen.queryByRole("link", { name: "Emitted attributes" })).not.toBeInTheDocument();
+
+    await user.click(tabButton);
+    expect(onSelectTab).toHaveBeenCalledWith("attributes");
   });
 
   it("renders nothing when there are no anchors", () => {

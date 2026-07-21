@@ -47,6 +47,7 @@ import type { CollectorComponent } from "@/types/collector";
 import { SubNav } from "@/v1/components/layout/sub-nav";
 import { DetailHeader } from "@/v1/components/detail/detail-header";
 import {
+  type OnPageAnchor,
   OnPageAnchors,
   SiblingNavigator,
   type SiblingItem,
@@ -128,6 +129,14 @@ export function CollectorDetailPageV1() {
   const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<DetailTabId>("configuration");
 
+  // Single writer for the tab deep-link hash: both the tablist and the on-page
+  // anchors change tabs through here so the URL always mirrors the active tab.
+  // DetailTabs still reads the hash on mount/hashchange for direct-link loads.
+  function selectTab(next: DetailTabId) {
+    setActiveTab(next);
+    window.history.replaceState(null, "", `#${next}`);
+  }
+
   const versionsQ = useCollectorVersions();
   // Explicit `?version=` wins; otherwise fall back to the latest release so a
   // bare `/collector/components/:distribution/:name` link (how the list page
@@ -202,12 +211,12 @@ export function CollectorDetailPageV1() {
       : []
   );
 
-  const anchors = [
+  const anchors: OnPageAnchor[] = [
     { id: "placement", label: t("anchors.placement") },
-    { id: "configuration", label: t("anchors.configuration") },
-    { id: "readme", label: t("anchors.readme") },
-    { id: "attributes", label: t("anchors.attributes") },
-    { id: "examples", label: t("anchors.examples") },
+    { id: "configuration", label: t("anchors.configuration"), tab: "configuration" },
+    { id: "readme", label: t("anchors.readme"), tab: "readme" },
+    { id: "attributes", label: t("anchors.attributes"), tab: "attributes" },
+    { id: "examples", label: t("anchors.examples"), tab: "examples" },
   ];
 
   return (
@@ -228,7 +237,7 @@ export function CollectorDetailPageV1() {
             items={siblings}
             activeId={component.id}
           />
-          <OnPageAnchors anchors={anchors} activeId={activeTab} />
+          <OnPageAnchors anchors={anchors} activeId={activeTab} onSelectTab={selectTab} />
         </aside>
 
         <main className="td-detail__main">
@@ -249,8 +258,8 @@ export function CollectorDetailPageV1() {
             <PipelinePlacement activeType={componentType} activeName={displayName} />
           </section>
 
-          <section id={activeTab}>
-            <DetailTabs active={activeTab} onChange={setActiveTab}>
+          <section id="content">
+            <DetailTabs active={activeTab} onChange={selectTab}>
               {activeTab === "configuration" && <ConfigurationTab rows={null} hrefSource={href} />}
               {activeTab === "readme" && <ReadmeTab hrefSource={href} />}
               {activeTab === "attributes" && <AttributesTab rows={attributeRows(component)} />}

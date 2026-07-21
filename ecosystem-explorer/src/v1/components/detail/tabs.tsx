@@ -44,12 +44,6 @@ export function DetailTabs({ active, onChange, children }: DetailTabsProps) {
   const { t } = useTranslation("detail");
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  function selectTab(id: DetailTabId) {
-    onChange(id);
-    // Update the URL hash without scrolling (use history.replaceState).
-    window.history.replaceState(null, "", `#${id}`);
-  }
-
   // Roving-tabindex keyboard support: arrows move between tabs (automatic
   // activation), Home/End jump to the ends. Without this the inactive tabs
   // (tabIndex=-1) are unreachable by keyboard.
@@ -62,7 +56,7 @@ export function DetailTabs({ active, onChange, children }: DetailTabsProps) {
     else return;
     event.preventDefault();
     const nextId = TAB_IDS[next];
-    selectTab(nextId);
+    onChange(nextId);
     tabRefs.current[nextId]?.focus();
   }
 
@@ -94,7 +88,7 @@ export function DetailTabs({ active, onChange, children }: DetailTabsProps) {
             aria-controls={`td-panel-${id}`}
             tabIndex={active === id ? 0 : -1}
             className={`td-tabs__btn ${active === id ? "td-tabs__btn--active" : ""}`}
-            onClick={() => selectTab(id)}
+            onClick={() => onChange(id)}
             onKeyDown={(e) => onKeyDown(e, index)}
           >
             {t(`tabs.${id}`)}
