@@ -28,7 +28,7 @@ export interface StatItem {
   /** Stable identifier for lookups and React keys; decoupled from `label` so a
    *  display-copy change never breaks consumers that key off a specific stat. */
   key: string;
-  /** Visible counter label (e.g. "Languages"). */
+  /** i18n key (namespace `home`) of the visible counter label; `<StatsBand>` resolves it. */
   label: string;
   /** Pre-formatted counter value (e.g. "12+"). */
   value: string;
@@ -44,27 +44,27 @@ const INTEGRATIONS_STAT_KEY = "integrations";
 export const HOME_STATS: StatItem[] = [
   {
     key: "languages",
-    label: "Languages",
+    label: "homeV1.stats.labels.languages",
     value: "12+",
     href: "https://opentelemetry.io/docs/languages/",
     external: true,
   },
   {
     key: "collector-components",
-    label: "Collector Components",
+    label: "homeV1.stats.labels.collector-components",
     value: "200+",
     href: "/collector",
   },
   {
     key: INTEGRATIONS_STAT_KEY,
-    label: "Integrations",
+    label: "homeV1.stats.labels.integrations",
     value: "1005+",
     href: "https://opentelemetry.io/ecosystem/registry/",
     external: true,
   },
   {
     key: "vendors",
-    label: "Vendors",
+    label: "homeV1.stats.labels.vendors",
     value: "102+",
     href: "https://opentelemetry.io/ecosystem/vendors/",
     external: true,

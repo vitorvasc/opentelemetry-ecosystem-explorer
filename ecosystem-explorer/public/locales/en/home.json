@@ -13,5 +13,96 @@
       "title": "OpenTelemetry Collector",
       "description": "Navigate Collector components like receivers, processors, and exporters."
     }
+  },
+  "homeV1": {
+    "hero": {
+      "lead": "Navigate every receiver, processor, exporter, and instrumentation across the OpenTelemetry project — searchable, comparable, version-aware.",
+      "cta": {
+        "browse": "Browse components",
+        "overview": "Read the overview"
+      }
+    },
+    "sections": {
+      "signalsActivityAriaLabel": "Signals and recent activity"
+    },
+    "search": {
+      "placeholder": "Search {{total}} components, instrumentations, vendors…",
+      "inputAriaLabel": "Search the ecosystem",
+      "resultsAriaLabel": "Search results",
+      "error": "Couldn't reach the search index right now. Please try again.",
+      "searching": "Searching…",
+      "noMatches": "No matches for \"{{query}}\". Try one of the suggestions below.",
+      "showing_one": "Showing {{shown}} of {{count}} match",
+      "showing_other": "Showing {{shown}} of {{count}} matches",
+      "tryLabel": "Try:"
+    },
+    "stats": {
+      "title": "The OpenTelemetry Ecosystem",
+      "itemAriaLabel": "{{label}}: {{value}}",
+      "labels": {
+        "languages": "Languages",
+        "collector-components": "Collector Components",
+        "integrations": "Integrations",
+        "vendors": "Vendors"
+      }
+    },
+    "ecosystems": {
+      "title": "Ecosystems",
+      "lead": "Browse the projects that make up OpenTelemetry.",
+      "viewAll": "View all projects →",
+      "cardAriaLabel": "{{name}} — {{tagline}}",
+      "metricLatest": "latest",
+      "metricWeekly": "updated this week",
+      "comingSoon": "Coming soon",
+      "collector": {
+        "tagline": "Vendor-agnostic agent",
+        "description": "Receive, process, and export telemetry data. 200+ receivers, processors, exporters, connectors and extensions.",
+        "unit": "components"
+      },
+      "java-agent": {
+        "tagline": "Auto-instrumentation",
+        "description": "Discover supported libraries, configuration options, and emitted telemetry for the Java auto-instrumentation agent.",
+        "unit": "instrumentations"
+      }
+    },
+    "signals": {
+      "title": "Browse by signal",
+      "lead": "Cuts across ecosystems, matching opentelemetry.io's canonical signal taxonomy.",
+      "cardAriaLabel": "{{name}} — {{description}}",
+      "traces": {
+        "name": "Traces",
+        "description": "Distributed traces · 312 components"
+      },
+      "metrics": {
+        "name": "Metrics",
+        "description": "Measurements over time · 218 components"
+      },
+      "logs": {
+        "name": "Logs",
+        "description": "Timestamped records · 147 components"
+      },
+      "baggage": {
+        "name": "Baggage",
+        "description": "Contextual metadata"
+      }
+    },
+    "activity": {
+      "title": "Recent activity",
+      "lead": "What changed in the last 30 days, across all ecosystems.",
+      "error": "We couldn't load the activity feed right now. Check back soon.",
+      "loading": "Loading recent activity…",
+      "empty": "No recent activity to show.",
+      "relative": {
+        "justNow": "just now",
+        "today": "today",
+        "yesterday": "yesterday",
+        "daysAgo_one": "{{count}} day ago",
+        "daysAgo_other": "{{count}} days ago",
+        "weeksAgo_one": "{{count}} week ago",
+        "weeksAgo_other": "{{count}} weeks ago",
+        "monthsAgo_one": "{{count}} month ago",
+        "monthsAgo_other": "{{count}} months ago"
+      }
+    }
   }
 }

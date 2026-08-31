@@ -13,5 +13,96 @@
       "title": "OpenTelemetry Collector",
       "description": "Navega los componentes del Collector como receptores, procesadores y exportadores."
     }
+  },
+  "homeV1": {
+    "hero": {
+      "lead": "Navega cada receptor, procesador, exportador e instrumentación del proyecto OpenTelemetry: buscable, comparable y consciente de versiones.",
+      "cta": {
+        "browse": "Explorar componentes",
+        "overview": "Leer la introducción"
+      }
+    },
+    "sections": {
+      "signalsActivityAriaLabel": "Señales y actividad reciente"
+    },
+    "search": {
+      "placeholder": "Busca entre {{total}} componentes, instrumentaciones, proveedores…",
+      "inputAriaLabel": "Buscar en el ecosistema",
+      "resultsAriaLabel": "Resultados de búsqueda",
+      "error": "No se pudo acceder al índice de búsqueda en este momento. Inténtalo de nuevo.",
+      "searching": "Buscando…",
+      "noMatches": "Sin resultados para \"{{query}}\". Prueba una de las sugerencias de abajo.",
+      "showing_one": "Mostrando {{shown}} de {{count}} coincidencia",
+      "showing_other": "Mostrando {{shown}} de {{count}} coincidencias",
+      "tryLabel": "Prueba:"
+    },
+    "stats": {
+      "title": "El ecosistema OpenTelemetry",
+      "itemAriaLabel": "{{label}}: {{value}}",
+      "labels": {
+        "languages": "Lenguajes",
+        "collector-components": "Componentes del Collector",
+        "integrations": "Integraciones",
+        "vendors": "Proveedores"
+      }
+    },
+    "ecosystems": {
+      "title": "Ecosistemas",
+      "lead": "Explora los proyectos que componen OpenTelemetry.",
+      "viewAll": "Ver todos los proyectos →",
+      "cardAriaLabel": "{{name}} — {{tagline}}",
+      "metricLatest": "última versión",
+      "metricWeekly": "actualizados esta semana",
+      "comingSoon": "Próximamente",
+      "collector": {
+        "tagline": "Agente independiente del proveedor",
+        "description": "Recibe, procesa y exporta datos de telemetría. Más de 200 receptores, procesadores, exportadores, conectores y extensiones.",
+        "unit": "componentes"
+      },
+      "java-agent": {
+        "tagline": "Auto-instrumentación",
+        "description": "Descubre bibliotecas compatibles, opciones de configuración y telemetría emitida por el agente de auto-instrumentación para Java.",
+        "unit": "instrumentaciones"
+      }
+    },
+    "signals": {
+      "title": "Explorar por señal",
+      "lead": "Atraviesa todos los ecosistemas, siguiendo la taxonomía canónica de señales de opentelemetry.io.",
+      "cardAriaLabel": "{{name}} — {{description}}",
+      "traces": {
+        "name": "Trazas",
+        "description": "Trazas distribuidas · 312 componentes"
+      },
+      "metrics": {
+        "name": "Métricas",
+        "description": "Mediciones a lo largo del tiempo · 218 componentes"
+      },
+      "logs": {
+        "name": "Logs",
+        "description": "Registros con marca de tiempo · 147 componentes"
+      },
+      "baggage": {
+        "name": "Baggage",
+        "description": "Metadatos contextuales"
+      }
+    },
+    "activity": {
+      "title": "Actividad reciente",
+      "lead": "Qué cambió en los últimos 30 días, en todos los ecosistemas.",
+      "error": "No se pudo cargar el feed de actividad en este momento. Vuelve a intentarlo pronto.",
+      "loading": "Cargando actividad reciente…",
+      "empty": "No hay actividad reciente que mostrar.",
+      "relative": {
+        "justNow": "justo ahora",
+        "today": "hoy",
+        "yesterday": "ayer",
+        "daysAgo_one": "hace {{count}} día",
+        "daysAgo_other": "hace {{count}} días",
+        "weeksAgo_one": "hace {{count}} semana",
+        "weeksAgo_other": "hace {{count}} semanas",
+        "monthsAgo_one": "hace {{count}} mes",
+        "monthsAgo_other": "hace {{count}} meses"
+      }
+    }
   }
 }

@@ -21,24 +21,24 @@
  * `01-home-page.md`). Renders empty + loading + error states.
  */
 
+import type { TFunction } from "i18next";
 import { ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useActivityFeed, type ActivityStability } from "@/v1/hooks/use-activity-feed";
 
-function formatRelative(occurredAt: string, now: Date = new Date()): string {
+function formatRelative(occurredAt: string, t: TFunction<"home">, now: Date = new Date()): string {
   const then = new Date(occurredAt);
   const diffMs = now.getTime() - then.getTime();
-  if (Number.isNaN(diffMs) || diffMs < 0) return "just now";
+  if (Number.isNaN(diffMs) || diffMs < 0) return t("homeV1.activity.relative.justNow");
   const diffDays = Math.floor(diffMs / 86_400_000);
-  if (diffDays === 0) return "today";
-  if (diffDays === 1) return "yesterday";
-  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays === 0) return t("homeV1.activity.relative.today");
+  if (diffDays === 1) return t("homeV1.activity.relative.yesterday");
+  if (diffDays < 7) return t("homeV1.activity.relative.daysAgo", { count: diffDays });
   if (diffDays < 30) {
-    const weeks = Math.floor(diffDays / 7);
-    return `${weeks} week${weeks === 1 ? "" : "s"} ago`;
+    return t("homeV1.activity.relative.weeksAgo", { count: Math.floor(diffDays / 7) });
   }
-  const months = Math.floor(diffDays / 30);
-  return `${months} month${months === 1 ? "" : "s"} ago`;
+  return t("homeV1.activity.relative.monthsAgo", { count: Math.floor(diffDays / 30) });
 }
 
 const PILL_VARIANT: Record<ActivityStability, string> = {
@@ -64,24 +64,25 @@ export interface RecentActivityRailProps {
 
 export function RecentActivityRail({ limit = 5, feedUrl }: RecentActivityRailProps) {
   const { data: items, loading, error } = useActivityFeed({ feedUrl, limit });
+  const { t } = useTranslation("home");
 
   return (
     <div aria-labelledby="activity-title">
       <h3 id="activity-title" className="td-subsection-title">
-        Recent activity
+        {t("homeV1.activity.title")}
       </h3>
-      <p className="td-subsection-lead">What changed in the last 30 days, across all ecosystems.</p>
+      <p className="td-subsection-lead">{t("homeV1.activity.lead")}</p>
       <div className="td-activity-card">
         {error ? (
           <p className="td-activity-empty" role="status">
-            We couldn't load the activity feed right now. Check back soon.
+            {t("homeV1.activity.error")}
           </p>
         ) : loading || items === null ? (
           <p className="td-activity-loading" role="status" aria-live="polite">
-            Loading recent activity…
+            {t("homeV1.activity.loading")}
           </p>
         ) : items.length === 0 ? (
-          <p className="td-activity-empty">No recent activity to show.</p>
+          <p className="td-activity-empty">{t("homeV1.activity.empty")}</p>
         ) : (
           <ul className="td-activity-list">
             {items.map((item) => (
@@ -93,7 +94,7 @@ export function RecentActivityRail({ limit = 5, feedUrl }: RecentActivityRailPro
                   <div className="td-activity-body">
                     <div className="td-activity-title">{item.title}</div>
                     <span className="td-activity-meta">
-                      {[item.ecosystem, item.version, formatRelative(item.occurredAt)]
+                      {[item.ecosystem, item.version, formatRelative(item.occurredAt, t)]
                         .filter(Boolean)
                         .join(" · ")}
                     </span>

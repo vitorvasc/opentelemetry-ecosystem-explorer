@@ -24,11 +24,13 @@
  * lets the showcase render alternative datasets without duplicating layout.
  */
 
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { HOME_STATS, type StatItem } from "@/v1/lib/home-stats";
 
 export interface StatsBandProps {
+  /** Overrides the translated default heading. */
   title?: string;
   stats?: StatItem[];
   /** Override the `<h2>` id (used by `aria-labelledby`). Defaults to `"stats-band-title"`. */
@@ -36,38 +38,43 @@ export interface StatsBandProps {
 }
 
 export function StatsBand({
-  title = "The OpenTelemetry Ecosystem",
+  title,
   stats = HOME_STATS,
   headingId = "stats-band-title",
 }: StatsBandProps) {
+  const { t } = useTranslation("home");
   return (
     <section className="td-stats-band" aria-labelledby={headingId}>
       <div className="td-stats-band__container">
         <h2 id={headingId} className="td-stats-band__title">
-          {title}
+          {title ?? t("homeV1.stats.title")}
         </h2>
         <div className="td-stats-band__grid">
-          {stats.map((stat) => (
-            <div key={stat.key} className="td-stats-band__item">
-              <div className="td-stats-band__number">
-                {stat.external ? (
-                  <a
-                    href={stat.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${stat.label}: ${stat.value}`}
-                  >
-                    {stat.value}
-                  </a>
-                ) : (
-                  <Link to={stat.href} aria-label={`${stat.label}: ${stat.value}`}>
-                    {stat.value}
-                  </Link>
-                )}
+          {stats.map((stat) => {
+            const label = t(stat.label);
+            const ariaLabel = t("homeV1.stats.itemAriaLabel", { label, value: stat.value });
+            return (
+              <div key={stat.key} className="td-stats-band__item">
+                <div className="td-stats-band__number">
+                  {stat.external ? (
+                    <a
+                      href={stat.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={ariaLabel}
+                    >
+                      {stat.value}
+                    </a>
+                  ) : (
+                    <Link to={stat.href} aria-label={ariaLabel}>
+                      {stat.value}
+                    </Link>
+                  )}
+                </div>
+                <div className="td-stats-band__label">{label}</div>
               </div>
-              <div className="td-stats-band__label">{stat.label}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
