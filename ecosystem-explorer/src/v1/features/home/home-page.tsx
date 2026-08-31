@@ -27,11 +27,11 @@ import { StatsBand } from "@/v1/components/home/stats-band";
 
 const COVER_CTAS = (
   <>
-    <Link className="td-btn td-btn--primary" to="/collector">
+    <Link className="td-btn td-btn--primary td-btn--lg" to="/collector">
       Browse components
     </Link>
     <a
-      className="td-btn td-btn--outline-light"
+      className="td-btn td-btn--outline-light td-btn--lg"
       href="https://opentelemetry.io/docs/what-is-opentelemetry/"
       target="_blank"
       rel="noopener noreferrer"
