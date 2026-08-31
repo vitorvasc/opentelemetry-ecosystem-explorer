@@ -29,6 +29,13 @@
     "sections": {
       "signalsActivityAriaLabel": "Signals and recent activity"
     },
+    "ecosystemNames": {
+      "collector": "Collector",
+      "collector-contrib": "Collector Contrib",
+      "java-agent": "Java Agent",
+      "dotnet": ".NET",
+      "page": "Page"
+    },
     "search": {
       "placeholder": "Search {{total}} components, instrumentations, vendors…",
       "inputAriaLabel": "Search the ecosystem",
