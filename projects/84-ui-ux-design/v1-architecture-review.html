@@ -457,17 +457,532 @@
         <div class="diagrams">
           <div>
             <p class="eyebrow">Before · scattered knowledge</p>
-            <pre class="mermaid">
-flowchart TD
-B0[&quot;Historical path → latest list&quot;]
-B1[&quot;Historical row → latest detail&quot;]
-B2[&quot;Historical detail → source main&quot;]
-B3[&quot;Router + separate tab hash state&quot;]
-B0 --&gt; B1
-B1 --&gt; B2
-B2 --&gt; B3
-classDef leak fill:#fff1f2,stroke:#be123c,color:#4c0519;
-class B0,B1,B2,B3 leak;</pre>
+            <div class="mermaid" data-processed="true">
+              <svg
+                id="mermaid-1788789420458"
+                width="100%"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                class="flowchart"
+                style="max-width: 276px"
+                viewBox="0 0 276 454"
+                role="graphics-document document"
+                aria-roledescription="flowchart-v2"
+              >
+                <style>
+                  #mermaid-1788789420458{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-1788789420458 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-1788789420458 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-1788789420458 .error-icon{fill:#552222;}#mermaid-1788789420458 .error-text{fill:#552222;stroke:#552222;}#mermaid-1788789420458 .edge-thickness-normal{stroke-width:1px;}#mermaid-1788789420458 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1788789420458 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1788789420458 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1788789420458 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1788789420458 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1788789420458 .marker{fill:#666;stroke:#666;}#mermaid-1788789420458 .marker.cross{stroke:#666;}#mermaid-1788789420458 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-1788789420458 p{margin:0;}#mermaid-1788789420458 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#000000;}#mermaid-1788789420458 .cluster-label text{fill:#333;}#mermaid-1788789420458 .cluster-label span{color:#333;}#mermaid-1788789420458 .cluster-label span p{background-color:transparent;}#mermaid-1788789420458 .label text,#mermaid-1788789420458 span{fill:#000000;color:#000000;}#mermaid-1788789420458 .node rect,#mermaid-1788789420458 .node circle,#mermaid-1788789420458 .node ellipse,#mermaid-1788789420458 .node polygon,#mermaid-1788789420458 .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-1788789420458 .rough-node .label text,#mermaid-1788789420458 .node .label text,#mermaid-1788789420458 .image-shape .label,#mermaid-1788789420458 .icon-shape .label{text-anchor:middle;}#mermaid-1788789420458 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1788789420458 .rough-node .label,#mermaid-1788789420458 .node .label,#mermaid-1788789420458 .image-shape .label,#mermaid-1788789420458 .icon-shape .label{text-align:center;}#mermaid-1788789420458 .node.clickable{cursor:pointer;}#mermaid-1788789420458 .root .anchor path{fill:#666!important;stroke-width:0;stroke:#666;}#mermaid-1788789420458 .arrowheadPath{fill:#333333;}#mermaid-1788789420458 .edgePaths .path{stroke:#666;stroke-width:1px;}#mermaid-1788789420458 .flowchart-link{stroke:#666;fill:none;}#mermaid-1788789420458 .edgeLabel{background-color:white;text-align:center;}#mermaid-1788789420458 .edgeLabel p{background-color:white;}#mermaid-1788789420458 .edgeLabel rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1788789420458 .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#mermaid-1788789420458 .cluster rect{fill:hsl(0, 0%, 98.9215686275%);stroke:#707070;stroke-width:1px;}#mermaid-1788789420458 .cluster text{fill:#333;}#mermaid-1788789420458 .cluster span{color:#333;}#mermaid-1788789420458 .node .collapsed-indicator{fill:#707070;stroke:none;opacity:0.6;}#mermaid-1788789420458 .node .collapsed-separator{stroke:#707070;stroke-width:0.75px;}#mermaid-1788789420458 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(-160, 0%, 93.3333333333%);border:1px solid #707070;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1788789420458 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-1788789420458 rect.text{fill:none;stroke-width:0;}#mermaid-1788789420458 .icon-shape,#mermaid-1788789420458 .image-shape{background-color:white;text-align:center;}#mermaid-1788789420458 .icon-shape p,#mermaid-1788789420458 .image-shape p{background-color:white;padding:2px;}#mermaid-1788789420458 .icon-shape .label rect,#mermaid-1788789420458 .image-shape .label rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1788789420458 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-1788789420458 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-1788789420458 .node .neo-node{stroke:#999;}#mermaid-1788789420458 [data-look="neo"].node rect,#mermaid-1788789420458 [data-look="neo"].cluster rect,#mermaid-1788789420458 [data-look="neo"].node polygon{stroke:url(#mermaid-1788789420458-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420458 [data-look="neo"].swimlane.cluster rect{filter:none;}#mermaid-1788789420458 [data-look="neo"].node path{stroke:url(#mermaid-1788789420458-gradient);stroke-width:1px;}#mermaid-1788789420458 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420458 [data-look="neo"].node .neo-line path{stroke:#999;filter:none;}#mermaid-1788789420458 [data-look="neo"].node circle{stroke:url(#mermaid-1788789420458-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420458 [data-look="neo"].node circle .state-start{fill:#000000;}#mermaid-1788789420458 [data-look="neo"].icon-shape .icon{fill:url(#mermaid-1788789420458-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420458 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#mermaid-1788789420458-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420458 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-1788789420458 .leak&gt;*{fill:rgb(255, 241, 242)!important;stroke:rgb(190, 18, 60)!important;color:rgb(76, 5, 25)!important;}#mermaid-1788789420458 .leak span{fill:rgb(255, 241, 242)!important;stroke:rgb(190, 18, 60)!important;color:rgb(76, 5, 25)!important;}#mermaid-1788789420458 .leak tspan{fill:rgb(76, 5, 25)!important;}
+                </style>
+                <g>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-pointEnd"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="5"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 0 L 10 5 L 0 10 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-pointStart"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="4.5"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 5 L 10 10 L 10 0 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-pointEnd-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 11.5 14"
+                    refX="11.5"
+                    refY="7"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="10.5"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 0 L 11.5 7 L 0 14 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-pointStart-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 11.5 14"
+                    refX="1"
+                    refY="7"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11.5"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <polygon
+                      points="0,7 11.5,14 11.5,0"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></polygon>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-circleEnd"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="11"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-circleStart"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="-1"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-circleEnd-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refY="5"
+                    refX="12.25"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="14"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-circleStart-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="-2"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="14"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-crossEnd"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 11 11"
+                    refX="12"
+                    refY="5.2"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 l 9,9 M 10,1 l -9,9"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-crossStart"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 11 11"
+                    refX="-1"
+                    refY="5.2"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 l 9,9 M 10,1 l -9,9"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-crossEnd-margin"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 15 15"
+                    refX="17.7"
+                    refY="7.5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="12"
+                    markerHeight="12"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 L 14,14 M 1,14 L 14,1"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2.5"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420458_flowchart-v2-crossStart-margin"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 15 15"
+                    refX="-3.5"
+                    refY="7.5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="12"
+                    markerHeight="12"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 L 14,14 M 1,14 L 14,1"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2.5; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <g class="root">
+                    <g class="clusters"></g>
+                    <g class="edgePaths">
+                      <path
+                        d="M138,62L138,66.167C138,70.333,138,78.667,138,86.333C138,94,138,101,138,104.5L138,108"
+                        id="mermaid-1788789420458-L_B0_B1_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B0_B1_0"
+                        data-points="W3sieCI6MTM4LCJ5Ijo2Mn0seyJ4IjoxMzgsInkiOjg3fSx7IngiOjEzOCwieSI6MTEyfV0="
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420458_flowchart-v2-pointEnd)"
+                      ></path>
+                      <path
+                        d="M138,190L138,194.167C138,198.333,138,206.667,138,214.333C138,222,138,229,138,232.5L138,236"
+                        id="mermaid-1788789420458-L_B1_B2_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B1_B2_0"
+                        data-points="W3sieCI6MTM4LCJ5IjoxOTB9LHsieCI6MTM4LCJ5IjoyMTV9LHsieCI6MTM4LCJ5IjoyNDB9XQ=="
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420458_flowchart-v2-pointEnd)"
+                      ></path>
+                      <path
+                        d="M138,318L138,322.167C138,326.333,138,334.667,138,342.333C138,350,138,357,138,360.5L138,364"
+                        id="mermaid-1788789420458-L_B2_B3_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B2_B3_0"
+                        data-points="W3sieCI6MTM4LCJ5IjozMTh9LHsieCI6MTM4LCJ5IjozNDN9LHsieCI6MTM4LCJ5IjozNjh9XQ=="
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420458_flowchart-v2-pointEnd)"
+                      ></path>
+                    </g>
+                    <g class="edgeLabels">
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B0_B1_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B1_B2_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B2_B3_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                    </g>
+                    <g class="nodes">
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420458-flowchart-B0-0"
+                        data-look="classic"
+                        transform="translate(138, 35)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-129.5390625"
+                          y="-27"
+                          width="259.078125"
+                          height="54"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-99.5390625, -12)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="199.078125" height="24"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Historical path → latest list</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420458-flowchart-B1-1"
+                        data-look="classic"
+                        transform="translate(138, 151)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Historical row → latest detail</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420458-flowchart-B2-2"
+                        data-look="classic"
+                        transform="translate(138, 279)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Historical detail → source main</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420458-flowchart-B3-3"
+                        data-look="classic"
+                        transform="translate(138, 407)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Router + separate tab hash state</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <defs>
+                  <filter id="mermaid-1788789420458-drop-shadow" height="130%" width="130%">
+                    <feDropShadow
+                      dx="4"
+                      dy="4"
+                      stdDeviation="0"
+                      flood-opacity="0.06"
+                      flood-color="#000000"
+                    ></feDropShadow>
+                  </filter>
+                </defs>
+                <defs>
+                  <filter id="mermaid-1788789420458-drop-shadow-small" height="150%" width="150%">
+                    <feDropShadow
+                      dx="2"
+                      dy="2"
+                      stdDeviation="0"
+                      flood-opacity="0.06"
+                      flood-color="#000000"
+                    ></feDropShadow>
+                  </filter>
+                </defs>
+                <linearGradient
+                  id="mermaid-1788789420458-gradient"
+                  gradientUnits="objectBoundingBox"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="hsl(0, 0%, 83.3333333333%)" stop-opacity="1"></stop>
+                  <stop
+                    offset="100%"
+                    stop-color="hsl(0, 0%, 88.9215686275%)"
+                    stop-opacity="1"
+                  ></stop>
+                </linearGradient>
+              </svg>
+            </div>
           </div>
           <div>
             <p class="eyebrow">After · greater depth</p>
@@ -656,17 +1171,531 @@ class B0,B1,B2,B3 leak;</pre>
         <div class="diagrams">
           <div>
             <p class="eyebrow">Before · scattered knowledge</p>
-            <pre class="mermaid">
-flowchart TD
-B0[&quot;Filter change → new callback&quot;]
-B1[&quot;Cleanup → restore focus&quot;]
-B2[&quot;Restart → focus Close&quot;]
-B3[&quot;Desktop CSS + modal behavior&quot;]
-B0 --&gt; B1
-B1 --&gt; B2
-B2 --&gt; B3
-classDef leak fill:#fff1f2,stroke:#be123c,color:#4c0519;
-class B0,B1,B2,B3 leak;</pre>
+            <div class="mermaid" data-processed="true">
+              <svg
+                id="mermaid-1788789420681"
+                width="100%"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                class="flowchart"
+                style="max-width: 276px"
+                viewBox="0 0 276 430"
+                role="graphics-document document"
+                aria-roledescription="flowchart-v2"
+              >
+                <style>
+                  #mermaid-1788789420681{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-1788789420681 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-1788789420681 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-1788789420681 .error-icon{fill:#552222;}#mermaid-1788789420681 .error-text{fill:#552222;stroke:#552222;}#mermaid-1788789420681 .edge-thickness-normal{stroke-width:1px;}#mermaid-1788789420681 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1788789420681 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1788789420681 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1788789420681 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1788789420681 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1788789420681 .marker{fill:#666;stroke:#666;}#mermaid-1788789420681 .marker.cross{stroke:#666;}#mermaid-1788789420681 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-1788789420681 p{margin:0;}#mermaid-1788789420681 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#000000;}#mermaid-1788789420681 .cluster-label text{fill:#333;}#mermaid-1788789420681 .cluster-label span{color:#333;}#mermaid-1788789420681 .cluster-label span p{background-color:transparent;}#mermaid-1788789420681 .label text,#mermaid-1788789420681 span{fill:#000000;color:#000000;}#mermaid-1788789420681 .node rect,#mermaid-1788789420681 .node circle,#mermaid-1788789420681 .node ellipse,#mermaid-1788789420681 .node polygon,#mermaid-1788789420681 .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-1788789420681 .rough-node .label text,#mermaid-1788789420681 .node .label text,#mermaid-1788789420681 .image-shape .label,#mermaid-1788789420681 .icon-shape .label{text-anchor:middle;}#mermaid-1788789420681 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1788789420681 .rough-node .label,#mermaid-1788789420681 .node .label,#mermaid-1788789420681 .image-shape .label,#mermaid-1788789420681 .icon-shape .label{text-align:center;}#mermaid-1788789420681 .node.clickable{cursor:pointer;}#mermaid-1788789420681 .root .anchor path{fill:#666!important;stroke-width:0;stroke:#666;}#mermaid-1788789420681 .arrowheadPath{fill:#333333;}#mermaid-1788789420681 .edgePaths .path{stroke:#666;stroke-width:1px;}#mermaid-1788789420681 .flowchart-link{stroke:#666;fill:none;}#mermaid-1788789420681 .edgeLabel{background-color:white;text-align:center;}#mermaid-1788789420681 .edgeLabel p{background-color:white;}#mermaid-1788789420681 .edgeLabel rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1788789420681 .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#mermaid-1788789420681 .cluster rect{fill:hsl(0, 0%, 98.9215686275%);stroke:#707070;stroke-width:1px;}#mermaid-1788789420681 .cluster text{fill:#333;}#mermaid-1788789420681 .cluster span{color:#333;}#mermaid-1788789420681 .node .collapsed-indicator{fill:#707070;stroke:none;opacity:0.6;}#mermaid-1788789420681 .node .collapsed-separator{stroke:#707070;stroke-width:0.75px;}#mermaid-1788789420681 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(-160, 0%, 93.3333333333%);border:1px solid #707070;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1788789420681 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-1788789420681 rect.text{fill:none;stroke-width:0;}#mermaid-1788789420681 .icon-shape,#mermaid-1788789420681 .image-shape{background-color:white;text-align:center;}#mermaid-1788789420681 .icon-shape p,#mermaid-1788789420681 .image-shape p{background-color:white;padding:2px;}#mermaid-1788789420681 .icon-shape .label rect,#mermaid-1788789420681 .image-shape .label rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1788789420681 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-1788789420681 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-1788789420681 .node .neo-node{stroke:#999;}#mermaid-1788789420681 [data-look="neo"].node rect,#mermaid-1788789420681 [data-look="neo"].cluster rect,#mermaid-1788789420681 [data-look="neo"].node polygon{stroke:url(#mermaid-1788789420681-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420681 [data-look="neo"].swimlane.cluster rect{filter:none;}#mermaid-1788789420681 [data-look="neo"].node path{stroke:url(#mermaid-1788789420681-gradient);stroke-width:1px;}#mermaid-1788789420681 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420681 [data-look="neo"].node .neo-line path{stroke:#999;filter:none;}#mermaid-1788789420681 [data-look="neo"].node circle{stroke:url(#mermaid-1788789420681-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420681 [data-look="neo"].node circle .state-start{fill:#000000;}#mermaid-1788789420681 [data-look="neo"].icon-shape .icon{fill:url(#mermaid-1788789420681-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420681 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#mermaid-1788789420681-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420681 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-1788789420681 .leak&gt;*{fill:rgb(255, 241, 242)!important;stroke:rgb(190, 18, 60)!important;color:rgb(76, 5, 25)!important;}#mermaid-1788789420681 .leak span{fill:rgb(255, 241, 242)!important;stroke:rgb(190, 18, 60)!important;color:rgb(76, 5, 25)!important;}#mermaid-1788789420681 .leak tspan{fill:rgb(76, 5, 25)!important;}
+                </style>
+                <g>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-pointEnd"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="5"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 0 L 10 5 L 0 10 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-pointStart"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="4.5"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 5 L 10 10 L 10 0 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-pointEnd-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 11.5 14"
+                    refX="11.5"
+                    refY="7"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="10.5"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 0 L 11.5 7 L 0 14 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-pointStart-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 11.5 14"
+                    refX="1"
+                    refY="7"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11.5"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <polygon
+                      points="0,7 11.5,14 11.5,0"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></polygon>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-circleEnd"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="11"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-circleStart"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="-1"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-circleEnd-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refY="5"
+                    refX="12.25"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="14"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-circleStart-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="-2"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="14"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-crossEnd"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 11 11"
+                    refX="12"
+                    refY="5.2"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 l 9,9 M 10,1 l -9,9"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-crossStart"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 11 11"
+                    refX="-1"
+                    refY="5.2"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 l 9,9 M 10,1 l -9,9"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-crossEnd-margin"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 15 15"
+                    refX="17.7"
+                    refY="7.5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="12"
+                    markerHeight="12"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 L 14,14 M 1,14 L 14,1"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2.5"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420681_flowchart-v2-crossStart-margin"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 15 15"
+                    refX="-3.5"
+                    refY="7.5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="12"
+                    markerHeight="12"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 L 14,14 M 1,14 L 14,1"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2.5; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <g class="root">
+                    <g class="clusters"></g>
+                    <g class="edgePaths">
+                      <path
+                        d="M138,86L138,90.167C138,94.333,138,102.667,138,110.333C138,118,138,125,138,128.5L138,132"
+                        id="mermaid-1788789420681-L_B0_B1_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B0_B1_0"
+                        data-points="W3sieCI6MTM4LCJ5Ijo4Nn0seyJ4IjoxMzgsInkiOjExMX0seyJ4IjoxMzgsInkiOjEzNn1d"
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420681_flowchart-v2-pointEnd)"
+                      ></path>
+                      <path
+                        d="M138,190L138,194.167C138,198.333,138,206.667,138,214.333C138,222,138,229,138,232.5L138,236"
+                        id="mermaid-1788789420681-L_B1_B2_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B1_B2_0"
+                        data-points="W3sieCI6MTM4LCJ5IjoxOTB9LHsieCI6MTM4LCJ5IjoyMTV9LHsieCI6MTM4LCJ5IjoyNDB9XQ=="
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420681_flowchart-v2-pointEnd)"
+                      ></path>
+                      <path
+                        d="M138,294L138,298.167C138,302.333,138,310.667,138,318.333C138,326,138,333,138,336.5L138,340"
+                        id="mermaid-1788789420681-L_B2_B3_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B2_B3_0"
+                        data-points="W3sieCI6MTM4LCJ5IjoyOTR9LHsieCI6MTM4LCJ5IjozMTl9LHsieCI6MTM4LCJ5IjozNDR9XQ=="
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420681_flowchart-v2-pointEnd)"
+                      ></path>
+                    </g>
+                    <g class="edgeLabels">
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B0_B1_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B1_B2_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B2_B3_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                    </g>
+                    <g class="nodes">
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420681-flowchart-B0-0"
+                        data-look="classic"
+                        transform="translate(138, 47)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Filter change → new callback</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420681-flowchart-B1-1"
+                        data-look="classic"
+                        transform="translate(138, 163)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-118.609375"
+                          y="-27"
+                          width="237.21875"
+                          height="54"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-88.609375, -12)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="177.21875" height="24"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Cleanup → restore focus</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420681-flowchart-B2-2"
+                        data-look="classic"
+                        transform="translate(138, 267)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-108.6796875"
+                          y="-27"
+                          width="217.359375"
+                          height="54"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-78.6796875, -12)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="157.359375" height="24"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Restart → focus Close</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420681-flowchart-B3-3"
+                        data-look="classic"
+                        transform="translate(138, 383)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Desktop CSS + modal behavior</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <defs>
+                  <filter id="mermaid-1788789420681-drop-shadow" height="130%" width="130%">
+                    <feDropShadow
+                      dx="4"
+                      dy="4"
+                      stdDeviation="0"
+                      flood-opacity="0.06"
+                      flood-color="#000000"
+                    ></feDropShadow>
+                  </filter>
+                </defs>
+                <defs>
+                  <filter id="mermaid-1788789420681-drop-shadow-small" height="150%" width="150%">
+                    <feDropShadow
+                      dx="2"
+                      dy="2"
+                      stdDeviation="0"
+                      flood-opacity="0.06"
+                      flood-color="#000000"
+                    ></feDropShadow>
+                  </filter>
+                </defs>
+                <linearGradient
+                  id="mermaid-1788789420681-gradient"
+                  gradientUnits="objectBoundingBox"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="hsl(0, 0%, 83.3333333333%)" stop-opacity="1"></stop>
+                  <stop
+                    offset="100%"
+                    stop-color="hsl(0, 0%, 88.9215686275%)"
+                    stop-opacity="1"
+                  ></stop>
+                </linearGradient>
+              </svg>
+            </div>
           </div>
           <div>
             <p class="eyebrow">After · greater depth</p>
@@ -866,17 +1895,533 @@ class B0,B1,B2,B3 leak;</pre>
         <div class="diagrams">
           <div>
             <p class="eyebrow">Before · scattered knowledge</p>
-            <pre class="mermaid">
-flowchart TD
-B0[&quot;Current facts + history Promise&quot;]
-B1[&quot;null → authored mock deltas&quot;]
-B2[&quot;Home snapshot ≠ landing snapshot&quot;]
-B3[&quot;Global totals mixed with catalog facts&quot;]
-B0 --&gt; B1
-B1 --&gt; B2
-B2 --&gt; B3
-classDef leak fill:#fff1f2,stroke:#be123c,color:#4c0519;
-class B0,B1,B2,B3 leak;</pre>
+            <div class="mermaid" data-processed="true">
+              <svg
+                id="mermaid-1788789420729"
+                width="100%"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                class="flowchart"
+                style="max-width: 276px"
+                viewBox="0 0 276 478"
+                role="graphics-document document"
+                aria-roledescription="flowchart-v2"
+              >
+                <style>
+                  #mermaid-1788789420729{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-1788789420729 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-1788789420729 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-1788789420729 .error-icon{fill:#552222;}#mermaid-1788789420729 .error-text{fill:#552222;stroke:#552222;}#mermaid-1788789420729 .edge-thickness-normal{stroke-width:1px;}#mermaid-1788789420729 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1788789420729 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1788789420729 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1788789420729 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1788789420729 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1788789420729 .marker{fill:#666;stroke:#666;}#mermaid-1788789420729 .marker.cross{stroke:#666;}#mermaid-1788789420729 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-1788789420729 p{margin:0;}#mermaid-1788789420729 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#000000;}#mermaid-1788789420729 .cluster-label text{fill:#333;}#mermaid-1788789420729 .cluster-label span{color:#333;}#mermaid-1788789420729 .cluster-label span p{background-color:transparent;}#mermaid-1788789420729 .label text,#mermaid-1788789420729 span{fill:#000000;color:#000000;}#mermaid-1788789420729 .node rect,#mermaid-1788789420729 .node circle,#mermaid-1788789420729 .node ellipse,#mermaid-1788789420729 .node polygon,#mermaid-1788789420729 .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-1788789420729 .rough-node .label text,#mermaid-1788789420729 .node .label text,#mermaid-1788789420729 .image-shape .label,#mermaid-1788789420729 .icon-shape .label{text-anchor:middle;}#mermaid-1788789420729 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1788789420729 .rough-node .label,#mermaid-1788789420729 .node .label,#mermaid-1788789420729 .image-shape .label,#mermaid-1788789420729 .icon-shape .label{text-align:center;}#mermaid-1788789420729 .node.clickable{cursor:pointer;}#mermaid-1788789420729 .root .anchor path{fill:#666!important;stroke-width:0;stroke:#666;}#mermaid-1788789420729 .arrowheadPath{fill:#333333;}#mermaid-1788789420729 .edgePaths .path{stroke:#666;stroke-width:1px;}#mermaid-1788789420729 .flowchart-link{stroke:#666;fill:none;}#mermaid-1788789420729 .edgeLabel{background-color:white;text-align:center;}#mermaid-1788789420729 .edgeLabel p{background-color:white;}#mermaid-1788789420729 .edgeLabel rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1788789420729 .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#mermaid-1788789420729 .cluster rect{fill:hsl(0, 0%, 98.9215686275%);stroke:#707070;stroke-width:1px;}#mermaid-1788789420729 .cluster text{fill:#333;}#mermaid-1788789420729 .cluster span{color:#333;}#mermaid-1788789420729 .node .collapsed-indicator{fill:#707070;stroke:none;opacity:0.6;}#mermaid-1788789420729 .node .collapsed-separator{stroke:#707070;stroke-width:0.75px;}#mermaid-1788789420729 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(-160, 0%, 93.3333333333%);border:1px solid #707070;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1788789420729 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-1788789420729 rect.text{fill:none;stroke-width:0;}#mermaid-1788789420729 .icon-shape,#mermaid-1788789420729 .image-shape{background-color:white;text-align:center;}#mermaid-1788789420729 .icon-shape p,#mermaid-1788789420729 .image-shape p{background-color:white;padding:2px;}#mermaid-1788789420729 .icon-shape .label rect,#mermaid-1788789420729 .image-shape .label rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1788789420729 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-1788789420729 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-1788789420729 .node .neo-node{stroke:#999;}#mermaid-1788789420729 [data-look="neo"].node rect,#mermaid-1788789420729 [data-look="neo"].cluster rect,#mermaid-1788789420729 [data-look="neo"].node polygon{stroke:url(#mermaid-1788789420729-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420729 [data-look="neo"].swimlane.cluster rect{filter:none;}#mermaid-1788789420729 [data-look="neo"].node path{stroke:url(#mermaid-1788789420729-gradient);stroke-width:1px;}#mermaid-1788789420729 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420729 [data-look="neo"].node .neo-line path{stroke:#999;filter:none;}#mermaid-1788789420729 [data-look="neo"].node circle{stroke:url(#mermaid-1788789420729-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420729 [data-look="neo"].node circle .state-start{fill:#000000;}#mermaid-1788789420729 [data-look="neo"].icon-shape .icon{fill:url(#mermaid-1788789420729-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420729 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#mermaid-1788789420729-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-1788789420729 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-1788789420729 .leak&gt;*{fill:rgb(255, 241, 242)!important;stroke:rgb(190, 18, 60)!important;color:rgb(76, 5, 25)!important;}#mermaid-1788789420729 .leak span{fill:rgb(255, 241, 242)!important;stroke:rgb(190, 18, 60)!important;color:rgb(76, 5, 25)!important;}#mermaid-1788789420729 .leak tspan{fill:rgb(76, 5, 25)!important;}
+                </style>
+                <g>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-pointEnd"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="5"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 0 L 10 5 L 0 10 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-pointStart"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="4.5"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 5 L 10 10 L 10 0 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-pointEnd-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 11.5 14"
+                    refX="11.5"
+                    refY="7"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="10.5"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 0 0 L 11.5 7 L 0 14 z"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-pointStart-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 11.5 14"
+                    refX="1"
+                    refY="7"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11.5"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <polygon
+                      points="0,7 11.5,14 11.5,0"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></polygon>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-circleEnd"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="11"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-circleStart"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="-1"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 1; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-circleEnd-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refY="5"
+                    refX="12.25"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="14"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-circleStart-margin"
+                    class="marker flowchart-v2"
+                    viewBox="0 0 10 10"
+                    refX="-2"
+                    refY="5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="14"
+                    markerHeight="14"
+                    orient="auto"
+                  >
+                    <circle
+                      cx="5"
+                      cy="5"
+                      r="5"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 0; stroke-dasharray: 1, 0"
+                    ></circle>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-crossEnd"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 11 11"
+                    refX="12"
+                    refY="5.2"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 l 9,9 M 10,1 l -9,9"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-crossStart"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 11 11"
+                    refX="-1"
+                    refY="5.2"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="11"
+                    markerHeight="11"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 l 9,9 M 10,1 l -9,9"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-crossEnd-margin"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 15 15"
+                    refX="17.7"
+                    refY="7.5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="12"
+                    markerHeight="12"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 L 14,14 M 1,14 L 14,1"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2.5"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="mermaid-1788789420729_flowchart-v2-crossStart-margin"
+                    class="marker cross flowchart-v2"
+                    viewBox="0 0 15 15"
+                    refX="-3.5"
+                    refY="7.5"
+                    markerUnits="userSpaceOnUse"
+                    markerWidth="12"
+                    markerHeight="12"
+                    orient="auto"
+                  >
+                    <path
+                      d="M 1,1 L 14,14 M 1,14 L 14,1"
+                      class="arrowMarkerPath"
+                      style="stroke-width: 2.5; stroke-dasharray: 1, 0"
+                    ></path>
+                  </marker>
+                  <g class="root">
+                    <g class="clusters"></g>
+                    <g class="edgePaths">
+                      <path
+                        d="M138,86L138,90.167C138,94.333,138,102.667,138,110.333C138,118,138,125,138,128.5L138,132"
+                        id="mermaid-1788789420729-L_B0_B1_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B0_B1_0"
+                        data-points="W3sieCI6MTM4LCJ5Ijo4Nn0seyJ4IjoxMzgsInkiOjExMX0seyJ4IjoxMzgsInkiOjEzNn1d"
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420729_flowchart-v2-pointEnd)"
+                      ></path>
+                      <path
+                        d="M138,214L138,218.167C138,222.333,138,230.667,138,238.333C138,246,138,253,138,256.5L138,260"
+                        id="mermaid-1788789420729-L_B1_B2_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B1_B2_0"
+                        data-points="W3sieCI6MTM4LCJ5IjoyMTR9LHsieCI6MTM4LCJ5IjoyMzl9LHsieCI6MTM4LCJ5IjoyNjR9XQ=="
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420729_flowchart-v2-pointEnd)"
+                      ></path>
+                      <path
+                        d="M138,342L138,346.167C138,350.333,138,358.667,138,366.333C138,374,138,381,138,384.5L138,388"
+                        id="mermaid-1788789420729-L_B2_B3_0"
+                        class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+                        style=""
+                        data-edge="true"
+                        data-et="edge"
+                        data-id="L_B2_B3_0"
+                        data-points="W3sieCI6MTM4LCJ5IjozNDJ9LHsieCI6MTM4LCJ5IjozNjd9LHsieCI6MTM4LCJ5IjozOTJ9XQ=="
+                        data-look="classic"
+                        marker-end="url(#mermaid-1788789420729_flowchart-v2-pointEnd)"
+                      ></path>
+                    </g>
+                    <g class="edgeLabels">
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B0_B1_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B1_B2_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                      <g class="edgeLabel">
+                        <g class="label" data-id="L_B2_B3_0" transform="translate(0, 0)">
+                          <foreignObject width="0" height="0"
+                            ><div
+                              xmlns="http://www.w3.org/1999/xhtml"
+                              class="labelBkg"
+                              style="
+                                display: table-cell;
+                                white-space: nowrap;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                              "
+                            >
+                              <span class="edgeLabel"></span></div
+                          ></foreignObject>
+                        </g>
+                      </g>
+                    </g>
+                    <g class="nodes">
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420729-flowchart-B0-0"
+                        data-look="classic"
+                        transform="translate(138, 47)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Current facts + history Promise</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420729-flowchart-B1-1"
+                        data-look="classic"
+                        transform="translate(138, 175)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>null → authored mock deltas</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420729-flowchart-B2-2"
+                        data-look="classic"
+                        transform="translate(138, 303)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Home snapshot ≠ landing snapshot</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                      <g
+                        class="node default leak"
+                        id="mermaid-1788789420729-flowchart-B3-3"
+                        data-look="classic"
+                        transform="translate(138, 431)"
+                      >
+                        <rect
+                          class="basic label-container"
+                          style="fill: #fff1f2 !important; stroke: #be123c !important"
+                          x="-130"
+                          y="-39"
+                          width="260"
+                          height="78"
+                        ></rect>
+                        <g
+                          class="label"
+                          style="color: #4c0519 !important"
+                          transform="translate(-100, -24)"
+                        >
+                          <rect></rect>
+                          <foreignObject width="200" height="48"
+                            ><div
+                              style="
+                                color: rgb(76, 5, 25) !important;
+                                display: table;
+                                white-space: break-spaces;
+                                line-height: 1.5;
+                                max-width: 200px;
+                                text-align: center;
+                                width: 200px;
+                              "
+                              xmlns="http://www.w3.org/1999/xhtml"
+                            >
+                              <span style="color: #4c0519 !important" class="nodeLabel"
+                                ><p>Global totals mixed with catalog facts</p></span
+                              >
+                            </div></foreignObject
+                          >
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <defs>
+                  <filter id="mermaid-1788789420729-drop-shadow" height="130%" width="130%">
+                    <feDropShadow
+                      dx="4"
+                      dy="4"
+                      stdDeviation="0"
+                      flood-opacity="0.06"
+                      flood-color="#000000"
+                    ></feDropShadow>
+                  </filter>
+                </defs>
+                <defs>
+                  <filter id="mermaid-1788789420729-drop-shadow-small" height="150%" width="150%">
+                    <feDropShadow
+                      dx="2"
+                      dy="2"
+                      stdDeviation="0"
+                      flood-opacity="0.06"
+                      flood-color="#000000"
+                    ></feDropShadow>
+                  </filter>
+                </defs>
+                <linearGradient
+                  id="mermaid-1788789420729-gradient"
+                  gradientUnits="objectBoundingBox"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="hsl(0, 0%, 83.3333333333%)" stop-opacity="1"></stop>
+                  <stop
+                    offset="100%"
+                    stop-color="hsl(0, 0%, 88.9215686275%)"
+                    stop-opacity="1"
+                  ></stop>
+                </linearGradient>
+              </svg>
+            </div>
           </div>
           <div>
             <p class="eyebrow">After · greater depth</p>

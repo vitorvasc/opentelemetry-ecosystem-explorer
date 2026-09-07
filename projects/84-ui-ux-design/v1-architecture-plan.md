@@ -9,7 +9,7 @@ last_updated: "2026-09-07"
 
 ## Plan: v1 redesign architecture improvements
 
-[Open the visual report](https://raw.githack.com/vitorvasc/opentelemetry-ecosystem-explorer/docs/84-v1-architecture-review/projects/84-ui-ux-design/v1-architecture-review.html)
+[Open the visual report](https://htmlpreview.github.io/?https://github.com/vitorvasc/opentelemetry-ecosystem-explorer/blob/docs/84-v1-architecture-review/projects/84-ui-ux-design/v1-architecture-review.html)
 · [HTML source](./v1-architecture-review.html)
 
 Status: proposed, no implementation. Reviewed HEAD `01d889a0`, 7 September 2026.
